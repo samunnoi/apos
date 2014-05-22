@@ -1,0 +1,64 @@
+github
+
+-create account
+-load git client
+
+git config --global user.name "farm"
+git config --global user.email "farm"
+
+
+เข้า git bash บน windows
+cd ไปยัง appserv\www\echogit
+
+พิมพ์ git init
+
+ทำการเช็ค status พิมพ์ git status
+
+ทำการ add change เข้าไป
+พิมพ์ git add index.php
+
+ทำการ commit  พิมพ์   git commit -m "ข้อความ"
+
+git config --global core.autocrlf true  ----------------จำเป็นต้องทำ
+git config --global core.safecrlf true
+
+ทำการ remote
+git remote add origin https://github.com/farmstyle/echo.git
+
+แกไข remote
+git remote set-url origin https://github.com/farmstyle/echo.git
+
+ให้เอาโค๊ดที่อยู่บนเครื่อง  ให้เอาขึ้นไปไว้บน server
+git push origin master
+ใส่ username password
+
+เพื่อนทำการ clone โปรเจ็คมาจาก server พิมพ์ git clone https://github.com/farmstyle/echo.git
+git clone https://github.com/samunnoi/apos.git
+
+การ push (อัพไฟล์ขึ้น git)
+git status
+git add index.php
+git commit -m "xxxxxx"
+git push origin master
+
+เมื่อเพื่อน change ไฟล์  เราทำการ pull ไฟล์ใหม่มาในเครื่องเรา
+git pull origin master
+
+
+
+กรณี push แล้วไม่ success
+เมื่อนาย A ทำการ change แล้ว push ขึ้นบน github
+แล้วนาย B จะทำการ push จะไม่สามารถทำได้ เพราะข้อมูลยังไม่ sync กับข้อมูลปัจจุบัน ต้องทำการ pull ก่อน
+
+
+
+
+
+
+
+
+
+
+
+
+
