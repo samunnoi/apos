@@ -72,7 +72,7 @@
 		
 		<br/>
 		
-		<form class="form-signin" role="form" method="post" action="<?=$_SERVER['PHP_SELF']."/welcomec/regis" ?>"> <!-- $_SERVER['PHP_SELF'] กลับมาที่ตัวมันเอง -->
+		<form class="form-signin" role="form" method="post" action="<?=$_SERVER['PHP_SELF']."/welcome/regis" ?>"> <!-- $_SERVER['PHP_SELF'] กลับมาที่ตัวมันเอง -->
 
 		<a href="#" id="newacc" onclick='customer_dettail();'>New account</a>
 		<div id='customer_detail' class="form-horizontal well" style='display:none;'>
