@@ -13,7 +13,7 @@
     <meta name="author" content="">
    
 
-    <title>Sign In </title>
+    <title>Signin Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">
@@ -59,8 +59,8 @@
 				<span class='col-xs-9' style='padding-left: 0px;  padding-right: 5px;'> <h2 class="form-signin-heading">Asian Pos</h2>
 				</span>
 			</div>
-			<input type="text" name="user" class="form-control" placeholder="Username" required autofocus>
-			<input type="password" name="pass" class="form-control" placeholder="Password" required >
+			<input type="text" name="user" class="form-control" placeholder="Username" required="" autofocus="">
+			<input type="password" name="pass" class="form-control" placeholder="Password" required="">
 			
 			<label class="checkbox">
 				<input type="checkbox" value="remember-me"> Remember me

@@ -11,31 +11,26 @@
 			
 			}
  
-		public function _pubSelectUser($user,$pass){	
-			// select ข้อมูลจาก user
-			// $user จัดเก็บผู้ใช้งาน
-			// $pass จัดเก็บรหัสผ่าน
+		public function _pubSelectUser($user,$pass)		// select ข้อมูลจาก user
+		{	
 			// 	เงื่อนไขในการ select โดยกำหนดเป็นตัวแปล array
 			
 			$cause = array('userid'=>$user,'password'=>$pass);	
 			$query = $this->db->get_where('user',$cause);	
 			
 			// return ค่าแบบ row 
-			if($query -> num_rows() == 1){
-				return $query->row();
-				}else{
-				return false;
-				}
+			if($query -> num_rows() == 1){return $query->row();}
+			else{return false;}
 		}
 		
-		public function _pubAddUser($userid,$password,$name,$email){
-			// ฟังก์ชัน insert ข้อมูลลงฐานข้อมูล
+		public function _pubAddUser($userid,$password,$name,$email)		// ฟังก์ชัน insert ข้อมูลลงฐานข้อมูล
+		{
 			$cause = array('userid'=>$userid,'password'=>$password,'name'=>$name,'email'=>$email);	
-			if(!$this->db->insert('user',$cause)){	// ดึงข้อมูลจาก member แบบมีเงื่อนไข
-				return 0;
-				}else{
-				return "can not insert data";
-				}
+			$this->db->insert('user',$cause);	// ดึงข้อมูลจาก member แบบมีเงื่อนไข
+
+			
+			return;						
+			
 		
 		}
 	}
