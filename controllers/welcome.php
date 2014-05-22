@@ -4,7 +4,7 @@
 		// หน้าจอ welcome  มีหน้าที่ เข้าสู่ระบบ หรือ ลงทะเบียนผู้ใช้งานเบื้องต้น
 		// เกี่ยวข้องกับ ตาราง user
 		// เกี่ยวข้องกับ ไฟล์ welcome.php user_m.php login_v.php
-		// เรียก Model ชื่อ user_m
+		// เรียก Model ชื่อ user_m 
 		// เรียก view ชื่อ login_v
 		//  เขียน    วันที่ 21 -5 57
 		function __construct()
