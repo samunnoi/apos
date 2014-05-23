@@ -2,8 +2,6 @@
 
 	class Welcome extends CI_Controller {
 
-	
-	
 			function __construct()
 			{
 				parent::__construct();
@@ -23,23 +21,26 @@
 	
 			public function login(){  								
 				//	 ฟังก์ชั่น login
-				// 	เช็คค่าจากที่ส่งมาจาก input  		
-				if($post = $this->input->post()){ 					 
-				extract($post);					
-				//	 เรียกใช้ฟังก์ชัน _pubSelectUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า
-				$userid= $this->user->_pubSelectUser($user,$pass);	
-					if($userid){														
+				
+				
+					// 	เช็คค่าจากที่ส่งมาจาก input  				
+					if($post = $this->input->post()){ 					 
+					extract($post);					
+						//	 เรียกใช้ฟังก์ชัน _pubSelectUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า
+						$userid= $this->user->_pubSelectUser($user,$pass);	
+						if($userid){														
 										
-						$this->session->set_userdata('id',$userid->userid); 	
+							$this->session->set_userdata('id',$userid->userid); 	
 						
-						// 	ใช้งาน load view				
-						$this->load->view('head_v');
-						$this->load->view('body_v');
-						$this->load->view('foot_v');
-					}else{echo "Login Fail";
-						$this->load->view('login_v');
+							// 	ใช้งาน load view				
+							$this->load->view('head_v');
+							$this->load->view('body_v');
+							$this->load->view('foot_v');
+						}else{echo "Login Fail";
+							$this->load->view('login_v');
+						}
 					}
-				}
+				
 										
 			}
 			
@@ -50,8 +51,8 @@
 				extract($post);				
 				// 	เรียกใช้ฟังก์ชัน _pubaddUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า
 				$this->user->_pubAddUser($userid,$password,$name,$email);	
-				redirect(base_url());
-			}
+				$this->load->view('login_v');
+				}
 			}
 			
 			public function logout()				
@@ -60,6 +61,8 @@
 				$this->session->sess_destroy();		
 				redirect(base_url());
 			}
+			
+			
 		
 		
 	}

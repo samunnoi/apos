@@ -96,7 +96,7 @@ padding:4px;
   <body class="cbp-spmenu-push">  
 		<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
 			<h4 class='menu-left'><img style='width:45px; height:45px;' src="<?php echo base_url(); ?>image/user.jpg"  class="img-rounded"> Username</h4>
-			<a href="#">menu1</a>
+			<a href="../item">Add Item</a>
 			<a href="#">menu1</a>
 			<a href="#">menu1</a>
 			<a onclick='$("#l_sub").slideToggle("fast");' href="#">sub menu1 <span class='glyphicon glyphicon-chevron-down'></span></a>			
@@ -144,8 +144,8 @@ padding:4px;
 	<div class='hidden-xs col-sm-3 col-md-3 col-lg-2' style='float:left;height:100%;'>	
 		<nav class="cbp-spmenu cbp-vertical">
 			<h4 class='menu-left'><img style='width:45px; height:45px;' src="<?php echo base_url(); ?>image/user.jpg"  class="img-rounded"> Username</h4>
-			<a href="#">menu1</a>
-			<a href="#">menu1</a>
+			<a href="../item">Add Item</a>
+			<a href="<? base_url();?>login">Receipt</a>
 			<a onclick='$("#fix_sub").slideToggle("fast");' href="#">sub menu1 <span class='glyphicon glyphicon-chevron-down'></span></a>			
 			<ul id='fix_sub' style='display:none;'>
 				<li><a href="#">sub menu1</a></li>								

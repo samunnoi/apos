@@ -19,7 +19,7 @@
 			$query = $this->db->get_where('user',$cause);	
 			
 			// return ค่าแบบ row 
-			if($query -> num_rows() == 1){return $query->row();}
+			if($query -> num_rows() == 1){return $query->row();} // return ค่าแบบเป็น row	
 			else{return false;}
 		}
 		
