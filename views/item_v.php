@@ -163,7 +163,7 @@
 	<div class="control-group">
 	
 				<button id="btn1" style='padding: 10px 10px;' type="reset" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-plus"> ADD</span></button>
-				<button id="btn2" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-trash"> DELETE</span></button>
+				<button id="btn2" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-trash"><a href="<?if(isset($itemid)){ base_url();?>delitem/<?echo $itemid; }?>"> DELETE</a></span></button>
 				<button id="btn3" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> REPORT</span></button>				
 			
 		</div>  
@@ -179,14 +179,14 @@
 	<div class="input-group-btn">
 			<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-pencil"></span></button>
 	</div>
-	<input name="itemid" style='padding: 10px 8px;'id="itemid" placeholder="Item ID" type="text" class="form-control" value="<?=$itemid?>">
+	<input name="itemid" style='padding: 10px 8px;'id="itemid" placeholder="Item ID" type="text" class="form-control" value="<? if(isset($itemid)){echo $itemid;}?>">
 	</div> <br style='clear:both;'/>	
 		
 	<div class="input-group input-group-lg" style=''>
 	<div class="input-group-btn">
 			<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-pencil"></span></button>
 	</div>
-	<input name="barcode" style='padding: 10px 8px;'id="barcode" placeholder="Barcode" type="text" class="form-control" value="<?=$barcode?>">
+	<input name="barcode" style='padding: 10px 8px;'id="barcode" placeholder="Barcode" type="text" class="form-control" value="<? if(isset($itemid)){echo $barcode;}?>">
 	</div> <br style='clear:both;'/>
 	
 	
@@ -194,16 +194,45 @@
 	<div class="input-group-btn">
 			<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-pencil"></span></button>
 	</div>
-	<input name="name" style='padding: 10px 8px;' placeholder="Name" type="text" class="form-control" value="<?=$name?>" >
+	<input name="name" style='padding: 10px 8px;' placeholder="Name" type="text" class="form-control" value="<? if(isset($itemid)){echo $name;} ?>" >
 	</div> <br style='clear:both;'/>
 	
 	
-	<div class="input-group input-group-lg" style=''>
-	<div class="input-group-btn">
-			<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-pencil"></span></button>
-	</div>
-	<input name="price" style='padding: 10px 8px;' placeholder="Price" type="text" class="form-control" value="<??>">
-	</div> <br style='clear:both;'/>
+	<div class="col-xs-6">
+	<table class="table table-bordered table-hover ">
+    <thead>
+      <tr>
+        
+        <th class='col-xs-3'>ประเภท</th>
+        <th class='col-xs-3'>ราคา</th>
+        <th class='col-xs-3'>Discount</th>
+		<th class='col-xs-3'>Percent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>        
+        <td align='center'>
+		<span>เงินสด</span>
+		<span style='float:right'>
+			
+		</span>
+		</td>
+         <td  align='center'>
+		<input name="price" style='padding: 10px 8px;' placeholder="Price " type="text" class="form-control" value="<? if(isset($itemid)){echo $price;} ?>" >
+		 </td>
+        <td align='center'>
+		<input name="discount" style='padding: 10px 8px;' placeholder="Discount " type="text" class="form-control" value="<? if(isset($itemid)){echo $discount;} ?>" >
+		</td>
+		<td align='center'>
+		<input name="percent" style='padding: 10px 8px;' placeholder="Percent " type="text" class="form-control" value="<? if(isset($itemid)){echo $percent;} ?>" >
+		</td>
+      </tr>
+	 
+      
+	  
+    </tbody>
+  </table></div><br style='clear:both;'/>
+	
 		
 	
             <!--<label class="control-label" for="input01">Barcode</label>-->
@@ -211,19 +240,58 @@
 				<div class="input-group-btn">
 					<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-pencil"></span></button>
 				</div>
-				<input name="detail" style='padding: 10px 8px;' placeholder="Detail" type="text" class="form-control" value="<?=$detail?>">
+				<input name="detail" style='padding: 10px 8px;' placeholder="Detail" type="text" class="form-control" value="<? if(isset($itemid)){echo $detail;} ?>">
 				</div><br style='clear:both;'/>		
 		
-				<div class="input-group input-group-lg" style=''>
-				<div class="input-group-btn">
-					<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-pencil"></span></button>
-				</div>
-				<input name="type" style='padding: 10px 8px;' placeholder="Type Of Item" type="text" class="form-control" value="<??>">
-				</div><br style='clear:both;'/>		
-
-	<?
+				<div class="col-xs-6">
+	<table class="table table-bordered table-hover ">
+    <thead>
+      <tr>
+        
+        
+        <th class='col-xs-3'>ประเภทสินค้า</th>
+		<th class='col-xs-1'>แก้ไข</th>
+		<th class='col-xs-3'>ประเภทหลัก</th>
+		
+      </tr>
+    </thead>
+    <tbody>
+      <tr>        
+       
+         <td  align='center'>
+	<input type="text" name="catalog" list="productName"/>
+<datalist id="productName" name="catalog" >
+    <option value="Pen">Pen</option>
+    <option value="Pencil">Pencil</option>
+    <option value="Paper">Paper</option>
+</datalist>
+		 </td>
+        <td align='center'>
 	
-?>	
+		<button type="button" class="btn btn-default btn-sm">
+				<span class="glyphicon glyphicon-list-alt"></span> 
+			</button>
+		</td>
+		<td align='center'>
+		
+		
+		<input type="text" name="master" list="productName"/>
+<datalist id="productName" name="master" >
+    <option value="Pen">Pen</option>
+    <option value="Pencil">Pencil</option>
+    <option value="Paper">Paper</option>
+</datalist>
+
+		</td>
+		
+      </tr>
+
+      
+	  
+    </tbody>
+  </table></div><br style='clear:both;'/>	
+
+
 		
   <div align='center'>
   <!-- <a href='submit.html' style='width:20%;' class="btn btn-primary">Cancel</a> -->
