@@ -23,6 +23,18 @@
 			else{return false;}
 		}
 		
+		public function _pubSelectEmail($email)		// select ข้อมูลจาก user
+		{	
+			// 	เงื่อนไขในการ select โดยกำหนดเป็นตัวแปล array
+			
+			$cause = array('email'=>$email);	
+			$query = $this->db->get_where('user',$cause);	
+			
+			// return ค่าแบบ row 
+			if($query -> num_rows() == 1){return $query->row();} // return ค่าแบบเป็น row	
+			else{return false;}
+		}
+		
 		public function _pubAddUser($userid,$password,$name,$email)		// ฟังก์ชัน insert ข้อมูลลงฐานข้อมูล
 		{
 			$cause = array('userid'=>$userid,'password'=>$password,'name'=>$name,'email'=>$email);	

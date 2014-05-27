@@ -59,8 +59,8 @@
 				<span class='col-xs-9' style='padding-left: 0px;  padding-right: 5px;'> <h2 class="form-signin-heading">Asian Pos</h2>
 				</span>
 			</div>
-			<input type="text" name="user" class="form-control" placeholder="Username" required="" autofocus="">
-			<input type="password" name="pass" class="form-control" placeholder="Password" required="">
+			<input type="text" name="user" class="form-control" placeholder="Username"  maxlength="15" required autofocus>
+			<input type="password" name="pass" class="form-control" placeholder="Password" maxlength="30" required>
 			
 			<label class="checkbox">
 				<input type="checkbox" value="remember-me"> Remember me
@@ -78,36 +78,37 @@
 		<div id='customer_detail' class="form-horizontal well" style='display:none;'>
 					<fieldset>         
 						<div class="control-group">            
-						<div class="controls">
+						<div class="controls"><? if(isset($error)){if(!strcmp($error,"User Require")){echo "<font color=red>User Require</font>";}} ?><br>
 							<div class="input-group">
+							
 								<span class="input-group-addon"><span class='glyphicon glyphicon-user'></span></span>
-								<input type="text" name="userid" class="form-control" placeholder="Username"/>
+								<input type="text" name="userid" class="form-control" placeholder="Username" maxlength="15" value="<? if(isset($userid)){echo $userid;}?>"/>
 							</div>
 						</div>
 							<label class="control-label" for="input01"></label>
-						<div class="controls">
+						<div class="controls"><? if(isset($error)){if(!strcmp($error,"Password Require")){echo "<font color=red>Password Require</font>";}} ?>
 							<div class="input-group">
 								
-									<input type="password" name="password" class="form-control" placeholder="Password" required="">
+									<input type="password" name="password" class="form-control" placeholder="Password" maxlength="30" required>
 							</div>
 						</div>						
-						<div class="controls" >										
+						<div class="controls" >	<? if(isset($error)){if(!strcmp($error,"Name Require")){echo "<font color=red>Name Require</font>";}} ?>									
 						
 							<div class="input-group">
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-pencil"></span>
 								</span>
-									<input type="text" name="name" class="form-control" placeholder="Name"/>
+									<input type="text" name="name" class="form-control" placeholder="Name" maxlength="30" value="<? if(isset($name)){echo $name;}?>"/>
 							</div>
 						</div>
 						
-						<div class="controls" >										
+						<div class="controls" >	<? if(isset($error)){if(!strcmp($error,"E-mail Require")){echo "<font color=red>E-mail Require</font>";}} ?>									
 						<label class="control-label" for="input01"></label>
 							<div class="input-group">
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-envelope"></span>
 								</span>
-									<input type="email" name="email" class="form-control" placeholder="Email"/>
+									<input type="email" name="email" class="form-control" placeholder="Email" maxlength="30" value="<? if(isset($email)){echo $email;}?>"/>
 							</div>
 						</div>
 						
