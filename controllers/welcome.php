@@ -57,21 +57,41 @@
 			}
 			private function validateregis($userid,$password,$name,$email)
 			{
-				if(strlen($userid)>=15){return "User Length More";}
-				if(strlen($userid)==0){return "User Require";}
-				if(strlen($password)>=30){return "Password Length More";}
-				if(strlen($password)==0){return "Password Require";}
-				if(strlen($name)>=30){return "Name Length More";}
-				if(strlen($name)==0){return "Name Require";}
-				if(strlen($email)>=30){return "E-mail Length More";}
-				if(strlen($email)==0){return "E-mail Require";}
+				$erroract=0;
+				if(strlen($userid)>=15){ $erroract = 1;$error['userid_error'] = "User Length More";}
+				if(strlen($userid)==0){$erroract = 1;$error['userid_notnull'] =  "User Require";}
+				if(strlen($password)>=30){$erroract = 1;$error['password_error'] =  "Password Length More";}
+				if(strlen($password)==0){$erroract = 1;$error['password_notnull'] =  "Password Require";}
+				if(strlen($name)>=30){$erroract = 1;$error['name_error'] = "Name Length More";}
+				if(strlen($name)==0){$erroract = 1;$error['name_notnull'] =   "Name Require";}
+				if(strlen($email)>=30){$erroract = 1;$error['email_error'] =  "E-mail Length More";}
+				if(strlen($email)==0){$erroract = 1;$error['email_notnull'] =  "E-mail Require";}
 				if($userid= $this->user->_pubSelectUser($userid,$password)){
-					if($userid->userid){return "User Aready";}
+					if($userid->userid){$erroract = 1;$error['userid_aready'] = "User Aready";}
 				}
 				if($email= $this->user->_pubSelectEmail($email)){
-					if($email->email){return "E-mail Aready";}
+					if($email->email){$erroract = 1;$error['email_aready'] = "E-mail Aready";}
 				}
-				return 0;	
+			
+				if($erroract==1){
+					$error['act']=$erroract;
+					$error['userid'] = $userid;
+					$error['password'] = $password;
+					$error['name'] = $name;
+					$error['email'] = $email;
+					//foreach($error as $row){echo $row."**";}						 
+					 
+					//if(strcmp($error,"User Aready")){ $data['userid'] = $userid; }
+					//if(strcmp($error['password'],"Password Length More")){ $data['password'] = $password; }
+					//if(strcmp($error['name'],"Name Length More")){ $data['name'] = $name; }
+					//if(strcmp($error['email'],"E-mail Length More")&&strcmp($error['email'],"E-mail Aready")){ $data['email'] = $email; ;}
+					//if(strcmp($error,"E-mail Aready")){ $data['email'] = $email; }
+				
+					$this->load->view('login_v',$error);
+					return $error;
+				}else{
+					return 0;	
+				}
 			}
 			public function regis()				
 			{	
@@ -87,26 +107,15 @@
 					$name=trim($name);
 					$email=trim($email);
 					$error = $this->validateregis($userid,$password,$name,$email);
-					echo $error;
+					echo count($error);
 					$data['error']=$error;
-					if (strlen($error) < 3){
+					if (count($error) == 0){
 					
 						// 	เรียกใช้ฟังก์ชัน _pubaddUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า
 						$this->user->_pubAddUser($userid,$password,$name,$email);	
 						$this->load->view('login_v');
 						return 0;
-					}else
-						{
-						if(strcmp($error,"User Length More")&&strcmp($error,"User Aready")){ $data['userid'] = $userid;  }
-						//if(strcmp($error,"User Aready")){ $data['userid'] = $userid; }
-						if(strcmp($error,"Password Length More")){ $data['password'] = $password; }
-						if(strcmp($error,"Name Length More")){ $data['name'] = $name; }
-						if(strcmp($error,"E-mail Length More")&&strcmp($error,"E-mail Aready")){ $data['email'] = $email; ;}
-						//if(strcmp($error,"E-mail Aready")){ $data['email'] = $email; }
-					
-						$this->load->view('login_v',$data);
-						
-						}
+					}
 				}
 				return 1;
 			}

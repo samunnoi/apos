@@ -75,24 +75,25 @@
 		<form class="form-signin" role="form" method="post" action="<?=$_SERVER['PHP_SELF']."/welcome/regis" ?>"> <!-- $_SERVER['PHP_SELF'] กลับมาที่ตัวมันเอง -->
 
 		<a href="#" id="newacc" onclick='customer_dettail();'>New account</a>
-		<div id='customer_detail' class="form-horizontal well" style='display:none;'>
+		<div id='customer_detail' class="form-horizontal well" <?if(isset($act)){echo "style='display:block;'";}else{ echo "style='display:none;'";} ?>>
 					<fieldset>         
 						<div class="control-group">            
-						<div class="controls"><? if(isset($error)){if(!strcmp($error,"User Require")){echo "<font color=red>User Require</font>";}} ?><br>
+						<div class="controls"><? if(isset($userid_notnull)){echo "<font color=red>".$userid_notnull."</font>";} ?>
+												<? if(isset($userid_aready)){echo "<font color=red>".$userid_aready."</font>";} ?><br>
 							<div class="input-group">
 							
 								<span class="input-group-addon"><span class='glyphicon glyphicon-user'></span></span>
-								<input type="text" name="userid" class="form-control" placeholder="Username" maxlength="15" value="<? if(isset($userid)){echo $userid;}?>"/>
+								<input type="text" name="userid" class="form-control" placeholder="Username" maxlength="15" value="<? if(isset($userid_aready)){echo "";}else{if(isset($userid)){echo $userid;}}?>"/>
 							</div>
 						</div>
 							<label class="control-label" for="input01"></label>
-						<div class="controls"><? if(isset($error)){if(!strcmp($error,"Password Require")){echo "<font color=red>Password Require</font>";}} ?>
+						<div class="controls"><? if(isset($password_notnull)){echo "<font color=red>".$password_notnull."</font>";} ?><br>
 							<div class="input-group">
 								
 									<input type="password" name="password" class="form-control" placeholder="Password" maxlength="30" required>
 							</div>
 						</div>						
-						<div class="controls" >	<? if(isset($error)){if(!strcmp($error,"Name Require")){echo "<font color=red>Name Require</font>";}} ?>									
+						<div class="controls" ><? if(isset($name_notnull)){echo "<font color=red>".$name_notnull."</font>";} ?><br>									
 						
 							<div class="input-group">
 								<span class="input-group-addon">
@@ -102,13 +103,14 @@
 							</div>
 						</div>
 						
-						<div class="controls" >	<? if(isset($error)){if(!strcmp($error,"E-mail Require")){echo "<font color=red>E-mail Require</font>";}} ?>									
+						<div class="controls" >	<? if(isset($email_notnull)){echo "<font color=red>".$email_notnull."</font>";} ?>
+												<? if(isset($email_aready)){echo "<font color=red>".$email_aready."</font>";} ?><br>									
 						<label class="control-label" for="input01"></label>
 							<div class="input-group">
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-envelope"></span>
 								</span>
-									<input type="email" name="email" class="form-control" placeholder="Email" maxlength="30" value="<? if(isset($email)){echo $email;}?>"/>
+									<input type="email" name="email" class="form-control" placeholder="Email" maxlength="30" value="<? if(isset($email_aready)){echo "";}else{if(isset($email)){echo $email;}}?>"/>
 							</div>
 						</div>
 						
