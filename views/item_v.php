@@ -46,118 +46,12 @@
 						<button type="submit" style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-search"></span></button>
 					</div>
 				</div>				
-		<!--	<div id='product_search' class="form-horizontal well" style='display:none; padding:5px;'>	
-			<fieldset>  
-			
-					  
-					<table class="table table-bordered table-hover">
-    <thead>
-      <tr>
-        
-        <th>√“¬°“√</th>
-        <th class='col-xs-1'>Qty</th>
-        <th class='col-xs-1'>Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>        
-        <td>
-		<span>¢π¡</span>
-		<span style='float:right'>
-			<button type="button" class="btn btn-default btn-sm">
-				<span class="glyphicon glyphicon-trash"></span> 
-			</button>
-		</span>
-		</td>
-         <td  align='center'>
-		 <select>
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
-			<option>6</option>
-			<option>7</option>
-			<option>8</option>
-			<option>9</option>
-			<option>10</option>
-		 </select>
-		 </td>
-        <td align='center'>1,100</td>
-      </tr>
-      <tr>
-        
-         <td>
-		<span>πÈ” È¡</span>
-		<span style='float:right'>
-			<button type="button" class="btn btn-default btn-sm">
-				<span class="glyphicon glyphicon-trash"></span> 
-			</button>
-		</span>
-		</td>
-         <td  align='center'><select>
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
-			<option>6</option>
-			<option>7</option>
-			<option>8</option>
-			<option>9</option>
-			<option>10</option>
-		 </select></td>
-        <td align='center'>200</td>
-      </tr>
-      <tr>
-        
-         <td>
-		<span>πÈ”Õ—¥≈¡</span>
-		<span style='float:right'>
-			<button type="button" class="btn btn-default btn-sm">
-				<span class="glyphicon glyphicon-trash"></span> 
-			</button>
-		</span>
-		</td>
-        <td  align='center'><select>
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
-			<option>6</option>
-			<option>7</option>
-			<option>8</option>
-			<option>9</option>
-			<option>10</option>
-		 </select></td>
-        <td align='center'>300</td>
-      </tr>
-	  <tr>
-		<td colspan="2" align='right' ><b>√«¡</b></td>
-		<td align='center'>1,600</td>
-	  </tr>
-    </tbody>
-  </table>
-        
-        
-			</fieldset>  
-			</div >	-->
+		
      </div>
 		 <br style='clear:both;'/>
 		 </form>
 		 
-	<div class="control-group">
 	
-            <!--<label class="control-label" for="input01">Barcode</label>-->
-			   <div class="input-group input-group-lg" style=''>
-				<input style='padding: 10px 8px;' placeholder="Detail" type="text" class="form-control">
-					<div class="input-group-btn">
-						            
-						<button onclick='product_search1();' style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-circle-arrow-down"></span></button>
-					</div>
-				</div>		
-				</div> <br style='clear:both;'/>	
 		  
 		 <form  method="post" action="<?=$_SERVER['PHP_SELF']."/additem"?>"> 
 	<div class="control-group">
@@ -175,18 +69,20 @@
 					
 						
 		?>
+		<? if(isset($itemid_notnull)){echo "<font color=red>".$itemid_notnull."</font>";} ?>
+		<? if(isset($itemid_aready)){echo "<font color=red>".$itemid_aready."</font>";} ?><br>
 		<div class="input-group input-group-lg" style=''>
 	<div class="input-group-btn">
 			<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-pencil"></span></button>
 	</div>
-	<input name="itemid" style='padding: 10px 8px;'id="itemid" placeholder="Item ID" type="text" class="form-control" value="<? if(isset($itemid)){echo $itemid;}?>">
+	<input name="itemid" style='padding: 10px 8px;'id="itemid" placeholder="Item ID" type="text" class="form-control" value="<? if(isset($itemid)){echo $itemid;}?>" maxlength="15" required>
 	</div> <br style='clear:both;'/>	
 		
 	<div class="input-group input-group-lg" style=''>
 	<div class="input-group-btn">
-			<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-pencil"></span></button>
+			<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-barcode"></span></button>
 	</div>
-	<input name="barcode" style='padding: 10px 8px;'id="barcode" placeholder="Barcode" type="text" class="form-control" value="<? if(isset($itemid)){echo $barcode;}?>">
+	<input name="barcode" style='padding: 10px 8px;'id="barcode" placeholder="Barcode" type="text" class="form-control" value="<? if(isset($barcode)){echo $barcode;}?>" maxlength="20" required>
 	</div> <br style='clear:both;'/>
 	
 	
@@ -194,10 +90,17 @@
 	<div class="input-group-btn">
 			<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-pencil"></span></button>
 	</div>
-	<input name="name" style='padding: 10px 8px;' placeholder="Name" type="text" class="form-control" value="<? if(isset($itemid)){echo $name;} ?>" >
+	<input name="name" style='padding: 10px 8px;' placeholder="Name" type="text" class="form-control" value="<? if(isset($name)){echo $name;} ?>" maxlength="50" required>
 	</div> <br style='clear:both;'/>
 	
-	
+		<div class="input-group input-group-lg" style=''>
+				<div class="input-group-btn">
+					<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-list-alt"></span></button>
+				</div>
+				<input name="detail" style='padding: 10px 8px;' placeholder="Detail" type="text" class="form-control" value="<? if(isset($detail)){echo $detail;} ?>"  maxlength="255" required>
+				</div><br style='clear:both;'/>	
+				
+				
 	<div class="col-xs-6">
 	<table class="table table-bordered table-hover ">
     <thead>
@@ -218,13 +121,13 @@
 		</span>
 		</td>
          <td  align='center'>
-		<input name="price" style='padding: 10px 8px;' placeholder="Price " type="text" class="form-control" value="<? if(isset($itemid)){echo $price;} ?>" >
+		<input name="price" style='padding: 10px 8px;' placeholder="Price " type="text" class="form-control" value="<? if(isset($price)){echo $price;} ?>" >
 		 </td>
         <td align='center'>
-		<input name="discount" style='padding: 10px 8px;' placeholder="Discount " type="text" class="form-control" value="<? if(isset($itemid)){echo $discount;} ?>" >
+		<input name="discount" style='padding: 10px 8px;' placeholder="Discount " type="text" class="form-control" value="<? if(isset($discount)){echo $discount;} ?>" >
 		</td>
 		<td align='center'>
-		<input name="percent" style='padding: 10px 8px;' placeholder="Percent " type="text" class="form-control" value="<? if(isset($itemid)){echo $percent;} ?>" >
+		<input name="percent" style='padding: 10px 8px;' placeholder="Percent " type="text" class="form-control" value="<? if(isset($percent)){echo $percent;} ?>" >
 		</td>
       </tr>
 	 
@@ -236,12 +139,7 @@
 		
 	
             <!--<label class="control-label" for="input01">Barcode</label>-->
-				<div class="input-group input-group-lg" style=''>
-				<div class="input-group-btn">
-					<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-pencil"></span></button>
-				</div>
-				<input name="detail" style='padding: 10px 8px;' placeholder="Detail" type="text" class="form-control" value="<? if(isset($itemid)){echo $detail;} ?>">
-				</div><br style='clear:both;'/>		
+				
 		
 				<div class="col-xs-6">
 	<table class="table table-bordered table-hover ">

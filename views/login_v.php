@@ -83,7 +83,7 @@
 							<div class="input-group">
 							
 								<span class="input-group-addon"><span class='glyphicon glyphicon-user'></span></span>
-								<input type="text" name="userid" class="form-control" placeholder="Username" maxlength="15" value="<? if(isset($userid_aready)){echo "";}else{if(isset($userid)){echo $userid;}}?>"/>
+								<input type="text" name="userid" class="form-control" placeholder="Username" maxlength="15" value="<? if(isset($userid_aready)){echo "";}else{if(isset($userid)){echo $userid;}}?>" required/>
 							</div>
 						</div>
 							<label class="control-label" for="input01"></label>
@@ -99,7 +99,7 @@
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-pencil"></span>
 								</span>
-									<input type="text" name="name" class="form-control" placeholder="Name" maxlength="30" value="<? if(isset($name)){echo $name;}?>"/>
+									<input type="text" name="name" class="form-control" placeholder="Name" maxlength="30" value="<? if(isset($name)){echo $name;}?>" required/>
 							</div>
 						</div>
 						
@@ -110,7 +110,7 @@
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-envelope"></span>
 								</span>
-									<input type="email" name="email" class="form-control" placeholder="Email" maxlength="30" value="<? if(isset($email_aready)){echo "";}else{if(isset($email)){echo $email;}}?>"/>
+									<input type="email" name="email" class="form-control" placeholder="Email" maxlength="30" value="<? if(isset($email_aready)){echo "";}else{if(isset($email)){echo $email;}}?>" required/>
 							</div>
 						</div>
 						
