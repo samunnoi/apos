@@ -49,11 +49,12 @@
 		{
 			$cause = array('itemid'=>$itemid);	
 			$query = $this->db->get_where('item',$cause);
+
 			if($query -> num_rows() == 1){
-				return $query->row();
+				return $query -> num_rows() //return 0 คือไม่ซ้ำ n=ค่าซ้ำ
 				}else
 				return 0;
-        
+  
 		}
 	
 
@@ -65,9 +66,6 @@
 			$this->db->where('itemid',$name);
 			$this->db->or_where('name',$name);
 			$this->db->or_where('barcode',$name);
-			//$this->db->like('name',$name,'both');
-			//$this->db->join('price', 'item.itemid = price.itemid' , 'left'); 
-			//$this->db->or_like('item.itemid',$name);
 			$query = $this->db->get();
 			//echo "AAAAAAAAAAA".$query->num_rows()."AAAAAAAAAAA";
 			if($query->num_rows() == 1 ){
@@ -83,6 +81,7 @@
 			$this->db->or_like('name',$name);
 			$this->db->or_like('barcode',$name);
 			$query = $this->db->get();
+
 			//echo "sdadsdsadsad".$query->num_rows()."sdadsdsadsad";
 			if($query->num_rows() == 1 ){
 				
@@ -98,6 +97,7 @@
 			//$data= $this->db->get('item');
 			//return $data->result();
         
+
 		}
 		
 		public function pubDelItem($delid)		// ฟังก์ชันค้นหาข้อมูล item
@@ -106,21 +106,8 @@
 			$this->db->delete('item',$cause);
 			$this->db->delete('catalog_name',$cause);
 			$this->db->delete('price',$cause);
-			//$this->db->delete('count_name',$cause);
+			$this->db->delete('count_name',$cause);
 			return;
 			
 		}
-	
-	
-		//public function _pubSearchItem($name)		// ฟังก์ชันค้นหาข้อมูล item
-		//{
-				
-			//$search = $this->db->like('name',$name.'both')
-			//		->get('item');						// ดึงข้อมูลจาก member แบบมีเงื่อนไข
-
-			
-			//return $search->result_array(); 					// return ค่าแบบเป็น array					
-			
-		
-		//}
 	}
