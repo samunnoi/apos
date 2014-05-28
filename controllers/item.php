@@ -15,11 +15,9 @@
 			
 			public function index()
 			{
-			
 				$this->load->view('head_v');
 				$this->load->view('item_v');
 				$this->load->view('foot_v');
-			
 			}
 			public function additem()
 			{
@@ -35,7 +33,7 @@
 					$catalog=trim($catalog);
 					$error = $this->validateitem($itemid,$barcode,$name,$detail,$price,$discount,$percent,$catalog);
 					//echo count($error);
-					$data['error']=$error;
+					//$data['error']=$error;
 					if (count($error) == 0){
 						$this->item->pubAddItem($itemid,$barcode,$name,$detail);
 						$this->item->pubAddPrice($itemid,$price,$discount,$percent);
@@ -54,26 +52,7 @@
 				// 	เรียกใช้ฟังก์ชัน pubaddUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า
 				$rec = $this->item->pubSearchItem($name,$rows=0);
 				
-				/* if($rec){
-					foreach($rec as $row){
-						$data["itemid"] = $row->itemid;
-						$data["barcode"] = $row->barcode;
-						$data["name"]= $row->name;
-						$data["detail"]= $row->detail1;
-						//$data["price"]= $row->price;
-						//$data["discount"]= $row->discount;
-						//$data["percent"]= $row->percent;
-						
-						//echo $data["barcode"];
-					}
 				
-					$this->load->view('head_v');
-					$this->load->view('item_v',$data);
-					$this->load->view('foot_v');
-								
-					}else{
-					$this->index();
-				} */
 			}
 			}
 			
@@ -82,9 +61,7 @@
 			{			
 				//	 ฟังก์ชัน register ทำการสมัครข้อมูลมูล userid
 				$delid=$this->uri->segment(3);
-				
-				if(pubSearchItemid($delid)){ 				 
-						
+				if(pubSearchItemid($delid)){ 	
 					// 	เรียกใช้ฟังก์ชัน pubaddUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า 
 					$this->item->pubDelItem($delid);		
 					$this->index();
@@ -115,9 +92,12 @@
 				if(strlen($catalog)>=30){$erroract = 1;$error['catalog_error'] =  "Catalog Length More";}
 				if(strlen($catalog)==0){$erroract = 1;$error['catalog_notnull'] =  "Catalog Require";}
 				
-				if($itemrec= $this->item->pubSearchItemid($itemid)){
-					if($itemrec->itemid){$erroract = 1;$error['itemid_aready'] = "ItemID Aready";}
-				}
+				$itemrec= $this->item->pubSearchItemid($itemid)
+				if($itemrec){
+					$erroract = 1;
+					$error['itemid_aready'] = "ItemID Aready";
+					}
+				
 				//echo "_______".count($error)."________";
 				//echo "+++++".gettype($itemid)."++++++";
 				if($erroract==1){
