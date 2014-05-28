@@ -60,8 +60,8 @@
 				//$discount=floatval($discount);
 				//$percent=floatval($percent);
 				$erroract=0;
-				if(strlen($cusid)>=15){ $erroract = 1;$error['cusid_error'] = "CustomerID Length More";}
-				if(strlen($cusid)==0){$erroract = 1;$error['cusid_notnull'] =  "CustomerID Require";}
+				if(strlen($cusid)>=15){ $erroract = 1;$error['cusid_error'] = "Customer ID Length More";}
+				if(strlen($cusid)==0){$erroract = 1;$error['cusid_notnull'] =  "Customer ID Require";}
 				if(strlen($name)>=30){$erroract = 1;$error['name_error'] =  "Name Length More";}
 				if(strlen($name)==0){$erroract = 1;$error['name_notnull'] =  "Name Require";}
 				if(strlen($suname)>=30){$erroract = 1;$error['suname_error'] =  "Surname Length More";}
@@ -81,7 +81,7 @@
 					//echo "cccccc"."cccccc";
 					//if($cusrec->cusid){
 					$erroract = 1;
-					$error['cusid_aready'] = "CustomerID Aready";
+					$error['cusid_aready'] = "Customer ID Aready";
 					//}
 				}
 				//echo "_______".count($error)."________";
@@ -97,7 +97,7 @@
 					$error['post1'] = $post1;
 					$error['email'] = $email;
 					
-					foreach($error as $row){echo $row."**";}				 				
+					//foreach($error as $row){echo $row."**";}				 				
 					$this->load->view('head_v');
 					$this->load->view('customer_v',$error);
 					$this->load->view('foot_v');

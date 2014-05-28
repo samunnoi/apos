@@ -1,43 +1,31 @@
 <!--<label class="control-label" for="input01">Customer</label>-->
-		
-	<form  method="post" action="<?=$_SERVER['PHP_SELF']."/addcustomer"?>"> 
+	<form  method="post" action="<?=$_SERVER['PHP_SELF']."/addsupplier"?>"> 
+			
 		<br style='clear:both;'/>
 		
-		<div class="control-group">
-	
-				<button id="btn1" style='padding: 10px 10px;' type="reset" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-plus"> ADD</span></button>
-				<button id="btn2" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-trash"><a href="<?if(isset($itemid)){ base_url();?>delitem/<?echo $itemid; }?>"> DELETE</a></span></button>
-				
-		</div>  
 		
-		<? if(isset($cusid_notnull)){echo "<font color=red>".$cusid_notnull."</font>";} ?>
-		<? if(isset($cusid_aready)){echo "<font color=red>".$cusid_aready."</font>";} ?><br>
+		<? if(isset($supid_notnull)){echo "<font color=red>".$supid_notnull."</font>";} ?>
+		<? if(isset($supid_aready)){echo "<font color=red>".$supid_aready."</font>";} ?><br>
 		<div class="input-group input-group-lg" style=''>
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-pencil"></span></button>
 			</div>
-			<input name="cusid" style='padding: 10px 8px;' placeholder="Customer ID" type="text" class="form-control" value="<? if(isset($cusid)){echo $cusid;}?>" maxlength="15" required>
+			<input name="supid" style='padding: 10px 8px;' placeholder="Supplier ID" type="text" class="form-control" value="<? if(isset($supid)){echo $supid;}?>" maxlength="15" required>
 		</div> <br style='clear:both;'/>	
 				
 		<div class="input-group input-group-lg" style=''>
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-user"></span></button>
 			</div>
-			<input name="name" style='padding: 10px 8px;' placeholder="Name" type="text" class="form-control" value="<? if(isset($name)){echo $name;}?>" maxlength="30" required>
+			<input name="supname" style='padding: 10px 8px;' placeholder="Supplier Name" type="text" class="form-control" value="<? if(isset($supname)){echo $supname;}?>" maxlength="50" required>
 		</div> <br style='clear:both;'/>
 		
-		<div class="input-group input-group-lg" style=''>
-			<div class="input-group-btn">
-				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-user"></span></button>
-			</div>
-			<input name="suname" style='padding: 10px 8px;' placeholder="Surname" type="text" class="form-control" value="<? if(isset($suname)){echo $suname;}?>" maxlength="30" required>
-		</div> <br style='clear:both;'/>
 		
 		<div class="input-group input-group-lg" style=''>
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-phone"></span></button>
 			</div>
-			<input name="tel1" style='padding: 10px 8px;' placeholder="Telephone" type="text" class="form-control" value="<? if(isset($tel1)){echo $tel1;}?>" maxlength="15" required>
+			<input name="tell" style='padding: 10px 8px;' placeholder="Telephone" type="text" class="form-control" value="<? if(isset($tell)){echo $tell;}?>" maxlength="15" required>
 		</div> <br style='clear:both;'/>
 		
 		<div class="input-group input-group-lg" style=''>
@@ -49,24 +37,19 @@
 		
 		<div class="input-group input-group-lg" style=''>
 			<div class="input-group-btn">
-				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-globe"></span></button>
+				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-user"></span></button>
 			</div>
-			<input name="province" style='padding: 10px 8px;' placeholder="Province" type="text" class="form-control" value="<? if(isset($province)){echo $province;}?>" maxlength="30" required>
+			<input name="sellman" style='padding: 10px 8px;' placeholder="Sellman" type="text" class="form-control" value="<? if(isset($sellman)){echo $sellman;}?>" maxlength="80" required>
 		</div> <br style='clear:both;'/>
 		
 		<div class="input-group input-group-lg" style=''>
 			<div class="input-group-btn">
-				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-send"></span></button>
+				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-euro"></span></button>
 			</div>
-			<input name="post1" style='padding: 10px 8px;' placeholder="Post Number" type="text" class="form-control" value="<? if(isset($post1)){echo $post1;}?>" maxlength="10" required>
+			<input name="account" style='padding: 10px 8px;' placeholder="Bank Account" type="text" class="form-control" value="<? if(isset($account)){echo $account;}?>" maxlength="20" required>
 		</div> <br style='clear:both;'/>
 		
-		<div class="input-group input-group-lg" style=''>
-			<div class="input-group-btn">
-				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-envelope"></span></button>
-			</div>
-			<input type="email" name="email" style='padding: 10px 8px;' placeholder="E-mail" type="text" class="form-control" value="<? if(isset($email)){echo $email;}?>" maxlength="30" required>
-		</div> <br style='clear:both;'/>
+		
 	
 		
 	

@@ -37,19 +37,17 @@
      </div>			
 			<br/>
 			<form  method="post" action="<?=$_SERVER['PHP_SELF']."/searchitem"?>"> 
-     <div class="control-group">
-            <!--<label class="control-label" for="input01">Barcode</label>-->
-			   <div class="input-group input-group-lg" style=''>
-				<input name="name" style='padding: 10px 8px;' placeholder="Search Item" type="text" class="form-control">
-					<div class="input-group-btn">
+				<div class="control-group">
+				<!--<label class="control-label" for="input01">Barcode</label>-->
+					<div class="input-group input-group-lg" style=''>
+						<input name="name" style='padding: 10px 8px;' placeholder="Search Item" type="text" class="form-control">
+						<div class="input-group-btn">
 						        <!--  onclick='product_search();'   -->
-						<button type="submit" style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-search"></span></button>
-					</div>
-				</div>				
-		
-     </div>
-		 <br style='clear:both;'/>
-		 </form>
+							<button type="submit" style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-search"></span></button>
+						</div>
+					</div>				
+				</div><br style='clear:both;'/>
+			</form>
 		 
 	
 		  
@@ -77,7 +75,8 @@
 	</div>
 	<input name="itemid" style='padding: 10px 8px;'id="itemid" placeholder="Item ID" type="text" class="form-control" value="<? if(isset($itemid)){echo $itemid;}?>" maxlength="15" required>
 	</div> <br style='clear:both;'/>	
-		
+		<? if(isset($barcode_notnull)){echo "<font color=red>".$barcode_notnull."</font>";} ?>
+		<? if(isset($barcode_error)){echo "<font color=red>".$barcode_error."</font>";} ?><br>
 	<div class="input-group input-group-lg" style=''>
 	<div class="input-group-btn">
 			<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-barcode"></span></button>
@@ -85,7 +84,8 @@
 	<input name="barcode" style='padding: 10px 8px;'id="barcode" placeholder="Barcode" type="text" class="form-control" value="<? if(isset($barcode)){echo $barcode;}?>" maxlength="20" required>
 	</div> <br style='clear:both;'/>
 	
-	
+	<? if(isset($name_notnull)){echo "<font color=red>".$name_notnull."</font>";} ?>
+		<? if(isset($name_error)){echo "<font color=red>".$name_error."</font>";} ?><br>
 	<div class="input-group input-group-lg" style=''>
 	<div class="input-group-btn">
 			<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-pencil"></span></button>
@@ -93,6 +93,9 @@
 	<input name="name" style='padding: 10px 8px;' placeholder="Name" type="text" class="form-control" value="<? if(isset($name)){echo $name;} ?>" maxlength="50" required>
 	</div> <br style='clear:both;'/>
 	
+	
+	<? if(isset($detail_notnull)){echo "<font color=red>".$detail_notnull."</font>";} ?>
+		<? if(isset($datail_error)){echo "<font color=red>".$datail_error."</font>";} ?><br>
 		<div class="input-group input-group-lg" style=''>
 				<div class="input-group-btn">
 					<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-list-alt"></span></button>
@@ -121,12 +124,19 @@
 		</span>
 		</td>
          <td  align='center'>
+		 <? if(isset($price_notnull)){echo "<font color=red>".$price_notnull."</font>";} ?>
+		<? if(isset($price_nav)){echo "<font color=red>".$price_nav."</font>";} ?>
+		<? if(isset($price_notnum)){echo "<font color=red>".$price_notnum."</font>";} ?><br>
 		<input name="price" style='padding: 10px 8px;' placeholder="Price " type="text" class="form-control" value="<? if(isset($price)){echo $price;} ?>" >
 		 </td>
         <td align='center'>
+		<? if(isset($discount_notnum)){echo "<font color=red>".$discount_notnum."</font>";} ?>
+		<? if(isset($discount_nav)){echo "<font color=red>".$discount_nav."</font>";} ?><br>
 		<input name="discount" style='padding: 10px 8px;' placeholder="Discount " type="text" class="form-control" value="<? if(isset($discount)){echo $discount;} ?>" >
 		</td>
 		<td align='center'>
+		<? if(isset($percent_notnum)){echo "<font color=red>".$percent_notnum."</font>";} ?>
+		<? if(isset($percent_nav)){echo "<font color=red>".$percent_nav."</font>";} ?><br>
 		<input name="percent" style='padding: 10px 8px;' placeholder="Percent " type="text" class="form-control" value="<? if(isset($percent)){echo $percent;} ?>" >
 		</td>
       </tr>
@@ -148,7 +158,7 @@
         
         
         <th class='col-xs-3'>ประเภทสินค้า</th>
-		<th class='col-xs-1'>แก้ไข</th>
+	
 		<th class='col-xs-3'>ประเภทหลัก</th>
 		
       </tr>
@@ -164,12 +174,12 @@
     <option value="Paper">Paper</option>
 </datalist>
 		 </td>
-        <td align='center'>
+        <!--<td align='center'>
 	
 		<button type="button" class="btn btn-default btn-sm">
 				<span class="glyphicon glyphicon-list-alt"></span> 
 			</button>
-		</td>
+		</td> -->
 		<td align='center'>
 		
 		

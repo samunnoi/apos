@@ -110,7 +110,7 @@
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-envelope"></span>
 								</span>
-									<input type="email" name="email" class="form-control" placeholder="Email" maxlength="30" value="<? if(isset($email_aready)){echo "";}else{if(isset($email)){echo $email;}}?>" required/>
+									<input type="email" name="email" class="form-control" placeholder="E-mail" maxlength="30" value="<? if(isset($email_aready)){echo "";}else{if(isset($email)){echo $email;}}?>" required/>
 							</div>
 						</div>
 						

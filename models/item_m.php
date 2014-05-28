@@ -52,7 +52,7 @@
 			if($query -> num_rows() == 1){
 				return $query->row();
 				}else
-				return -1;
+				return 0;
         
 		}
 	
@@ -69,7 +69,7 @@
 			//$this->db->join('price', 'item.itemid = price.itemid' , 'left'); 
 			//$this->db->or_like('item.itemid',$name);
 			$query = $this->db->get();
-			echo "AAAAAAAAAAA".$query->num_rows()."AAAAAAAAAAA";
+			//echo "AAAAAAAAAAA".$query->num_rows()."AAAAAAAAAAA";
 			if($query->num_rows() == 1 ){
 				
 				$rows = 1;
@@ -83,7 +83,7 @@
 			$this->db->or_like('name',$name);
 			$this->db->or_like('barcode',$name);
 			$query = $this->db->get();
-			echo "sdadsdsadsad".$query->num_rows()."sdadsdsadsad";
+			//echo "sdadsdsadsad".$query->num_rows()."sdadsdsadsad";
 			if($query->num_rows() == 1 ){
 				
 				$rows = 1;
@@ -92,7 +92,7 @@
 				return $query->result();
 				}
 				
-				}
+				
 		
 			//$this->db->like('name',$name,'both')->or_like('itemid',$name);
 			//$data= $this->db->get('item');

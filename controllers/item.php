@@ -54,7 +54,7 @@
 				// 	เรียกใช้ฟังก์ชัน pubaddUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า
 				$rec = $this->item->pubSearchItem($name,$rows=0);
 				
-				/* if($rec){
+				 if($rec){
 					foreach($rec as $row){
 						$data["itemid"] = $row->itemid;
 						$data["barcode"] = $row->barcode;
@@ -73,7 +73,7 @@
 								
 					}else{
 					$this->index();
-				} */
+				} 
 			}
 			}
 			
