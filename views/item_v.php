@@ -1,7 +1,8 @@
 
   		
 			<br/>
-			<form  method="post" action="<?=$_SERVER['PHP_SELF']."/searchitem"?>"> 
+			<form  method="post" action="<? echo site_url("item/searchitem"); ?>"> 
+			<? if(isset($itemerror)){echo "<font color=red>".$itemerror."</font>";} ?><br>
 				<div class="control-group">
 				<!--<label class="control-label" for="input01">Barcode</label>-->
 					<div class="input-group input-group-lg" style=''>
@@ -45,7 +46,7 @@
 		 
 	
 		  
-		 <form  method="post" action="<?=$_SERVER['PHP_SELF']."/additem"?>"> 
+		 <form  method="post" action="<? echo site_url("item/additem"); ?>"> 
 	<div class="control-group">
 	
 				<button id="btn1" style='padding: 10px 10px;' type="reset" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-plus"> ADD</span></button>

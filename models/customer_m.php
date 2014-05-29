@@ -37,5 +37,28 @@
         
 		}
 		
+		public function pubSearchCustomer($name)		// ฟังก์ชันค้นหาข้อมูล customer
+		{
+			// ค้นหาในกรณีที่ เจอเลย
+			$this->db->select('*');
+			$this->db->from('customer');
+			$this->db->where('cusid',$name);
+			$this->db->or_where('name',$name);
+			$this->db->or_where('suname',$name);
+			$query = $this->db->get();		
+			return $query->result();				
+			
+		}
+		
+		public function pubDelCustomer($delid)		// ฟังก์ชันค้นหาข้อมูล item
+		{
+			$cause = array('cusid'=>$delid);
+			$this->db->delete('customer',$cause);
+			
+			//$this->db->delete('count_name',$cause);
+			return;
+			
+		}
+		
 		
 	}

@@ -57,7 +57,7 @@
 		}
 	
 
-		public function pubSearchItem($name,$rowsm)		// ฟังก์ชันค้นหาข้อมูล item
+		public function pubSearchItem($name)		// ฟังก์ชันค้นหาข้อมูล item
 		{
 			// ค้นหาในกรณีที่ เจอเลย
 			$this->db->select('*');
@@ -65,27 +65,9 @@
 			$this->db->where('itemid',$name);
 			$this->db->or_where('name',$name);
 			$this->db->or_where('barcode',$name);
-			$query = $this->db->get();
-			echo "AAAAAAAAAAA".$query->num_rows()."AAAAAAAAAAA";
-			if($query->num_rows() == 1 ){				
-				$rowsm = 1;
-				echo "bbbbbb";
-				return $query->result();
-				}
+			$query = $this->db->get();		
+			return $query->result();				
 			
-			// ค้นหาในกรณีที่เจอมากกว่า 1 like'
-			$this->db->select('*');
-			$this->db->from('item');
-			$this->db->like('itemid',$name);
-			$this->db->or_like('name',$name);
-			$this->db->or_like('barcode',$name);
-			$query = $this->db->get();
-			//echo "sdadsdsadsad".$query->num_rows()."sdadsdsadsad";
-			if($query->num_rows() >= 1 ){
-				echo "mmmmmm";
-				$rowsm = $query->num_rows();
-				return $query->result();				
-			}
 		}
 		
 		public function pubDelItem($delid)		// ฟังก์ชันค้นหาข้อมูล item

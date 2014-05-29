@@ -1,12 +1,64 @@
-<!--<label class="control-label" for="input01">Customer</label>-->
+
+		<br style='clear:both;'/>
 		
-	<form  method="post" action="<?=$_SERVER['PHP_SELF']."/addcustomer"?>"> 
+		<form  method="post" action="<? echo site_url("customer/searchcustomer"); ?>"> 
+			<? if(isset($cuserror)){echo "<font color=red>".$cuserror."</font>";} ?><br>
+				<div class="control-group">
+				<!--<label class="control-label" for="input01">Barcode</label>-->
+					<div class="input-group input-group-lg" style=''>
+						<input name="name" style='padding: 10px 8px;' placeholder="Search Item" type="text" class="form-control">
+						<div class="input-group-btn">
+						        <!--  onclick='product_search();'   -->
+							<button type="submit" style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-search"></span></button>
+						</div>
+					</div>				
+				</div><br style='clear:both;'/>
+			</form>
+			<? if(isset($searchtable)){?>
+			
+						<table class="table table-bordered table-hover">
+					<thead>
+					  <tr>
+						
+						<th class='col-xs-3'>Customer ID</th>
+						<th class='col-xs-5'>Name</th>
+						<th class='col-xs-5'>Surname</th>
+						
+					  </tr>
+					</thead>
+					<tbody>
+					<?php for( $count=0; $count<$rowtable; $count++ ){ ?>
+					  <tr>        
+						<td align='center'>
+						<span><a href="<? echo site_url("customer/searchcustomer/".$searchtable['cusid'][$count]); ?>"><?php echo $searchtable['cusid'][$count]; ?></span>
+						
+						</td>
+						<td  align='center'>
+						<span><?php echo $searchtable['name'][$count]; ?></span>
+						</td>
+						
+						
+						</td>
+						<td  align='center'>
+						<span><?php echo $searchtable['suname'][$count]; ?></span>
+						</td>
+						
+					  </tr>
+					  <? } ?>
+					</tbody>
+				  </table>
+					<br style='clear:both;'/>
+
+			<? } ?>
+			
+			
+	<form  method="post" action="<? echo site_url("customer/addcustomer"); ?>"> 
 		<br style='clear:both;'/>
 		
 		<div class="control-group">
 	
 				<button id="btn1" style='padding: 10px 10px;' type="reset" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-plus"> ADD</span></button>
-				<button id="btn2" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-trash"><a href="<?if(isset($itemid)){ base_url();?>delitem/<?echo $itemid; }?>"> DELETE</a></span></button>
+				<button id="btn2" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-trash"><a href="<? if(isset($cusid)){echo site_url("customer/delcustomer/".$cusid); } ?>"> DELETE</a></span></button>
 				
 		</div>  
 		<? if(isset($cusid_error)){echo "<font color=red>".$cusid_error."</font>";} ?>

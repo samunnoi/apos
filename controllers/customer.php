@@ -108,6 +108,62 @@
 				}
 			}
 			
+			
+			public function searchcustomer(){				
+							
+				if($post = $this->input->post()){
+					extract($post);
+				}else{
+					$name=$this->uri->segment(3);	
+				}
+				// 	เรียกใช้ฟังก์ชัน pubaddUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า
+				$rec = $this->customer->pubSearchCustomer($name);
+				if(count($rec)==1){
+					foreach($rec as $row){
+						$data["cusid"] = $row->cusid;
+						$data["name"] = $row->name;
+						$data["suname"]= $row->suname;
+						$data["tel1"]= $row->tel1;
+						$data["address1"]= $row->address1;
+						$data["province"]= $row->province;
+						$data["post1"]= $row->post;	
+						$data["email"]= $row->email;
+					}			
+				}
+				if(count($rec)>1){
+					$index=0;
+					foreach($rec as $row){
+						$searchtable['cusid'][$index]=$row->cusid;
+						$searchtable['name'][$index]=$row->name;
+						$searchtable['suname'][$index]=$row->suname;
+						$index++;					
+					}
+					$data['searchtable']=$searchtable;
+					$data['rowtable']=$index;
+				} 
+				if(count($rec) == 0){
+				$data['cuserror']="Customer Not Found";
+				}	
+				
+				$this->load->view('head_v');
+				$this->load->view('customer_v',$data);
+				$this->load->view('foot_v');
+				
+			}
+			
+			public function delitem()
+				{			
+					//	 ฟังก์ชัน register ทำการสมัครข้อมูลมูล userid
+					$delid=$this->uri->segment(3);
+					
+					if(isset($delid)){ 				 
+							
+						// 	เรียกใช้ฟังก์ชัน pubaddUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า 
+						$this->customer->pubDelCustomer($delid);		
+						$this->index();
+					}			
+			}
+			
 	}
 		
 		

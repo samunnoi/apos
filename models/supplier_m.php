@@ -37,5 +37,28 @@
         
 		}
 		
+		public function pubSearchSupplier($name)		// ฟังก์ชันค้นหาข้อมูล customer
+		{
+			// ค้นหาในกรณีที่ เจอเลย
+			$this->db->select('*');
+			$this->db->from('supplier');
+			$this->db->where('supid',$name);
+			$this->db->or_where('sup_name',$name);
+			$this->db->or_where('sellman',$name);
+			$query = $this->db->get();		
+			return $query->result();				
+			
+		}
+		
+		public function pubDelSupplier($delid)		// ฟังก์ชันค้นหาข้อมูล item
+		{
+			$cause = array('supid'=>$delid);
+			$this->db->delete('supplier',$cause);
+			
+			//$this->db->delete('count_name',$cause);
+			return;
+			
+		}
+		
 		
 	}

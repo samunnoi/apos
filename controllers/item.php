@@ -51,14 +51,11 @@
 				if($post = $this->input->post()){
 					extract($post);
 				}else{
-					$name=$this->uri->segment(3);
-					echo "....".$name."....";
+					$name=$this->uri->segment(3);	
 				}
 				// 	เรียกใช้ฟังก์ชัน pubaddUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า
-				$rowsm=0;
-				$rec = $this->item->pubSearchItem($name,$rowsm);
-				echo "------".$rowsm."--------";
-				 if($rowsm==1){
+				$rec = $this->item->pubSearchItem($name);
+				if(count($rec)==1){
 					foreach($rec as $row){
 						$data["itemid"] = $row->itemid;
 						$data["barcode"] = $row->barcode;
@@ -68,17 +65,20 @@
 						//$data["discount"]= $row->discount;
 						//$data["percent"]= $row->percent;	
 					}			
-					}else{
-						$index=0;
-						foreach($rec as $row){
-							$searchtable['itemid'][$index]=$row->itemid;
-							$searchtable['name'][$index]=$row->name;
-							$index++;					
-						}
-						$data['searchtable']=$searchtable;
-						$data['rowtable']=$index;
-					} 
-					
+				}
+				if(count($rec)>1){
+					$index=0;
+					foreach($rec as $row){
+						$searchtable['itemid'][$index]=$row->itemid;
+						$searchtable['name'][$index]=$row->name;
+						$index++;					
+					}
+					$data['searchtable']=$searchtable;
+					$data['rowtable']=$index;
+				} 
+				if(count($rec) == 0){
+				$data['itemerror']="Item Not Found";
+				}	
 				
 				$this->load->view('head_v');
 				$this->load->view('item_v',$data);
