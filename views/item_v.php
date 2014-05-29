@@ -1,40 +1,5 @@
-<!--<label class="control-label" for="input01">Customer</label>-->
 
-	<!-- <div class="control-group">
-				<div class="input-group input-group-lg">
-				  <input style='padding: 10px 8px;' placeholder="Customer" type="text" class="form-control">
-					<span class="input-group-btn">
-						<button id='dettail_button' onclick='customer_dettail();' style='padding: 10px 8px;' class="btn btn-default" type="button">Detail</button>
-					</span>
-				</div>	
-				
-				<div id='customer_detail' class="form-horizontal well" style='display:none;'>
-					<fieldset>         
-					  <div class="control-group">            
-						<div class="controls">
-							<div class="input-group">
-								<span class="input-group-addon"><span class='glyphicon glyphicon-user'></span></span>
-								<input type="text" class="form-control" placeholder="name"/>
-							</div>
-						</div>
-						<label class="control-label" for="input01"></label>
-						<div class="controls">
-							<div class="input-group">
-								<span class="input-group-addon">
-									<span class="glyphicon glyphicon-phone-alt"></span>
-								</span>
-							<input type="text" class="form-control" placeholder="Tel"/>
-							</div>
-						</div>						
-						<div class="controls" style=''>										
-							<label class="control-label" for="input01"></label> 
-							<textarea class="form-control" placeholder="Adress" rows="3"></textarea>
-						</div>
-					  </div>
-					  
-					</fieldset>
-				</div> -->
-     </div>			
+  		
 			<br/>
 			<form  method="post" action="<?=$_SERVER['PHP_SELF']."/searchitem"?>"> 
 				<div class="control-group">
@@ -48,6 +13,35 @@
 					</div>				
 				</div><br style='clear:both;'/>
 			</form>
+			<? if(isset($searchtable)){?>
+			
+						<table class="table table-bordered table-hover">
+					<thead>
+					  <tr>
+						
+						<th class='col-xs-3'>Item ID</th>
+						<th class='col-xs-9'>สินค้า</th>
+						
+					  </tr>
+					</thead>
+					<tbody>
+					<?php for( $count=0; $count<$rowtable; $count++ ){ ?>
+					  <tr>        
+						<td align='center'>
+						<span><a href="<? echo site_url("item/searchitem/".$searchtable['itemid'][$count]); ?>"><?php echo $searchtable['itemid'][$count]; ?></span>
+						
+						</td>
+						 <td  align='center'>
+						 <span><?php echo $searchtable['name'][$count]; ?></span>
+						 </td>
+						
+					  </tr>
+					  <? } ?>
+					</tbody>
+				  </table>
+					<br style='clear:both;'/>
+
+			<? } ?>
 		 
 	
 		  
