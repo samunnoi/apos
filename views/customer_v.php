@@ -9,7 +9,7 @@
 				<button id="btn2" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-trash"><a href="<?if(isset($itemid)){ base_url();?>delitem/<?echo $itemid; }?>"> DELETE</a></span></button>
 				
 		</div>  
-		
+		<? if(isset($cusid_error)){echo "<font color=red>".$cusid_error."</font>";} ?>
 		<? if(isset($cusid_notnull)){echo "<font color=red>".$cusid_notnull."</font>";} ?>
 		<? if(isset($cusid_aready)){echo "<font color=red>".$cusid_aready."</font>";} ?><br>
 		<div class="input-group input-group-lg" style=''>
@@ -18,7 +18,10 @@
 			</div>
 			<input name="cusid" style='padding: 10px 8px;' placeholder="Customer ID" type="text" class="form-control" value="<? if(isset($cusid)){echo $cusid;}?>" maxlength="15" required>
 		</div> <br style='clear:both;'/>	
-				
+			
+
+		<? if(isset($name_error)){echo "<font color=red>".$name_error."</font>";} ?>
+		<? if(isset($name_notnull)){echo "<font color=red>".$name_notnull."</font>";} ?><br>
 		<div class="input-group input-group-lg" style=''>
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-user"></span></button>
@@ -26,6 +29,10 @@
 			<input name="name" style='padding: 10px 8px;' placeholder="Name" type="text" class="form-control" value="<? if(isset($name)){echo $name;}?>" maxlength="30" required>
 		</div> <br style='clear:both;'/>
 		
+		
+		
+		<? if(isset($suname_error)){echo "<font color=red>".$suname_error."</font>";} ?>
+		<? if(isset($suname_notnull)){echo "<font color=red>".$suname_notnull."</font>";} ?><br>
 		<div class="input-group input-group-lg" style=''>
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-user"></span></button>
@@ -33,6 +40,9 @@
 			<input name="suname" style='padding: 10px 8px;' placeholder="Surname" type="text" class="form-control" value="<? if(isset($suname)){echo $suname;}?>" maxlength="30" required>
 		</div> <br style='clear:both;'/>
 		
+		
+		<? if(isset($tel1_error)){echo "<font color=red>".$tel1_error."</font>";} ?>
+		<? if(isset($tel1_notnull)){echo "<font color=red>".$tel1_notnull."</font>";} ?><br>
 		<div class="input-group input-group-lg" style=''>
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-phone"></span></button>
@@ -40,6 +50,9 @@
 			<input name="tel1" style='padding: 10px 8px;' placeholder="Telephone" type="text" class="form-control" value="<? if(isset($tel1)){echo $tel1;}?>" maxlength="15" required>
 		</div> <br style='clear:both;'/>
 		
+		
+		<? if(isset($address1_error)){echo "<font color=red>".$address1_error."</font>";} ?>
+		<? if(isset($address1_notnull)){echo "<font color=red>".$address1_notnull."</font>";} ?><br>
 		<div class="input-group input-group-lg" style=''>
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-home"></span></button>
@@ -47,6 +60,9 @@
 			<input name="address1" style='padding: 10px 8px;' placeholder="Address" type="text" class="form-control" value="<? if(isset($address1)){echo $address1;}?>" maxlength="50" required>
 		</div> <br style='clear:both;'/>
 		
+		
+		<? if(isset($province_error)){echo "<font color=red>".$province_error."</font>";} ?>
+		<? if(isset($province_notnull)){echo "<font color=red>".$province_notnull."</font>";} ?><br>
 		<div class="input-group input-group-lg" style=''>
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-globe"></span></button>
@@ -54,6 +70,9 @@
 			<input name="province" style='padding: 10px 8px;' placeholder="Province" type="text" class="form-control" value="<? if(isset($province)){echo $province;}?>" maxlength="30" required>
 		</div> <br style='clear:both;'/>
 		
+		
+		<? if(isset($post1_error)){echo "<font color=red>".$post1_error."</font>";} ?>
+		<? if(isset($post1_notnull)){echo "<font color=red>".$post1_notnull."</font>";} ?><br>
 		<div class="input-group input-group-lg" style=''>
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-send"></span></button>
@@ -61,6 +80,9 @@
 			<input name="post1" style='padding: 10px 8px;' placeholder="Post Number" type="text" class="form-control" value="<? if(isset($post1)){echo $post1;}?>" maxlength="10" required>
 		</div> <br style='clear:both;'/>
 		
+		
+		<? if(isset($email_error)){echo "<font color=red>".$email_error."</font>";} ?>
+		<? if(isset($email_notnull)){echo "<font color=red>".$email_notnull."</font>";} ?><br>
 		<div class="input-group input-group-lg" style=''>
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-envelope"></span></button>
