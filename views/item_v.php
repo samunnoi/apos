@@ -193,12 +193,13 @@
 	  
     </tbody>
   </table></div><br style='clear:both;'/>	
-
+<input type="hidden" name="status" id="actionupdate" value="add">
+<input type="hidden" name="olditemid" id="actionupdate" value="<? if(isset($itemid)){echo $itemid;}?>">
 
 		
   <div align='center'>
   <!-- <a href='submit.html' style='width:20%;' class="btn btn-primary">Cancel</a> -->
-	<button style='width:20%;' class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+	<button style='width:20%;' class="btn btn-lg btn-primary btn-block" type="submit"  OnClick="JavaScript:fncAlert();">Save</button>
 	<button style='width:20%;' class="btn btn-lg btn-primary btn-block" type="submit">Cancel</button>
   </div>
   </form>
@@ -244,7 +245,26 @@
 
 
 
-
+		/*---------------------------------------------   ----------------------------------------------------  */		
+			var isDirty = false;
+			$("input[type='text']").change(function(){
+				isDirty = true;
+			});
+			
+			function fncAlert()
+			{
+				if (isDirty == true) {
+				var sSave;	
+				sSave = window.confirm("You have some changes that have not been saved. Click OK to save now or CANCEL to continue without saving.");
+				if (sSave == true) {
+					document.getElementById('actionupdate').value = 'update'; 
+					
+					} else {
+					return true;
+					}
+				}
+			}
+			
 
 
 

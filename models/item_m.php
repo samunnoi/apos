@@ -13,7 +13,7 @@
  
 		
 		
-		public function pubAddItem($itemid,$barcode,$name,$detail)		// ฟังก์ชัน insert ข้อมูลลงฐานข้อมูล
+		public function pubAddItem($itemid,$barcode,$name,$detail)		// ฟังก์ชัน insert ข้อมูลสินค้า
 		{
 			$cause = array('itemid'=>$itemid,'barcode'=>$barcode,'name'=>$name,'detail1'=>$detail);	
 			$this->db->insert('item',$cause);	// ดึงข้อมูลจาก member แบบมีเงื่อนไข
@@ -24,7 +24,7 @@
 		
 		}
 		
-		public function pubAddPrice($itemid,$price,$discount,$percent)		// ฟังก์ชัน insert ข้อมูลลงฐานข้อมูล
+		public function pubAddPrice($itemid,$price,$discount,$percent)		// ฟังก์ชัน insert ราคาสินค้า
 		{
 			$cause = array('itemid'=>$itemid,'price'=>$price,'discount'=>$discount,'percent'=>$percent);	
 			$this->db->insert('price',$cause);	// ดึงข้อมูลจาก member แบบมีเงื่อนไข
@@ -35,7 +35,7 @@
 		
 		}
 		
-		public function pubAddCatalog($itemid,$catalog,$master)		// ฟังก์ชัน insert ข้อมูลลงฐานข้อมูล
+		public function pubAddCatalog($itemid,$catalog,$master)		// ฟังก์ชัน insert catalog
 		{
 			$cause = array('itemid'=>$itemid,'catalog_name'=>$catalog,'master_catalog'=>$master);	
 			$this->db->insert('catalog_item',$cause);	// ดึงข้อมูลจาก member แบบมีเงื่อนไข
@@ -45,7 +45,7 @@
 			
 		
 		}
-		public function pubSearchItemid($itemid)		// ฟังก์ชันค้นหาข้อมูล item
+		public function pubSearchItemid($itemid)		// ฟังก์ชันค้นหาข้อมูล item id
 		{
 			$cause = array('itemid'=>$itemid);	
 			$query = $this->db->get_where('item',$cause);
@@ -70,7 +70,7 @@
 			
 		}
 		
-		public function pubDelItem($delid)		// ฟังก์ชันค้นหาข้อมูล item
+		public function pubDelItem($delid)		// ฟังก์ชันลบข้อมูล item
 		{
 			$cause = array('itemid'=>$delid);
 			$this->db->delete('item',$cause);
@@ -82,15 +82,39 @@
 		}
 	
 	
-		//public function _pubSearchItem($name)		// ฟังก์ชันค้นหาข้อมูล item
-		//{
-				
-			//$search = $this->db->like('name',$name.'both')
-			//		->get('item');						// ดึงข้อมูลจาก member แบบมีเงื่อนไข
-
+		public function pubSetItem($itemid,$olditemid,$barcode,$name,$detail)		// ฟังก์ชัน update ข้อมูลสินค้า
+		{
+			$cause = array('itemid'=>$itemid,'barcode'=>$barcode,'name'=>$name,'detail1'=>$detail);	
+			$this->db->update('item',$cause,array('itemid'=>$olditemid));	
 			
-			//return $search->result_array(); 					// return ค่าแบบเป็น array					
+			
+			return;						
 			
 		
-		//}
+		}
+		
+		public function pubSetPrice($itemid,$olditemid,$price,$discount,$percent)		// ฟังก์ชัน update ข้อมูลราคาสินค้า
+		{
+			$cause = array('itemid'=>$itemid,'price'=>$price,'discount'=>$discount,'percent'=>$percent);	
+			$this->db->update('price',$cause,array('itemid'=>$olditemid));	
+			
+			
+			return;						
+			
+		
+		}
+		public function pubSetCatalog($itemid,$olditemid,$catalog,$master)		// ฟังก์ชัน update ข้อมูลประเภทสินค้า
+		{
+			$cause = array('itemid'=>$itemid,'catalog_name'=>$catalog,'master_catalog'=>$master);	
+			$this->db->update('catalog_item',$cause,array('itemid'=>$olditemid));	
+			
+			
+			return;						
+			
+		
+		}
+		
+		
+		
+		
 	}

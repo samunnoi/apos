@@ -29,6 +29,7 @@
 						$data["email"]= $row->email;
 						$data["password"]= $row->password;
 					}	
+				$this->session->set_userdata('name',$data["name"]);
 				$this->session->set_userdata('email',$data["email"]); 		
 				$this->load->view('head_v');
 				$this->load->view('user_v',$data);
@@ -52,11 +53,12 @@
 					$email=trim($email);
 					$password=trim($password);
 					$error = $this->validateuser($userid,$name,$suname,$personal,$tel,$address1,$province,$post1,$email,$password);
-					if ($error == 0){
-						$this->user->pubSetUser($userid,$name,$suname,$personal,$tel,$address1,$province,$post1,$email,$password);	
-						$this->index();
-						return 0;
-					}
+					echo $status;
+					//if ($error == 0){
+					//	$this->user->pubSetUser($userid,$name,$suname,$personal,$tel,$address1,$province,$post1,$email,$password);	
+					//	$this->index();
+					//	return 0;
+					//}
 				}
 				return 1;
 			}

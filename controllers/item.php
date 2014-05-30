@@ -23,9 +23,11 @@
 			}
 			public function additem()
 			{
+				// ฟังก์ชัน เพิ่มสินค้า
 				if($post = $this->input->post()){ 	
 					extract($post);
 					$itemid=trim($itemid);
+					$olditemid=trim($olditemid);
 					$barcode=trim($barcode);
 					$name=trim($name);
 					$detail=trim($detail);
@@ -33,14 +35,30 @@
 					$discount=trim($discount);
 					$percent=trim($percent);
 					$catalog=trim($catalog);
-					$error = $this->validateitem($itemid,$barcode,$name,$detail,$price,$discount,$percent,$catalog);
-					//echo count($error);
-					$data['error']=$error;
-					if ($error == 0){
-						$this->item->pubAddItem($itemid,$barcode,$name,$detail);
-						$this->item->pubAddPrice($itemid,$price,$discount,$percent);
-						$this->item->pubAddCatalog($itemid,$catalog,$master);					
-						$this->index();
+					echo $status;
+					// เช็คสถานะว่าเป็น add หรือ update 
+					if(strcmp($status,'add')==0){
+						$error = $this->validateitem($itemid,$olditemid,$barcode,$name,$detail,$price,$discount,$percent,$catalog,$status);
+						if ($error == 0){
+							$this->item->pubAddItem($itemid,$barcode,$name,$detail);
+							$this->item->pubAddPrice($itemid,$price,$discount,$percent);
+							$this->item->pubAddCatalog($itemid,$catalog,$master);					
+							$this->index();
+						}
+					}if(strcmp($status,'update')==0){
+					
+					echo "----".$itemid;
+					echo "----".$olditemid;
+						$error = $this->validateitem($itemid,$olditemid,$barcode,$name,$detail,$price,$discount,$percent,$catalog,$status);
+						foreach($error as $row){ echo $row;}
+						
+						if ($error == 0){
+							
+							$this->item->pubSetItem($itemid,$olditemid,$barcode,$name,$detail);
+							$this->item->pubSetPrice($itemid,$olditemid,$price,$discount,$percent);
+							$this->item->pubSetCatalog($itemid,$olditemid,$catalog,$master);					
+							$this->index();
+						}
 					}
 				}			
 
@@ -53,7 +71,7 @@
 				}else{
 					$name=$this->uri->segment(3);	
 				}
-				// 	เรียกใช้ฟังก์ชัน pubaddUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า
+				// 	เรียกใช้ฟังก์ชันค้นหาสินค้า
 				$rec = $this->item->pubSearchItem($name);
 				if(count($rec)==1){
 					foreach($rec as $row){
@@ -89,19 +107,21 @@
 				
 			public function delitem()
 				{			
-					//	 ฟังก์ชัน register ทำการสมัครข้อมูลมูล userid
+					//	 ฟังก์ชันลบสินค้า
 					$delid=$this->uri->segment(3);
 					
 					if(pubSearchItemid($delid)){ 				 
 							
-						// 	เรียกใช้ฟังก์ชัน pubaddUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า 
+						
 						$this->item->pubDelItem($delid);		
 						$this->index();
 					}			
 			}
 		
-			private function validateitem($itemid,$barcode,$name,$detail,$price,$discount,$percent,$catalog)
+			private function validateitem($itemid,$olditemid,$barcode,$name,$detail,$price,$discount,$percent,$catalog,$status)
 			{	
+			
+				// ฟังก์ชันตรวจสอบข้อผิดพลาดในการกรอก form
 				$price=floatval($price);
 				$discount=floatval($discount);
 				$percent=floatval($percent);
@@ -123,13 +143,23 @@
 				if(!is_float($percent)){$erroract = 1;$error['percent_notnull'] =  "Percent Is Not Number";}
 				if(strlen($catalog)>=30){$erroract = 1;$error['catalog_error'] =  "Catalog Length More";}
 				if(strlen($catalog)==0){$erroract = 1;$error['catalog_notnull'] =  "Catalog Require";}
+				if(strcmp($status,'add')==0){
+					if($itemrec= $this->item->pubSearchItemid($itemid)){
+						if($itemrec->itemid){$erroract = 1;$error['itemid_aready'] = "ItemID Aready";}
+					}
+				}if(strcmp($status,'update')==0){
+					
+						if(strcmp($olditemid,$itemid)!=0){
+							if($itemrec= $this->item->pubSearchItemid($itemid)){
+								if($itemrec->itemid){$erroract = 1;$error['itemid_aready'] = "ItemID Aready";}
+							}	
+						}
 				
-				if($itemrec= $this->item->pubSearchItemid($itemid)){
-					if($itemrec->itemid){$erroract = 1;$error['itemid_aready'] = "ItemID Aready";}
 				}
-				//echo "_______".count($error)."________";
-				//echo "+++++".gettype($itemid)."++++++";
+				
 				if($erroract==1){
+				
+					// เก็บตัวแปลเพื่อส่งไปแสดงผลยังหน้า view
 					$error['act']=$erroract;
 					$error['itemid'] = $itemid;
 					$error['barcode'] = $barcode;
@@ -140,7 +170,7 @@
 					$error['percent'] = $percent;
 					$error['catalog'] = $catalog; 
 					
-					//foreach($error as $row){echo $row."**";}				 				
+					 				
 					$this->load->view('head_v');
 					$this->load->view('item_v',$error);
 					$this->load->view('foot_v');
