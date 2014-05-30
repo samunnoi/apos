@@ -7,7 +7,7 @@
 				parent::__construct();
 				//	 โหลด model User	
 				//	โหลดไลบารี session และ form_validation
-				$this->load->model('User_m','user');					
+				$this->load->model('Login_m','login');					
 				$this->load->library(array( 'session', 'form_validation')); 
 				$this->load->helper(array('url', 'html', 'form'));
 			}
@@ -36,8 +36,8 @@
 					$user=trim($user);
 					$pass=trim($pass);
 					if(!$this->validate($user,$pass)){
-						//	 เรียกใช้ฟังก์ชัน _pubSelectUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า
-						$userid= $this->user->_pubSelectUser($user,$pass);	
+						//	 เรียกใช้ฟังก์ชัน pubSelectUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า
+						$userid= $this->login->pubSelectUser($user,$pass);	
 						if($userid){														
 										
 							$this->session->set_userdata('id',$userid->userid); 	
@@ -66,13 +66,14 @@
 				if(strlen($name)==0){$erroract = 1;$error['name_notnull'] =   "Name Require";}
 				if(strlen($email)>=30){$erroract = 1;$error['email_error'] =  "E-mail Length More";}
 				if(strlen($email)==0){$erroract = 1;$error['email_notnull'] =  "E-mail Require";}
-				if($userid= $this->user->_pubSelectUser($userid,$password)){
+				if($userid= $this->login->pubSelectUser($userid,$password)){
 					if($userid->userid){$erroract = 1;$error['userid_aready'] = "User Aready";}
 				}
-				if($email= $this->user->_pubSelectEmail($email)){
-					if($email->email){$erroract = 1;$error['email_aready'] = "E-mail Aready";}
+				if($userrec= $this->login->pubSelectEmail($email)){
+					if($userrec->email){$erroract = 1;$error['email_aready'] = "E-mail Aready";}
 				}
 			
+				echo "xxx".$erroract."aaa";
 				if($erroract==1){
 					$error['act']=$erroract;
 					$error['userid'] = $userid;
@@ -107,12 +108,12 @@
 					$name=trim($name);
 					$email=trim($email);
 					$error = $this->validateregis($userid,$password,$name,$email);
-					echo count($error);
-					$data['error']=$error;
-					if (count($error) == 0){
 					
-						// 	เรียกใช้ฟังก์ชัน _pubaddUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า
-						$this->user->_pubAddUser($userid,$password,$name,$email);	
+					$data['error']=$error;
+					if ($error == 0){
+					
+						// 	เรียกใช้ฟังก์ชัน pubaddUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า
+						$this->login->pubAddUser($userid,$password,$name,$email);	
 						$this->load->view('login_v');
 						return 0;
 					}

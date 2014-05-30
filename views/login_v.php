@@ -52,7 +52,7 @@
 
     <div class="container" style='padding-top:10px;'>
 
-      <form class="form-signin" role="form" method="post" action="<?=$_SERVER['PHP_SELF']."/welcome/login" ?>"> <!-- $_SERVER['PHP_SELF'] กลับมาที่ตัวมันเอง -->
+      <form class="form-signin" role="form" method="post" action="<? echo site_url("welcome/login"); ?>"> <!-- $_SERVER['PHP_SELF'] กลับมาที่ตัวมันเอง -->
 			<div class='row'>
 				<span class='col-xs-3' style='padding-left: 10px;  padding-right: 0px;'> <span style='font-size: 50;' class='glyphicon glyphicon-fire'></span>
 				</span>
@@ -72,7 +72,7 @@
 		
 		<br/>
 		
-		<form class="form-signin" role="form" method="post" action="<?=$_SERVER['PHP_SELF']."/welcome/regis" ?>"> <!-- $_SERVER['PHP_SELF'] กลับมาที่ตัวมันเอง -->
+		<form class="form-signin" role="form" method="post" action="<? echo site_url("welcome/regis"); ?>"> <!-- $_SERVER['PHP_SELF'] กลับมาที่ตัวมันเอง -->
 
 		<a href="#" id="newacc" onclick='customer_dettail();'>New account</a>
 		<div id='customer_detail' class="form-horizontal well" <?if(isset($act)){echo "style='display:block;'";}else{ echo "style='display:none;'";} ?>>

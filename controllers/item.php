@@ -36,7 +36,7 @@
 					$error = $this->validateitem($itemid,$barcode,$name,$detail,$price,$discount,$percent,$catalog);
 					//echo count($error);
 					$data['error']=$error;
-					if (count($error) == 0){
+					if ($error == 0){
 						$this->item->pubAddItem($itemid,$barcode,$name,$detail);
 						$this->item->pubAddPrice($itemid,$price,$discount,$percent);
 						$this->item->pubAddCatalog($itemid,$catalog,$master);					
