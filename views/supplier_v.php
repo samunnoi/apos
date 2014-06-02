@@ -56,7 +56,7 @@
 		<div class="control-group">
 	
 				<button id="btn1" style='padding: 10px 10px;' type="reset" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-plus"> ADD</span></button>
-				<button id="btn2" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-trash"><a href="<? if(isset($supid)){echo site_url("supplier/delsupplier/".$supid); } ?>"> DELETE</a></span></button>
+				<a href="<? if(isset($supid)){echo site_url("supplier/delsupplier/".$supid); } ?>"><button id="btn2" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-trash"> DELETE</span></button></a>
 				
 		</div>  
 		

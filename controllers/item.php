@@ -47,10 +47,10 @@
 						}
 					}if(strcmp($status,'update')==0){
 					
-					echo "----".$itemid;
-					echo "----".$olditemid;
+					//echo "----".$itemid;
+					//echo "----".$olditemid;
 						$error = $this->validateitem($itemid,$olditemid,$barcode,$name,$detail,$price,$discount,$percent,$catalog,$status);
-						foreach($error as $row){ echo $row;}
+						//foreach($error as $row){ echo $row;}
 						
 						if ($error == 0){
 							
@@ -110,7 +110,7 @@
 					//	 ฟังก์ชันลบสินค้า
 					$delid=$this->uri->segment(3);
 					
-					if(pubSearchItemid($delid)){ 				 
+					if($this->item->pubSearchItemid($delid)){ 				 
 							
 						
 						$this->item->pubDelItem($delid);		

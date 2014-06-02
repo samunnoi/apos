@@ -74,7 +74,7 @@
 		{
 			$cause = array('itemid'=>$delid);
 			$this->db->delete('item',$cause);
-			$this->db->delete('catalog_name',$cause);
+			$this->db->delete('catalog_item',$cause);
 			$this->db->delete('price',$cause);
 			//$this->db->delete('count_name',$cause);
 			return;
