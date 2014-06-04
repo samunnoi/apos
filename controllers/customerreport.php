@@ -1,13 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-	class Itemreport extends CI_Controller {
+	class Customerreport extends CI_Controller {
 
 			function __construct()
 			{
 				parent::__construct();
 				//	 โหลด model User	
 				//	โหลดไลบารี session และ form_validation
-				$this->load->model('Itemreport_m','itemreport');					
+				$this->load->model('Customerreport_m','customerreport');					
 				$this->load->library(array( 'session', 'form_validation','table')); 
 				$this->load->helper(array('url', 'html', 'form'));
 			}
@@ -17,7 +17,7 @@
 			{
 				$data1=$this->head();
 				$this->load->view('head_v');
-				$this->load->view('itemreporthead_v',$data1);
+				$this->load->view('customerreporthead_v',$data1);
 				$this->load->view('foot_v');
 			
 			}
@@ -28,23 +28,27 @@
 				$post=$this->input->post();
 				extract($post);
 				$data1=$this->head();
-				$search=$this->itemreport->pubitemreport($select);
+				$search=$this->customerreport->pubCustomerReport($select);
 					foreach($search as $row){
-						$catalog['itemid'][$index]=$row->itemid;
-						$catalog['name'][$index]=$row->name;
-						$catalog['barcode'][$index]=$row->barcode;
-						$catalog['detail'][$index]=$row->detail1;
-						$catalog['price'][$index]=$row->price;
-						$catalog['catalog_name'][$index]=$row->catalog_name;
+						$customer['cusid'][$index]=$row->cusid;
+						$customer['name'][$index]=$row->name;
+						$customer['suname'][$index]=$row->suname;
+						$customer['tel1'][$index]=$row->tel1;
+						$customer['address1'][$index]=$row->address1;
+						$customer['province'][$index]=$row->province;
+						$customer['post1'][$index]=$row->post;
+						$customer['cutid'][$index]=$row->cutid;
+						$customer['email'][$index]=$row->email;
+						
 			
 						$index++;	
 					}			
-					$data['catalog_name']=$catalog;
+					$data['customer']=$customer;
 					$data['rowtable']=$index;
-					$data1['catalog_select']=$select;	
+					$data1['cutid_select']=$select;	
 				$this->load->view('head_v');
-				$this->load->view('itemreporthead_v',$data1);
-				$this->load->view('itemreport_v',$data);
+				$this->load->view('customerreporthead_v',$data1);
+				$this->load->view('customerreport_v',$data);
 				$this->load->view('foot_v');
 				
 			
@@ -54,12 +58,12 @@
 			private function head(){
 			
 					$index1=0;
-					$rec=$this->itemreport->pubSerchCatalog();
+					$rec=$this->customerreport->pubSerchCustomerType();
 					foreach($rec as $row){
-						$catalog1['catalog_name1'][$index1]=$row->catalog_name;
+						$cutid1['cut_id1'][$index1]=$row->cutid;
 						$index1++;	
 					}			
-					$data1['catalog_name1']=$catalog1;
+					$data1['cut_id1']=$cutid1;
 					$data1['rowtable']=$index1;
 			
 			return  $data1;
