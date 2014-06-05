@@ -47,7 +47,7 @@
 		<br style='clear:both;'/>
 		
 		<button style='padding: 10px 10px;' type="submit" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> VIEW </span></button>
-		<a href="<? if(isset($catalog_select)){echo site_url("excel/rep/".$catalog_select); }?>"> <button id="btn3" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> Excel </span></button></a>
+		<a href="<? if(isset($catalog_select)){echo site_url("itemreport/repitem/".$catalog_select); }?>"> <button id="btn3" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> Excel </span></button></a>
 		</form>	 
 		
 		

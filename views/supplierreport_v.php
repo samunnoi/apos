@@ -1,3 +1,4 @@
+
 <style>
 
 .btn-input {
@@ -18,21 +19,12 @@
 }
 
 </style>
-  		
+
+
 			<br/>
 		
-			
-			<!--<div class="btn-group btn-input clearfix">
-  <button type="button" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown">
-    <span data-bind="label">All</span> <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu">
-    <li><a href="<?echo site_url("user");?>">Item Price</a></li>
-    <li><a href="<?echo site_url("supplier");?>">Catalog Type</a></li>
-    <li><a href="#">Item Name</a></li>
-  </ul>
-</div>  -->
-		<a href="<? echo site_url("excel/repsup"); ?>"> <button id="btn3" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> Excel </span></button></a>
+
+		<a href="<? echo site_url("supplierreport/repsup"); ?>"> <button id="btn3" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> Excel </span></button></a>
 		<br style='clear:both;'/>
 		<br style='clear:both;'/>
 		<table class="table table-bordered table-hover ">
@@ -74,12 +66,12 @@
 				<span>ที่อยู่ : </span><span><?php echo  $supplier['address1'][$count]; ?> </span>
 				</td>
 				</tr>
-		<?	}
+		<?	
+		}
 		?>
-      
-				
-		
-		
+		</table>
+
+	
 	</div>
 	</div>
 		
