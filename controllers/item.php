@@ -5,7 +5,7 @@
 			function __construct()
 			{
 				parent::__construct();
-				//	 โหลด model User	
+				//	 โหลด model Item	
 				//	โหลดไลบารี session และ form_validation
 				$this->load->model('Item_m','item');					
 				$this->load->library(array( 'session', 'form_validation')); 
@@ -15,7 +15,7 @@
 			
 			public function index()
 			{
-			
+				// โหลด view
 				$this->load->view('head_v');
 				$this->load->view('item_v');
 				$this->load->view('foot_v');
@@ -35,7 +35,6 @@
 					$discount=trim($discount);
 					$percent=trim($percent);
 					$catalog=trim($catalog);
-					echo $status;
 					// เช็คสถานะว่าเป็น add หรือ update 
 					if(strcmp($status,'add')==0){
 						$error = $this->validateitem($itemid,$olditemid,$barcode,$name,$detail,$price,$discount,$percent,$catalog,$status);
@@ -46,14 +45,8 @@
 							$this->index();
 						}
 					}if(strcmp($status,'update')==0){
-					
-					//echo "----".$itemid;
-					//echo "----".$olditemid;
 						$error = $this->validateitem($itemid,$olditemid,$barcode,$name,$detail,$price,$discount,$percent,$catalog,$status);
-						//foreach($error as $row){ echo $row;}
-						
 						if ($error == 0){
-							
 							$this->item->pubSetItem($itemid,$olditemid,$barcode,$name,$detail);
 							$this->item->pubSetPrice($itemid,$olditemid,$price,$discount,$percent);
 							$this->item->pubSetCatalog($itemid,$olditemid,$catalog,$master);					
@@ -64,14 +57,15 @@
 
 			}
 			
-			public function searchitem(){				
-							
+			
+			public function searchitem()
+			{				
+				// ฟังก์ชันค้นหาข้อมูลสินค้า
 				if($post = $this->input->post()){
 					extract($post);
 				}else{
 					$name=$this->uri->segment(3);	
 				}
-				// 	เรียกใช้ฟังก์ชันค้นหาสินค้า
 				$rec = $this->item->pubSearchItem($name);
 				if(count($rec)==1){
 					foreach($rec as $row){
@@ -79,9 +73,6 @@
 						$data["barcode"] = $row->barcode;
 						$data["name"]= $row->name;
 						$data["detail"]= $row->detail1;
-						//$data["price"]= $row->price;
-						//$data["discount"]= $row->discount;
-						//$data["percent"]= $row->percent;	
 					}			
 				}
 				if(count($rec)>1){
@@ -97,30 +88,24 @@
 				if(count($rec) == 0){
 				$data['itemerror']="Item Not Found";
 				}	
-				
 				$this->load->view('head_v');
 				$this->load->view('item_v',$data);
-				$this->load->view('foot_v');
-				
+				$this->load->view('foot_v');	
 			}
 				
 				
 			public function delitem()
-				{			
-					//	 ฟังก์ชันลบสินค้า
-					$delid=$this->uri->segment(3);
-					
-					if($this->item->pubSearchItemid($delid)){ 				 
-							
-						
-						$this->item->pubDelItem($delid);		
-						$this->index();
-					}			
+			{			
+				//	 ฟังก์ชันลบสินค้า
+				$delid=$this->uri->segment(3);
+				if($this->item->pubSearchItemid($delid)){ 				 
+					$this->item->pubDelItem($delid);		
+					$this->index();
+				}			
 			}
 		
 			private function validateitem($itemid,$olditemid,$barcode,$name,$detail,$price,$discount,$percent,$catalog,$status)
 			{	
-			
 				// ฟังก์ชันตรวจสอบข้อผิดพลาดในการกรอก form
 				$price=floatval($price);
 				$discount=floatval($discount);
@@ -148,17 +133,14 @@
 						if($itemrec->itemid){$erroract = 1;$error['itemid_aready'] = "ItemID Aready";}
 					}
 				}if(strcmp($status,'update')==0){
-					
-						if(strcmp($olditemid,$itemid)!=0){
-							if($itemrec= $this->item->pubSearchItemid($itemid)){
-								if($itemrec->itemid){$erroract = 1;$error['itemid_aready'] = "ItemID Aready";}
-							}	
-						}
+					if(strcmp($olditemid,$itemid)!=0){
+						if($itemrec= $this->item->pubSearchItemid($itemid)){
+							if($itemrec->itemid){$erroract = 1;$error['itemid_aready'] = "ItemID Aready";}
+						}	
+					}
 				
 				}
-				
 				if($erroract==1){
-				
 					// เก็บตัวแปลเพื่อส่งไปแสดงผลยังหน้า view
 					$error['act']=$erroract;
 					$error['itemid'] = $itemid;
@@ -168,9 +150,7 @@
 					$error['price'] = $price;
 					$error['discount'] = $discount;
 					$error['percent'] = $percent;
-					$error['catalog'] = $catalog; 
-					
-					 				
+					$error['catalog'] = $catalog; 				
 					$this->load->view('head_v');
 					$this->load->view('item_v',$error);
 					$this->load->view('foot_v');
@@ -179,6 +159,7 @@
 					return 0;	
 				}
 			}
+			
 	}
 		
 		

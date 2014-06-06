@@ -11,9 +11,8 @@
 			
 			}
  
-		public function pubSerchCustomerType()		// ฟังก์ชันค้นหาข้อมูล item
+		public function pubSerchCustomerType()		// ฟังก์ชันค้นหาข้อมูลประเภท customer
 		{
-			// ค้นหาในกรณีที่ เจอเลย
 			$this->db->select('cutid');
 			$this->db->from('customer');
 			$this->db->distinct();
@@ -23,7 +22,7 @@
 		}
 
 
-		public function pubCustomerReport($select)		// ฟังก์ชันค้นหาข้อมูล item
+		public function pubCustomerReport($select)		// ฟังก์ชันค้นหาข้อมูล customer
 		{
 			// ค้นหาในกรณีที่ เจอเลย
 			$this->db->select('cusid,name,suname,tel1,address1,province,post,cutid,email');
@@ -33,13 +32,8 @@
 			}
 			$this->db->order_by('cutid','DESC');
 			$query = $this->db->get();		
-			return $query->result();				
-			
+			return $query->result();					
 		}
 		
 	
-		
-		
-		
-		
 	}

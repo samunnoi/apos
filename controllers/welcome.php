@@ -12,24 +12,20 @@
 				$this->load->helper(array('url', 'html', 'form'));
 			}
 			private function validate($user,$pass)
-			{
-				//$this->form_validation->set_rules('user', 'Username', 'required|min_length[8]');
+			{	// ฟังก์ชันตรวจสอบความถูกต้องในการกรอก user,password
 				if(strlen($user)>=15){return "User Length More";}
 				if(strlen($pass)>=30){return "Password Length More";}
 				return 0;
-			
 			}
 			
 			public function index()
 			{
 				$this->load->view('login_v');	
-			
 			}
 	
-			public function login(){  								
+			public function login()
+			{  								
 				//	 ฟังก์ชั่น login
-				
-				
 				// 	เช็คค่าจากที่ส่งมาจาก input  				
 				if($post = $this->input->post()){ 					 
 					extract($post);	
@@ -38,10 +34,8 @@
 					if(!$this->validate($user,$pass)){
 						//	 เรียกใช้ฟังก์ชัน pubSelectUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า
 						$userid= $this->login->pubSelectUser($user,$pass);	
-						if($userid){														
-										
+						if($userid){																	
 							$this->session->set_userdata('id',$userid->userid); 	
-						
 							// 	ใช้งาน load view				
 							$this->load->view('head_v');
 							$this->load->view('body_v');
@@ -51,12 +45,13 @@
 							$this->load->view('login_v');
 						}
 					}
-				}
-				
-										
+				}							
 			}
+			
+			
 			private function validateregis($userid,$password,$name,$email)
 			{
+				// ฟังก์ชันการตรวจสอบความถูกต้องของการกรอก form โดยจะแจ้ง error กลับไปยัง form
 				$erroract=0;
 				if(strlen($userid)>=15){ $erroract = 1;$error['userid_error'] = "User Length More";}
 				if(strlen($userid)==0){$erroract = 1;$error['userid_notnull'] =  "User Require";}
@@ -72,35 +67,28 @@
 				if($userrec= $this->login->pubSelectEmail($email)){
 					if($userrec->email){$erroract = 1;$error['email_aready'] = "E-mail Aready";}
 				}
-			
-				echo "xxx".$erroract."aaa";
 				if($erroract==1){
 					$error['act']=$erroract;
 					$error['userid'] = $userid;
 					$error['password'] = $password;
 					$error['name'] = $name;
 					$error['email'] = $email;
-					//foreach($error as $row){echo $row."**";}						 
-					 
-					//if(strcmp($error,"User Aready")){ $data['userid'] = $userid; }
-					//if(strcmp($error['password'],"Password Length More")){ $data['password'] = $password; }
-					//if(strcmp($error['name'],"Name Length More")){ $data['name'] = $name; }
-					//if(strcmp($error['email'],"E-mail Length More")&&strcmp($error['email'],"E-mail Aready")){ $data['email'] = $email; ;}
-					//if(strcmp($error,"E-mail Aready")){ $data['email'] = $email; }
-				
 					$this->load->view('login_v',$error);
 					return $error;
 				}else{
 					return 0;	
 				}
 			}
+			
+			
+			
 			public function regis()				
 			{	
+				// ฟังก์ชันสมัครข้อมูลสมาชิก
 				$data['userid']='';
 				$data['password']='';
 				$data['name']='';
 				$data['email']='';
-				//	 ฟังก์ชัน register ทำการสมัครข้อมูลมูล userid
 				if($post = $this->input->post()){ 				 
 					extract($post);	
 					$userid=trim($userid);
@@ -108,10 +96,8 @@
 					$name=trim($name);
 					$email=trim($email);
 					$error = $this->validateregis($userid,$password,$name,$email);
-					
 					$data['error']=$error;
 					if ($error == 0){
-					
 						// 	เรียกใช้ฟังก์ชัน pubaddUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า
 						$this->login->pubAddUser($userid,$password,$name,$email);	
 						$this->load->view('login_v');

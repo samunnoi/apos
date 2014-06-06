@@ -5,28 +5,24 @@
 			function __construct()
 			{
 				parent::__construct();
-				//		
+				//	โหลด model Customer_m	
 				//	โหลดไลบารี session และ form_validation
-				
 				$this->load->model('Customer_m','customer');
 				$this->load->library(array( 'session', 'form_validation')); 
 				$this->load->helper(array('url', 'html', 'form'));
 			}
 			
-			
 			public function index()
 			{
-			
+				// ฟังก์ชัน index ทำการโหลด view
 				$this->load->view('head_v');
 				$this->load->view('customer_v');
 				$this->load->view('foot_v');
-				
-			
 			}
 			
 			public function addcustomer()
 			{
-				//	function เพิ่ม สินค้า
+				//	function เพิ่มข้อมูลลูกค้า
 				if($post = $this->input->post()){ 	
 					extract($post);
 					// ตัดช่องว่างหน้าหลัง string
@@ -37,28 +33,21 @@
 					$address1=trim($address1);
 					$province=trim($province);
 					$post1=trim($post1);
+					$cutid=trim($cutid);
 					$email=trim($email);
-				
 					// เรียกใช้งาน function validate เพื่อตรวจสอบ string
-					$error = $this->validatecustomer($cusid,$name,$suname,$tel1,$address1,$province,$post1,$email);
-					//echo "xxx".count($error)."xxx";
-					//foreach($error as $row){echo $row."**";}	
-					//$data['error']=$error;
+					$error = $this->validatecustomer($cusid,$name,$suname,$tel1,$address1,$province,$post1,$cutid,$email);
+					// เช็คว่าค่า error ใช่ตัวเลขเปล่า
 					if (is_int($error)){
-						
-						$this->customer->pubAddCustomer($cusid,$name,$suname,$tel1,$address1,$province,$post1,$email);		
+						$this->customer->pubAddCustomer($cusid,$name,$suname,$tel1,$address1,$province,$post1,$cutid,$email);		
 						$this->index();
 					}
 				}			
-
 			}
 			
-			private function validatecustomer($cusid,$name,$suname,$tel1,$address1,$province,$post1,$email)
+			private function validatecustomer($cusid,$name,$suname,$tel1,$address1,$province,$post1,$cutid,$email)
 			{	
 				// ฟังก์ชันการตรวจสอบความถูกต้องของการกรอก form โดยจะแจ้ง error กลับไปยัง form
-				//$price=floatval($price);
-				//$discount=floatval($discount);
-				//$percent=floatval($percent);
 				$erroract=0;
 				if(strlen($cusid)>=15){ $erroract = 1;$error['cusid_error'] = "Customer ID Length More";}
 				if(strlen($cusid)==0){$erroract = 1;$error['cusid_notnull'] =  "Customer ID Require";}
@@ -74,18 +63,15 @@
 				if(strlen($province)==0){$erroract = 1;$error['province_notnull'] =  "Province Require";}
 				if(strlen($post1)>=10){ $erroract = 1;$error['post1_error'] = "PostID Length More";}
 				if(strlen($post1)==0){$erroract = 1;$error['post1_notnull'] =  "PostID Require";}
+				if(strlen($cutid)>=10){ $erroract = 1;$error['cutid_error'] = "Customer Type Length More";}
+				if(strlen($cutid)==0){$erroract = 1;$error['cutid_notnull'] =  "Customer Type Require";}
 				if(strlen($email)>=30){ $erroract = 1;$error['email_error'] = "E-mail Length More";}
 				if(strlen($email)==0){$erroract = 1;$error['email_notnull'] =  "E-mail Require";}
 				$cusrec= $this->customer->pubSearchCusid($cusid);
 				if($cusrec==1){ 
-					//echo "cccccc"."cccccc";
-					//if($cusrec->cusid){
 					$erroract = 1;
-					$error['cusid_aready'] = "Customer ID Aready";
-					//}
+					$error['cusid_aready'] = "Customer ID Aready";	
 				}
-				//echo "_______".count($error)."________";
-				//echo "+++++".gettype($itemid)."++++++";
 				if($erroract==1){
 					$error['act']=$erroract;
 					$error['cusid'] = $cusid;
@@ -95,29 +81,28 @@
 					$error['address1'] = $address1;
 					$error['province'] = $province;
 					$error['post1'] = $post1;
-					$error['email'] = $email;
-					
-					//foreach($error as $row){echo $row."**";}				 				
+					$error['cutid'] = $cutid;
+					$error['email'] = $email;	 				
 					$this->load->view('head_v');
 					$this->load->view('customer_v',$error);
 					$this->load->view('foot_v');
 					return $error;
 				}else{
-					
 					return 0;	
 				}
 			}
 			
 			
-			public function searchcustomer(){				
-							
+			public function searchcustomer()
+			{				
+				// ฟังก์ชันค้นหาข้อมูลลูกค้า			
 				if($post = $this->input->post()){
 					extract($post);
 				}else{
 					$name=$this->uri->segment(3);	
 				}
-				// 	เรียกใช้ฟังก์ชัน pubaddUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า
 				$rec = $this->customer->pubSearchCustomer($name);
+				// หากมีลูกค้า 1 คน
 				if(count($rec)==1){
 					foreach($rec as $row){
 						$data["cusid"] = $row->cusid;
@@ -127,9 +112,11 @@
 						$data["address1"]= $row->address1;
 						$data["province"]= $row->province;
 						$data["post1"]= $row->post;	
+						$data["cutid"]= $row->cutid;	
 						$data["email"]= $row->email;
 					}			
 				}
+				// หากมีลูกค้ามากกว่า 1 คน
 				if(count($rec)>1){
 					$index=0;
 					foreach($rec as $row){
@@ -142,26 +129,23 @@
 					$data['rowtable']=$index;
 				} 
 				if(count($rec) == 0){
-				$data['cuserror']="Customer Not Found";
+					$data['cuserror']="Customer Not Found";
 				}	
-				
 				$this->load->view('head_v');
 				$this->load->view('customer_v',$data);
 				$this->load->view('foot_v');
 				
 			}
 			
-			public function delitem()
-				{			
-					//	 ฟังก์ชัน register ทำการสมัครข้อมูลมูล userid
-					$delid=$this->uri->segment(3);
-					
-					if(isset($delid)){ 				 
-							
-						// 	เรียกใช้ฟังก์ชัน pubaddUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า 
-						$this->customer->pubDelCustomer($delid);		
-						$this->index();
-					}			
+			
+			public function delcustomer()
+			{			
+				//	 ฟังก์ชัน ลบข้อมูลลูกค้า
+				$delid=$this->uri->segment(3);
+				if(isset($delid)){ 				 
+					$this->customer->pubDelCustomer($delid);		
+					$this->index();
+				}			
 			}
 			
 	}

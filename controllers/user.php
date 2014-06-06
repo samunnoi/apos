@@ -15,31 +15,31 @@
 			
 			public function index()
 			{	
+				// ฟังก์ชันโหลดข้อมูบ user มาแสดงบน view
 				$userid=$this->session->userdata('id');
 				$rec=$this->user->pubSearchUser($userid);
 				foreach($rec as $row){
-						$data["userid"] = $row->userid;
-						$data["name"] = $row->name;
-						$data["suname"] = $row->suname;
-						$data["personal"] = $row->personal_num;
-						$data["tel"] = $row->tel;
-						$data["address1"] = $row->address1;
-						$data["province"] = $row->province;
-						$data["post1"] = $row->post;
-						$data["email"]= $row->email;
-						$data["password"]= $row->password;
+					$data["userid"] = $row->userid;
+					$data["name"] = $row->name;
+					$data["suname"] = $row->suname;
+					$data["personal"] = $row->personal_num;
+					$data["tel"] = $row->tel;
+					$data["address1"] = $row->address1;
+					$data["province"] = $row->province;
+					$data["post1"] = $row->post;
+					$data["email"]= $row->email;
+					$data["password"]= $row->password;
 					}	
 				$this->session->set_userdata('name',$data["name"]);
 				$this->session->set_userdata('email',$data["email"]); 		
 				$this->load->view('head_v');
 				$this->load->view('user_v',$data);
 				$this->load->view('foot_v');
-				
-			
 			}
 			
 			public function setuser()
 			{	
+				// ฟังก์ชันอัพเดตข้อมูล user
 				if($post = $this->input->post()){ 	
 					extract($post);
 					$userid=trim($userid);
@@ -52,13 +52,7 @@
 					$post1=trim($post1);
 					$email=trim($email);
 					$password=trim($password);
-					$error = $this->validateuser($userid,$name,$suname,$personal,$tel,$address1,$province,$post1,$email,$password);
-					echo $status;
-					//if ($error == 0){
-					//	$this->user->pubSetUser($userid,$name,$suname,$personal,$tel,$address1,$province,$post1,$email,$password);	
-					//	$this->index();
-					//	return 0;
-					//}
+					$this->validateuser($userid,$name,$suname,$personal,$tel,$address1,$province,$post1,$email,$password);	
 				}
 				return 1;
 			}
@@ -67,12 +61,7 @@
 			private function validateuser($userid,$name,$suname,$personal,$tel,$address1,$province,$post1,$email,$password)
 			{	
 				// ฟังก์ชันการตรวจสอบความถูกต้องของการกรอก form โดยจะแจ้ง error กลับไปยัง form
-				//$price=floatval($price);
-				//$discount=floatval($discount);
-				//$percent=floatval($percent);
 				$erroract=0;
-				//if(strlen($userid)>=15){ $erroract = 1;$error['cusid_error'] = "Customer ID Length More";}
-				//if(strlen($userid)==0){$erroract = 1;$error['cusid_notnull'] =  "Customer ID Require";}
 				if(strlen($name)>=30){$erroract = 1;$error['name_error'] =  "Name Length More";}
 				if(strlen($name)==0){$erroract = 1;$error['name_notnull'] =  "Name Require";}
 				if(strlen($suname)>=50){$erroract = 1;$error['suname_error'] =  "Surname Length More";}
@@ -97,8 +86,6 @@
 						if($userrec->email){$erroract = 1;$error['email_aready'] = "E-mail Aready";}
 					}
 				}
-				//echo "_______".count($error)."________";
-				//echo "+++++".gettype($itemid)."++++++";
 				if($erroract==1){
 					$error['act']=$erroract;
 					$error['userid'] = $userid;
@@ -110,15 +97,12 @@
 					$error['province'] = $province;
 					$error['post1'] = $post1;
 					$error['email'] = $email;
-					$error['password'] = $password;
-					
-					//foreach($error as $row){echo $row."**";}				 				
+					$error['password'] = $password;			 				
 					$this->load->view('head_v');
 					$this->load->view('user_v',$error);
 					$this->load->view('foot_v');
 					return $error;
 				}else{
-					
 					return 0;	
 				}
 			}

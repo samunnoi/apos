@@ -25,6 +25,7 @@
 		
 
 		<a href="<? echo site_url("supplierreport/repsup"); ?>"> <button id="btn3" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> Excel </span></button></a>
+		<a href="<? echo site_url("supplierreport/reppdf"); ?>"> <button id="btn4" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> PDF </span></button></a>
 		<br style='clear:both;'/>
 		<br style='clear:both;'/>
 		<table class="table table-bordered table-hover ">

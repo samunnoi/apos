@@ -48,6 +48,7 @@
 		
 		<button style='padding: 10px 10px;' type="submit" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> VIEW </span></button>
 		<a href="<? if(isset($cutid_select)){echo site_url("customerreport/repcus/".$cutid_select); }?>"> <button id="btn3" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> Excel </span></button></a>
+		<a href="<? echo site_url("customerreport/repcuspdf"); ?>"> <button id="btn4" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> PDF </span></button></a>
 		</form>	 
 		
 		

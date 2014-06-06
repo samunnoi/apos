@@ -8,23 +8,18 @@
 		function __construct()
 			{
 				parent::__construct();
-			
 			}
  
 		
 		
-		public function pubAddCustomer($cusid,$name,$suname,$tel1,$address1,$province,$post1,$email)		// ฟังก์ชัน insert ข้อมูลลงฐานข้อมูล
+		public function pubAddCustomer($cusid,$name,$suname,$tel1,$address1,$province,$post1,$cutid,$email)		// ฟังก์ชัน insert ข้อมูลลงฐานข้อมูล
 		{
-			$cause = array('cusid'=>$cusid,'name'=>$name,'suname'=>$suname,'tel1'=>$tel1,'address1'=>$address1,'province'=>$province,'post'=>$post1,'email'=>$email);	
-			$this->db->insert('customer',$cause);	// ดึงข้อมูลจาก member แบบมีเงื่อนไข
-			
-			
+			$cause = array('cusid'=>$cusid,'name'=>$name,'suname'=>$suname,'tel1'=>$tel1,'address1'=>$address1,'province'=>$province,'post'=>$post1,'cutid'=>$cutid,'email'=>$email);	
+			$this->db->insert('customer',$cause);	// ดึงข้อมูลจาก customer แบบมีเงื่อนไข
 			return;						
-			
-		
 		}
 		
-		public function pubSearchCusID($cusid)		// ฟังก์ชันค้นหาข้อมูล item
+		public function pubSearchCusID($cusid)		// ฟังก์ชันค้นหาข้อมูล customer
 		{
 			$cause = array('cusid'=>$cusid);	
 			$query = $this->db->get_where('customer',$cause);
@@ -32,9 +27,6 @@
 				return 1;
 				}else
 				return 0;
-				
-
-        
 		}
 		
 		public function pubSearchCustomer($name)		// ฟังก์ชันค้นหาข้อมูล customer
@@ -46,16 +38,13 @@
 			$this->db->or_where('name',$name);
 			$this->db->or_where('suname',$name);
 			$query = $this->db->get();		
-			return $query->result();				
-			
+			return $query->result();					
 		}
 		
-		public function pubDelCustomer($delid)		// ฟังก์ชันค้นหาข้อมูล item
+		public function pubDelCustomer($delid)		// ฟังก์ชันค้นหาข้อมูล customer
 		{
 			$cause = array('cusid'=>$delid);
 			$this->db->delete('customer',$cause);
-			
-			//$this->db->delete('count_name',$cause);
 			return;
 			
 		}

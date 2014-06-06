@@ -16,8 +16,8 @@
 			
 			
 			public function index()
-			{	// ฟังก์ชัน index จะทำการดึงข้อมูล supplier มา report เป็นตาราง
-				
+			{	
+				// ฟังก์ชัน index จะทำการดึงข้อมูล supplier มา report เป็นตาราง
 				$index=0;
 				$search=$this->supplierreport->pubSupplierReport();
 					foreach($search as $row){
@@ -29,21 +29,19 @@
 						$supplier['account_bank'][$index]=$row->account_bank;
 						$index++;	
 					}			
-					$data['supplier']=$supplier;
-					$data['rowtable']=$index;
-					
+				$data['supplier']=$supplier;
+				$data['rowtable']=$index;	
 				$this->load->view('head_v');
 				$this->load->view('supplierreport_v',$data);
 				$this->load->view('foot_v');
-				
-			
 			}
 			
 			
 			public function repsup()
-			{		$objPHPExcel = new PHPExcel();
+			{		
+					// ฟังก์ชันการ export ข้อมูลผู้ส่งสินค้าเป็น excel
+					$objPHPExcel = new PHPExcel();
 					$index=0;
-					
 					$search=$this->supplierreport->pubSupplierReport();
 					foreach($search as $row){
 						$supplier['supid'][$index]=$row->supid;
@@ -52,7 +50,6 @@
 						$supplier['address1'][$index]=$row->address1;
 						$supplier['sellman'][$index]=$row->sellman;
 						$supplier['account_bank'][$index]=$row->account_bank;
-			
 						$index++;	
 					}
 					$i=0; 		// set ค่า index ของ PHPExcel
@@ -66,7 +63,6 @@
 					$objPHPExcel->getActiveSheet()->SetCellValue('E3', 'Sellman');
 					$objPHPExcel->getActiveSheet()->SetCellValue('F3', 'Bank Account');
 					for( $count=0; $count<$index; $count++ ){  
-	
 						// สร้าง worksheet แล้ว write ค่า ลงตาราง
 						$objPHPExcel->getActiveSheet()->SetCellValue('B'.$rows, $supplier['supid'][$count]);
 						$objPHPExcel->getActiveSheet()->SetCellValue('C'.$rows, $supplier['sup_name'][$count]);
@@ -78,19 +74,18 @@
 						$rows=$rows+2;
 						$rowsdetail=$rowsdetail+2;
 					}
-						$objPHPExcel->getActiveSheet()->setTitle('Supplier Report');
-						// บันทึกไฟล์ Excel 2007
-						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-						$objWriter->save( 'supplier.xls'); //ชื่อไฟล์ เมื่อมีการเรียกไฟล์นี้ทำงานก็จะทำการสร้าง ไฟล์ไว้ใน ตำแหน่งของที่กำหนดชื่อไฟล์
-						echo  redirect(base_url()."supplier.xls");
-
+					$objPHPExcel->getActiveSheet()->setTitle('Supplier Report');
+					// บันทึกไฟล์ Excel 2007
+					$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+					$objWriter->save( 'supplier.xls'); //ชื่อไฟล์ เมื่อมีการเรียกไฟล์นี้ทำงานก็จะทำการสร้าง ไฟล์ไว้ใน ตำแหน่งของที่กำหนดชื่อไฟล์
+					echo  redirect(base_url()."supplier.xls");
 			}
 			
-			public function pdfreport1()
+			
+			public function reppdf()
 			{		
-			 require_once(APPPATH.'third_party/html2pdf/html2pdf.class.php');
-
-				//vista template pdf
+				// ฟังก์ชัน export ข้อมูลลูกค้าเป็น pdf
+				require_once(APPPATH.'third_party/html2pdf/html2pdf.class.php');
 				$index=0;
 				$search=$this->supplierreport->pubSupplierReport();
 					foreach($search as $row){
@@ -104,11 +99,8 @@
 					}			
 				$data['supplier']=$supplier;
 				$data['rowtable']=$index;
-				$this->load->view('pdf',$data);
-		
+				$this->load->view('suppdf_v',$data);
 
-				
-			
 			}
 			
 			

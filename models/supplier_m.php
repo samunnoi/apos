@@ -16,28 +16,24 @@
 		public function pubAddSupplier($supid,$supname,$tell,$address1,$sellman,$account)		// ฟังก์ชัน insert ข้อมูลลงฐานข้อมูล
 		{
 			$cause = array('supid'=>$supid,'sup_name'=>$supname,'tell'=>$tell,'address1'=>$address1,'sellman'=>$sellman,'account_bank'=>$account);	
-			$this->db->insert('supplier',$cause);	// ดึงข้อมูลจาก member แบบมีเงื่อนไข
-			
-			
+			$this->db->insert('supplier',$cause);	
 			return;						
 			
 		
 		}
 		
-		public function pubSearchSupID($supid)		// ฟังก์ชันค้นหาข้อมูล item
+		public function pubSearchSupID($supid)		// ฟังก์ชันค้นหาข้อมูล supplierID
 		{
 			$cause = array('supid'=>$supid);	
 			$query = $this->db->get_where('supplier',$cause);
 			if($query -> num_rows() == 1){
 				return 1;
-				}else
+			}else{
 				return 0;
-				
-
-        
+			}
 		}
 		
-		public function pubSearchSupplier($name)		// ฟังก์ชันค้นหาข้อมูล customer
+		public function pubSearchSupplier($name)		// ฟังก์ชันค้นหาข้อมูล supplier
 		{
 			// ค้นหาในกรณีที่ เจอเลย
 			$this->db->select('*');
@@ -50,12 +46,10 @@
 			
 		}
 		
-		public function pubDelSupplier($delid)		// ฟังก์ชันค้นหาข้อมูล item
+		public function pubDelSupplier($delid)		// ฟังก์ชันลบข้อมูล supplier
 		{
 			$cause = array('supid'=>$delid);
 			$this->db->delete('supplier',$cause);
-			
-			//$this->db->delete('count_name',$cause);
 			return;
 			
 		}

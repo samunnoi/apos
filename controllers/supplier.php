@@ -5,7 +5,7 @@
 			function __construct()
 			{
 				parent::__construct();
-				//		
+				//	โหลด model Supplier		
 				//	โหลดไลบารี session และ form_validation
 				$this->load->model('Supplier_m','supplier');					
 				$this->load->library(array( 'session', 'form_validation')); 
@@ -15,17 +15,14 @@
 			
 			public function index()
 			{
-			
 				$this->load->view('head_v');
 				$this->load->view('supplier_v');
 				$this->load->view('foot_v');
-				
-			
 			}
 			
 			public function addsupplier()
 			{
-				//	function เพิ่ม สินค้า
+				//	function เพิ่มข้อมูลผู้ส่งสินค้า
 				if($post = $this->input->post()){ 	
 					extract($post);
 					// ตัดช่องว่างหน้าหลัง string
@@ -35,15 +32,9 @@
 					$address1=trim($address1);
 					$sellman=trim($sellman);
 					$account=trim($account);
-				
-				
 					// เรียกใช้งาน function validate เพื่อตรวจสอบ string
 					$error = $this->validatesupplier($supid,$supname,$tell,$address1,$sellman,$account);
-					//echo "xxx".count($error)."xxx";
-					//foreach($error as $row){echo $row."**";}	
-					//$data['error']=$error;
 					if (is_int($error)){
-						
 						$this->supplier->pubAddSupplier($supid,$supname,$tell,$address1,$sellman,$account);		
 						$this->index();
 					}
@@ -56,9 +47,6 @@
 			private function validatesupplier($supid,$supname,$tell,$address1,$sellman,$account)
 			{	
 				// ฟังก์ชันการตรวจสอบความถูกต้องของการกรอก form โดยจะแจ้ง error กลับไปยัง form
-				//$price=floatval($price);
-				//$discount=floatval($discount);
-				//$percent=floatval($percent);
 				$erroract=0;
 				if(strlen($supid)>=15){ $erroract = 1;$error['supid_error'] = "Customer ID Length More";}
 				if(strlen($supid)==0){$erroract = 1;$error['sup_notnull'] =  "Customer ID Require";}
@@ -71,18 +59,12 @@
 				if(strlen($sellman)>=80){ $erroract = 1;$error['sellman_error'] = "Sellman Name Length More";}
 				if(strlen($sellman)==0){$erroract = 1;$error['sellman_notnull'] =  "Sellman Name Require";}
 				if(strlen($account)>=20){ $erroract = 1;$error['account_error'] = "Bank Accout Length More";}
-				if(strlen($account)==0){$erroract = 1;$error['account_notnull'] =  "Bank Accout Require";}
-				
+				if(strlen($account)==0){$erroract = 1;$error['account_notnull'] =  "Bank Accout Require";}				
 				$suprec= $this->supplier->pubSearchSupid($supid);
 				if($suprec==1){ 
-					//echo "cccccc"."cccccc";
-					//if($cusrec->cusid){
 					$erroract = 1;
 					$error['supid_aready'] = "Supplier ID Aready";
-					//}
 				}
-				//echo "_______".count($error)."________";
-				//echo "+++++".gettype($itemid)."++++++";
 				if($erroract==1){
 					$error['act']=$erroract;
 					$error['supid'] = $supid;
@@ -90,28 +72,26 @@
 					$error['tell'] = $tell;
 					$error['address1'] = $address1;
 					$error['sellman'] = $sellman;
-					$error['account'] = $account;
-					
-					//foreach($error as $row){echo $row."**";}				 				
+					$error['account'] = $account;			 				
 					$this->load->view('head_v');
 					$this->load->view('supplier_v',$error);
 					$this->load->view('foot_v');
 					return $error;
 				}else{
-					
 					return 0;	
 				}
 			}
 			
 			
-			public function searchsupplier(){				
-							
+			public function searchsupplier()
+			{				
+				// ฟังก์ชันค้นหาข้อมูลผู้ส่งสินค้า
 				if($post = $this->input->post()){
 					extract($post);
 				}else{
 					$name=$this->uri->segment(3);	
 				}
-				// 	เรียกใช้ฟังก์ชัน pubaddUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า
+				// 	เรียกใช้ฟังก์ชัน pubSearchSupplier 
 				$rec = $this->supplier->pubSearchSupplier($name);
 				if(count($rec)==1){
 					foreach($rec as $row){
@@ -121,7 +101,6 @@
 						$data["address1"]= $row->address1;
 						$data["sellman"]= $row->sellman;
 						$data["account"]= $row->account_bank;	
-					
 					}			
 				}
 				if(count($rec)>1){
@@ -137,24 +116,20 @@
 				if(count($rec) == 0){
 				$data['superror']="Supplier Not Found";
 				}	
-				
 				$this->load->view('head_v');
 				$this->load->view('supplier_v',$data);
 				$this->load->view('foot_v');
 				
 			}
 
-			public function delitem()
-				{			
-					//	 ฟังก์ชัน register ทำการสมัครข้อมูลมูล userid
-					$delid=$this->uri->segment(3);
-					
-					if(isset($delid)){ 				 
-							
-						// 	เรียกใช้ฟังก์ชัน pubaddUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า 
-						$this->supplier->pubDelSupplier($delid);		
-						$this->index();
-					}			
+			public function delsupplier()
+			{			
+				//	 ฟังก์ชันลบข้อมูลผู้ส่งสินค้า
+				$delid=$this->uri->segment(3);
+				if(isset($delid)){ 				 
+					$this->supplier->pubDelSupplier($delid);		
+					$this->index();
+				}			
 			}
 			
 			

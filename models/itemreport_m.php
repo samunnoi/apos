@@ -1,8 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-		// 	มีหน้าที่ select, insert ข้อมูล user ของ customer
-		// 	เกี่ยวข้องกับ ตาราง user
-		// 	เกี่ยวข้องกับ ไฟล์ welcomec
-		// 	เขียนวันที่ 21-05-14
+		// 	มีหน้าที่ select, insert ข้อมูลประเภท item
+		// 	เกี่ยวข้องกับ ตาราง item
+
 	Class Itemreport_m extends CI_Model
 	{
 		function __construct()
@@ -11,7 +10,7 @@
 			
 			}
  
-		public function pubSerchCatalog()		// ฟังก์ชันค้นหาข้อมูล item
+		public function pubSerchCatalog()		// ฟังก์ชันค้นหาข้อมูลประเภท item
 		{
 			// ค้นหาในกรณีที่ เจอเลย
 			$this->db->select('catalog_name');
@@ -25,7 +24,6 @@
 
 		public function pubitemreport($select)		// ฟังก์ชันค้นหาข้อมูล item
 		{
-			// ค้นหาในกรณีที่ เจอเลย
 			$this->db->select('item.itemid,item.name,item.barcode,item.detail1,price.price,catalog_item.catalog_name');
 			$this->db->from('item');
 			$this->db->join('catalog_item','catalog_item.itemid=item.itemid');
@@ -37,10 +35,5 @@
 			return $query->result();				
 			
 		}
-		
-	
-		
-		
-		
-		
+
 	}

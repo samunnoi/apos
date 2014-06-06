@@ -5,7 +5,7 @@
 				<div class="control-group">
 				<!--<label class="control-label" for="input01">Barcode</label>-->
 					<div class="input-group input-group-lg" style=''>
-						<input name="name" style='padding: 10px 8px;' placeholder="Search Item" type="text" class="form-control">
+						<input name="name" style='padding: 10px 8px;' placeholder="Search Supplier ID" type="text" class="form-control">
 						<div class="input-group-btn">
 						        <!--  onclick='product_search();'   -->
 							<button type="submit" style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-search"></span></button>
@@ -57,7 +57,7 @@
 	
 				<button id="btn1" style='padding: 10px 10px;' type="reset" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-plus"> ADD</span></button>
 				<a href="<? if(isset($supid)){echo site_url("supplier/delsupplier/".$supid); } ?>"><button id="btn2" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-trash"> DELETE</span></button></a>
-				
+				<a href="<?echo site_url("supplierreport");?>"> <button id="btn3" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> REPORT </span></button></a>
 		</div>  
 		
 		<? if(isset($supid_error)){echo "<font color=red>".$supid_error."</font>";} ?>

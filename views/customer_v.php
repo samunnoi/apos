@@ -6,7 +6,7 @@
 				<div class="control-group">
 				<!--<label class="control-label" for="input01">Barcode</label>-->
 					<div class="input-group input-group-lg" style=''>
-						<input name="name" style='padding: 10px 8px;' placeholder="Search Item" type="text" class="form-control">
+						<input name="name" style='padding: 10px 8px;' placeholder="Search Customer ID" type="text" class="form-control">
 						<div class="input-group-btn">
 						        <!--  onclick='product_search();'   -->
 							<button type="submit" style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-search"></span></button>
@@ -58,8 +58,8 @@
 		<div class="control-group">
 	
 				<button id="btn1" style='padding: 10px 10px;' type="reset" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-plus"> ADD</span></button>
-				<button id="btn2" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-trash"><a href="<? if(isset($cusid)){echo site_url("customer/delcustomer/".$cusid); } ?>"> DELETE</a></span></button>
-				
+				<a href="<? if(isset($cusid)){echo site_url("customer/delcustomer/".$cusid); } ?>"> <button id="btn2" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-trash">DELETE</span></button></a>
+				<a href="<?echo site_url("customerreport");?>"> <button id="btn3" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> REPORT </span></button></a>
 		</div>  
 		<? if(isset($cusid_error)){echo "<font color=red>".$cusid_error."</font>";} ?>
 		<? if(isset($cusid_notnull)){echo "<font color=red>".$cusid_notnull."</font>";} ?>
@@ -130,6 +130,16 @@
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-send"></span></button>
 			</div>
 			<input name="post1" style='padding: 10px 8px;' placeholder="Post Number" type="text" class="form-control" value="<? if(isset($post1)){echo $post1;}?>" maxlength="10" required>
+		</div> <br style='clear:both;'/>
+		
+		
+		<? if(isset($cutid_error)){echo "<font color=red>".$cutid_error."</font>";} ?>
+		<? if(isset($cutid_notnull)){echo "<font color=red>".$cutid_notnull."</font>";} ?><br>
+		<div class="input-group input-group-lg" style=''>
+			<div class="input-group-btn">
+				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-send"></span></button>
+			</div>
+			<input name="cutid" style='padding: 10px 8px;' placeholder="Customer Type" type="text" class="form-control" value="<? if(isset($cutid)){echo $cutid;}?>" maxlength="10" required>
 		</div> <br style='clear:both;'/>
 		
 		

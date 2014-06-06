@@ -13,9 +13,8 @@
  
 		
 
-		public function pubSupplierReport()		// ฟังก์ชันค้นหาข้อมูล item
+		public function pubSupplierReport()		// ฟังก์ชันค้นหาข้อมูล supplier
 		{
-			// ค้นหาในกรณีที่ เจอเลย
 			$this->db->select('supid,sup_name,tell,address1,sellman,account_bank');
 			$this->db->from('supplier');
 			$this->db->order_by('supid','DESC');
