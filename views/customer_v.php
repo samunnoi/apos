@@ -1,6 +1,4 @@
-
-		<br style='clear:both;'/>
-		
+	<br>
 		<form  method="post" action="<? echo site_url("customer/searchcustomer"); ?>"> 
 			<? if(isset($cuserror)){echo "<font color=red>".$cuserror."</font>";} ?><br>
 				<div class="control-group">
@@ -60,7 +58,9 @@
 				<button id="btn1" style='padding: 10px 10px;' type="reset" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-plus"> ADD</span></button>
 				<a href="<? if(isset($cusid)){echo site_url("customer/delcustomer/".$cusid); } ?>"> <button id="btn2" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-trash">DELETE</span></button></a>
 				<a href="<?echo site_url("customerreport");?>"> <button id="btn3" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> REPORT </span></button></a>
-		</div>  
+		</div> 
+		<br>
+		<span id="scusid"></span>
 		<? if(isset($cusid_error)){echo "<font color=red>".$cusid_error."</font>";} ?>
 		<? if(isset($cusid_notnull)){echo "<font color=red>".$cusid_notnull."</font>";} ?>
 		<? if(isset($cusid_aready)){echo "<font color=red>".$cusid_aready."</font>";} ?><br>
@@ -68,7 +68,7 @@
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-pencil"></span></button>
 			</div>
-			<input name="cusid" style='padding: 10px 8px;' placeholder="Customer ID" type="text" class="form-control" value="<? if(isset($cusid)){echo $cusid;}?>" maxlength="15" required>
+			<input name="cusid" style='padding: 10px 8px;' id="cusid" placeholder="Customer ID" type="text" class="form-control" value="<? if(isset($cusid)){echo $cusid;}?>" maxlength="15" required>
 		</div> <br style='clear:both;'/>	
 			
 
@@ -80,9 +80,6 @@
 			</div>
 			<input name="name" style='padding: 10px 8px;' placeholder="Name" type="text" class="form-control" value="<? if(isset($name)){echo $name;}?>" maxlength="30" required>
 		</div> <br style='clear:both;'/>
-		
-		
-		
 		<? if(isset($suname_error)){echo "<font color=red>".$suname_error."</font>";} ?>
 		<? if(isset($suname_notnull)){echo "<font color=red>".$suname_notnull."</font>";} ?><br>
 		<div class="input-group input-group-lg" style=''>
@@ -142,6 +139,26 @@
 			<input name="cutid" style='padding: 10px 8px;' placeholder="Customer Type" type="text" class="form-control" value="<? if(isset($cutid)){echo $cutid;}?>" maxlength="10" required>
 		</div> <br style='clear:both;'/>
 		
+		<br style='clear:both;'/>
+		<div class="input-group input-group-lg" style=''>
+			<div class="input-group-btn">
+				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;'>Customer Type</span></button>
+			</div>
+
+				<input type="hidden" id="hideinputtype" name="custype" class="form-control" style="width:30%; height:46px;" />
+				<select id="inputtype" name="custype" class="form-control" style="width:30%; height:46px;">
+					<option value="Pen" >Cash</option>
+					<option value="Pencil">Member</option>
+					<option value="Paper">Vip</option>
+				</select>
+				
+					<button type="button" id="btnadd" class="btn btn-default btn-sm" style=" height:46px;">
+					<span class="glyphicon glyphicon-plus" > ADD  </span> 
+					</button>
+			</div> <br style='clear:both;'/>	
+			
+
+		
 		
 		<? if(isset($email_error)){echo "<font color=red>".$email_error."</font>";} ?>
 		<? if(isset($email_notnull)){echo "<font color=red>".$email_notnull."</font>";} ?><br>
@@ -162,9 +179,8 @@
 
 		
 		<div align='center'>
-			<!-- <a href='submit.html' style='width:20%;' class="btn btn-primary">Cancel</a> -->
-			<button style='width:20%;' class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
-			<button style='width:20%;' class="btn btn-lg btn-primary btn-block" type="submit">Cancel</button>
+			<button style='width:20%;' class="btn btn-lg btn-primary " type="submit">Cancel</button>
+			<button style='width:20%;' class="btn btn-lg btn-primary " type="submit">Save</button>
 		</div>
 	</form>
 	</div>
@@ -210,7 +226,38 @@
 
 
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////  เช็คค่า cusid ว่าซ้ำหรือไม่ 
+			$(document).ready(function(){
+				// เมื่อ หลุด focus จะทำการส่งค่า
+				$("#cusid").focusout(function(){
+					// ส่งข้อมูลไปยัง controller
+					$("#scusid").empty();		
+						$.ajax({ 
+						url: "<?php echo base_url()."index.php/customer/validatecusid";?>",
+						type: "POST",
+						data: 'scusid=' +$("#cusid").val()
+						})
+						// เมื่อสำเร็จจะทำการเปิดไฟล์ json และเปรียบเทียบค่า
+						.success(function(result) { 
+						var obj = jQuery.parseJSON(result);
+						if(obj != ''){
+							$.each(obj, function(key, inval) {
+							if($("#cusid").val() == inval["cusid"]){
+							   $("#scusid").html(" <font color='red'>CustomerID is already.</font>");
+							}
+							});					
+						}
+						});
+				});
+			});
+			
+///////////////////////////////////////////////////////////////////////////////////////////////////////// จัดการ customer type
+			
+			$(document).on('click', '#btnadd', function(){ 
+				$('#inputtype').hide();
+				$('#hideinputtype').get(0).type = 'text'; // เปลี่ยน type ของ input
+				
+			});
 
 
 

@@ -132,7 +132,13 @@
 				}			
 			}
 			
-			
+			public function validatesupid()
+			{		
+				// เช็คค่าซ้ำจากฐานข้อมูลโดยใช้ ajax + json
+				//$_POST['scusid']
+				$check = $this->supplier->pubCheckId($_POST['ssupid']); 
+				echo json_encode($check);
+			}
 			
 	}
 		

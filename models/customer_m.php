@@ -49,5 +49,17 @@
 			
 		}
 		
+		public function pubCheckId($cusid)		// ฟังก์ชันค้นหาข้อมูล customer
+		{
+			// ค้นหาในกรณีที่ เจอเลย
+			$this->db->select('cusid');
+			$this->db->from('customer');
+			$this->db->where('cusid',$cusid);
+			$query = $this->db->get();		
+			return $query->result();
+
+				
+		}
+		
 		
 	}

@@ -59,7 +59,8 @@
 				<a href="<? if(isset($supid)){echo site_url("supplier/delsupplier/".$supid); } ?>"><button id="btn2" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-trash"> DELETE</span></button></a>
 				<a href="<?echo site_url("supplierreport");?>"> <button id="btn3" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> REPORT </span></button></a>
 		</div>  
-		
+		<br>
+		<span id="ssupid"></span>
 		<? if(isset($supid_error)){echo "<font color=red>".$supid_error."</font>";} ?>
 		<? if(isset($sup_notnull)){echo "<font color=red>".$sup_notnull."</font>";} ?>
 		<? if(isset($supid_aready)){echo "<font color=red>".$supid_aready."</font>";} ?><br>
@@ -67,7 +68,7 @@
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-pencil"></span></button>
 			</div>
-			<input name="supid" style='padding: 10px 8px;' placeholder="Supplier ID" type="text" class="form-control" value="<? if(isset($supid)){echo $supid;}?>" maxlength="15" required>
+			<input name="supid" style='padding: 10px 8px;' placeholder="Supplier ID" id="supid" type="text" class="form-control" value="<? if(isset($supid)){echo $supid;}?>" maxlength="15" required>
 		</div> <br style='clear:both;'/>	
 			
 
@@ -176,6 +177,30 @@
 				disableOther( 'showRightPush' );
 			};
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////  เช็คค่า supid ว่าซ้ำหรือไม่ 
+			$(document).ready(function(){
+				// เมื่อ หลุด focus จะทำการส่งค่า
+				$("#supid").focusout(function(){
+					// ส่งข้อมูลไปยัง controller
+					$("#ssupid").empty();		
+						$.ajax({ 
+						url: "<?php echo base_url()."index.php/supplier/validatesupid";?>",
+						type: "POST",
+						data: 'ssupid=' +$("#supid").val()
+						})
+						// เมื่อสำเร็จจะทำการเปิดไฟล์ json และเปรียบเทียบค่า
+						.success(function(result) { 
+						var obj = jQuery.parseJSON(result);
+						if(obj != ''){
+							$.each(obj, function(key, inval) {
+							if($("#supid").val() == inval["supid"]){
+							   $("#ssupid").html(" <font color='red'>Supplier is already.</font>");
+							}
+							});					
+						}
+						});
+				});
+			});
 
 
 

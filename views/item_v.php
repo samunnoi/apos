@@ -1,7 +1,7 @@
 
   		
 			<br/>
-			<form  method="post" action="<? echo site_url("item/searchitem"); ?>"> 
+			<form  method="post" action="<? echo site_url("item/searchitem"); ?>" > 
 			<? if(isset($itemerror)){echo "<font color=red>".$itemerror."</font>";} ?><br>
 				<div class="control-group">
 				<!--<label class="control-label" for="input01">Barcode</label>-->
@@ -29,7 +29,7 @@
 					<?php for( $count=0; $count<$rowtable; $count++ ){ ?>
 					  <tr>        
 						<td align='center'>
-						<span><a href="<? echo site_url("item/searchitem/".$searchtable['itemid'][$count]); ?>"><?php echo $searchtable['itemid'][$count]; ?></span>
+						<span><a href="<? echo site_url("item/searchitemall/".$searchtable['itemid'][$count]); ?>"><?php echo $searchtable['itemid'][$count]; ?></span>
 						
 						</td>
 						 <td  align='center'>
@@ -45,8 +45,8 @@
 			<? } ?>
 		 
 	
-		  
-		 <form  method="post" action="<? echo site_url("item/additem"); ?>"> 
+		 
+		 <form  method="post" action="<? echo site_url("item/additem"); ?>"   enctype="multipart/form-data" > 
 	<div class="control-group">
 	
 				<button id="btn1" style='padding: 10px 10px;' type="reset" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-plus"> ADD </span></button>
@@ -57,11 +57,8 @@
 		  
 		<br style='clear:both;'/>
 		
-		<?
 		
-					
-						
-		?>
+		<span id="sitemid"></span>
 		<? if(isset($itemid_notnull)){echo "<font color=red>".$itemid_notnull."</font>";} ?>
 		<? if(isset($itemid_aready)){echo "<font color=red>".$itemid_aready."</font>";} ?><br>
 		<div class="input-group input-group-lg" style=''>
@@ -99,7 +96,7 @@
 				</div><br style='clear:both;'/>	
 				
 				
-	<div class="col-xs-6">
+	<div class="col-xs-12">
 	<table class="table table-bordered table-hover ">
     <thead>
       <tr>
@@ -146,7 +143,7 @@
             <!--<label class="control-label" for="input01">Barcode</label>-->
 				
 		
-				<div class="col-xs-6">
+	<div class="col-xs-12">
 	<table class="table table-bordered table-hover ">
     <thead>
       <tr>
@@ -163,7 +160,7 @@
        
          <td  align='center'>
 	<input type="text" name="catalog" list="productName"/>
-<datalist id="productName" name="catalog" >
+<datalist id="productName" name="catalog" value="<? if(isset($catalog_name)){echo $catalog_name;} ?>" >
     <option value="Pen">Pen</option>
     <option value="Pencil">Pencil</option>
     <option value="Paper">Paper</option>
@@ -179,7 +176,7 @@
 		
 		
 		<input type="text" name="master" list="productName"/>
-<datalist id="productName" name="master" >
+<datalist id="productName" name="master" value="<? if(isset($master_catalog)){echo $master_catalog;} ?>">
     <option value="Pen">Pen</option>
     <option value="Pencil">Pencil</option>
     <option value="Paper">Paper</option>
@@ -193,16 +190,49 @@
 	  
     </tbody>
   </table></div><br style='clear:both;'/>	
+  
+  <div class="input-group image-preview">
+                <input type="text" class="form-control image-preview-filename" > <!-- don't give a name === doesn't send on POST/GET -->
+                <span class="input-group-btn">
+					<button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                        <span class="glyphicon glyphicon-remove"></span> Clear
+                    </button>
+                    <!-- image-preview-input -->
+                    <div class="btn btn-default image-preview-input">
+                        <span class="glyphicon glyphicon-folder-open"></span>
+                        <span class="image-preview-input-title">Browse</span>
+                        <input id="myfile" name="myfile"  type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
+				
+                    </div>
+					
+                </span>
+            </div><!-- /input-group image-preview [TO HERE]--> 
+<br style='clear:both;'/>	
+
 <input type="hidden" name="status" id="actionupdate" value="add">
 <input type="hidden" name="olditemid" id="actionupdate" value="<? if(isset($itemid)){echo $itemid;}?>">
 
 		
-  <div align='center'>
+  <div align='right'>
   <!-- <a href='submit.html' style='width:20%;' class="btn btn-primary">Cancel</a> -->
-	<button style='width:20%;' class="btn btn-lg btn-primary btn-block" type="submit"  OnClick="JavaScript:fncAlert();">Save</button>
-	<button style='width:20%;' class="btn btn-lg btn-primary btn-block" type="submit">Cancel</button>
+	<button style='width:20%;' class="btn btn-lg btn-primary" type="submit"  OnClick="JavaScript:fncAlert();">Save</button>
+
   </div>
   </form>
+  
+  <!--	<iframe id="upload_target" name="upload_target" src="#" style="display:none;"></iframe>
+  <form  id="frmUpload" action="<? echo site_url("item/upload"); ?>" method="post" enctype="multipart/form-data"   target="upload_target" onSubmit="stopUpload();"  >
+   
+				
+				<div align='right'>
+				<br style='clear:both;'/>
+				<button style='width:20%;' class="btn btn-lg btn-primary " type="submit" target="upload_target" onSubmit="clickupload();">Upload Picture</button>
+				<br style='clear:both;'/>
+				</div>
+			</form>
+	<span id="upload_process"></span> -->
+
+	
 	</div>
 	</div>
 		
@@ -213,6 +243,7 @@
     <script src="<?php echo base_url(); ?>js/jquery1.11.0.min.js"></script>
     <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
   <script src="<?php echo base_url(); ?>js/slidePushMenus/classie.js"></script>
+
 		<script>
 					var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
 					menuRight = document.getElementById( 'cbp-spmenu-s2' ),
@@ -247,6 +278,8 @@
 
 		/*---------------------------------------------   ----------------------------------------------------  */		
 			var isDirty = false;
+			
+			if($('#itemid').val()!=""){
 			$("input[type='text']").change(function(){
 				isDirty = true;
 			});
@@ -264,9 +297,144 @@
 					}
 				}
 			}
+			}
+/* ----------------------------------------------------------------------------------------------------------------------------------------------- */
+
+$(document).on('click', '#close-preview', function(){ 
+    $('.image-preview').popover('hide');
+    // Hover befor close the preview
+    $('.image-preview').hover(
+        function () {
+           $('.image-preview').popover('show');
+        }, 
+         function () {
+           $('.image-preview').popover('hide');
+        }
+    );    
+});
+
+$(function() {
+    // Create the close button
+    var closebtn = $('<button/>', {
+        type:"button",
+        text: 'x',
+        id: 'close-preview',
+        style: 'font-size: initial;',
+    });
+    closebtn.attr("class","close pull-right");
+    // Set the popover default content
+    $('.image-preview').popover({
+        trigger:'manual',
+        html:true,
+        title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+        content: "There's no image",
+        placement:'bottom'
+    });
+    // Clear event
+    $('.image-preview-clear').click(function(){
+        $('.image-preview').attr("data-content","").popover('hide');
+        $('.image-preview-filename').val("");
+        $('.image-preview-clear').hide();
+        $('.image-preview-input input:file').val("");
+        $(".image-preview-input-title").text("Browse"); 
+    }); 
+    // Create the preview image
+    $(".image-preview-input input:file").change(function (){     
+        var img = $('<img/>', {
+            id: 'dynamic',
+            width:250,
+            height:200
+        });      
+        var file = this.files[0];
+        var reader = new FileReader();
+        // Set preview image into the popover data-content
+        reader.onload = function (e) {
+            $(".image-preview-input-title").text("Change");
+            $(".image-preview-clear").show();
+            $(".image-preview-filename").val(file.name);            
+            img.attr('src', e.target.result);
+            $(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
+        }        
+        reader.readAsDataURL(file);
+    });  
+});
+
+///////////////////////////////////////////////////////////////////////////////////
+function clickupload() {
+	if($("#myfile").val()==""){
+		$('#msg').html('Plase Wait.');					
+		$('#upload_process').empty();	
+		return false;		
+	} else {	
+		$('#msg').html('No file.');	
+		return true ;				
+	}
+}
+
+function stopUpload(success, error){
+	var response='';
+	if (success == 1){
+		alert("Upload Success");
+	} else {
+		if (error == 1) {
+			alert("Upload fail");
+			$('#msg').empty();	
 			
+		}
+	}
 
+	$('#frmUpload')[0].reset();
+	return true ;
+		  
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////  เช็คค่า itemid ว่าซ้ำหรือไม่ 
+			$(document).ready(function(){
+			
+				$("#itemid").focusout(function(){
+					$("#sitemid").empty();		
+						$.ajax({ 
+						url: "<?php echo base_url()."index.php/item/validateitemid";?>",
+						type: "POST",
+						data: 'sitemid=' +$("#itemid").val()
+						})
+						.success(function(result) { 
+						var obj = jQuery.parseJSON(result);
+						if(obj != ''){
+							$.each(obj, function(key, inval) {
+							if($("#itemid").val() == inval["itemid"]){
+							   $("#sitemid").html(" <font color='red'>ItemID is already.</font>");
+							}
+							});					
+						}
+						});
+				});
+			});
 
-
-
-		</script>
+	</script>
+	<style>	
+			.container{
+				margin-top:20px;
+			}
+			.image-preview-input {
+				position: relative;
+				overflow: hidden;
+				margin: 0px;    
+				color: #333;
+				background-color: #fff;
+				border-color: #ccc;    
+			}
+			.image-preview-input input[type=file] {
+				position: absolute;
+				top: 0;
+				right: 0;
+				margin: 0;
+				padding: 0;
+				font-size: 20px;
+				cursor: pointer;
+				opacity: 0;
+				filter: alpha(opacity=0);
+			}
+			.image-preview-input-title {
+				margin-left:2px;
+			}
+	</style>

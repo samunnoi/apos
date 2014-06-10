@@ -54,5 +54,17 @@
 			
 		}
 		
+		public function pubCheckId($supid)		// ฟังก์ชันค้นหาข้อมูล supplier
+		{
+			// ค้นหาในกรณีที่ เจอเลย
+			$this->db->select('supid');
+			$this->db->from('supplier');
+			$this->db->where('supid',$supid);
+			$query = $this->db->get();		
+			return $query->result();
+
+				
+		}
+		
 		
 	}

@@ -148,6 +148,14 @@
 				}			
 			}
 			
+			public function validatecusid()
+			{		
+				// เช็คค่าซ้ำจากฐานข้อมูลโดยใช้ ajax + json
+				//$_POST['scusid']
+				$check = $this->customer->pubCheckId($_POST['scusid']); 
+				echo json_encode($check);
+			}
+			
 	}
 		
 		

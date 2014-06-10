@@ -12,9 +12,9 @@
  
 		
 		
-		public function pubAddItem($itemid,$barcode,$name,$detail)		// ฟังก์ชัน insert ข้อมูลสินค้า
+		public function pubAddItem($itemid,$barcode,$name,$detail,$image)		// ฟังก์ชัน insert ข้อมูลสินค้า
 		{
-			$cause = array('itemid'=>$itemid,'barcode'=>$barcode,'name'=>$name,'detail1'=>$detail);	
+			$cause = array('itemid'=>$itemid,'barcode'=>$barcode,'name'=>$name,'detail1'=>$detail,'image'=>$image);	
 			$this->db->insert('item',$cause);	// ดึงข้อมูลจาก item แบบมีเงื่อนไข
 			return;						
 		}
@@ -50,11 +50,22 @@
 			// ค้นหาในกรณีที่ เจอเลย
 			$this->db->select('*');
 			$this->db->from('item');
-			$this->db->where('itemid',$name);
-			$this->db->or_where('name',$name);
-			$this->db->or_where('barcode',$name);
+			$this->db->where('itemid',$name,'both');
+			$this->db->or_where('name',$name,'both');
 			$query = $this->db->get();		
 			return $query->result();				
+		}
+		
+		
+		public function pubSearchItemAll($name)		// ฟังก์ชันค้นหาข้อมูล item
+		{
+			$this->db->select('*');
+			$this->db->from('item');
+			$this->db->join('catalog_item','catalog_item.itemid=item.itemid');
+			$this->db->join('price','price.itemid=item.itemid');
+			$this->db->where('item.itemid',$name);
+			$query = $this->db->get();		
+			return $query->result();
 		}
 		
 		public function pubDelItem($delid)		// ฟังก์ชันลบข้อมูล item
@@ -67,9 +78,9 @@
 		}
 	
 	
-		public function pubSetItem($itemid,$olditemid,$barcode,$name,$detail)		// ฟังก์ชัน update ข้อมูลสินค้า
+		public function pubSetItem($itemid,$olditemid,$barcode,$name,$detail,$image)		// ฟังก์ชัน update ข้อมูลสินค้า
 		{
-			$cause = array('itemid'=>$itemid,'barcode'=>$barcode,'name'=>$name,'detail1'=>$detail);	
+			$cause = array('itemid'=>$itemid,'barcode'=>$barcode,'name'=>$name,'detail1'=>$detail,'image'=>$image);	
 			$this->db->update('item',$cause,array('itemid'=>$olditemid));	
 			return;						
 		}
@@ -87,7 +98,17 @@
 			return;						
 		}
 		
-		
+		public function pubCheckId($itemid)		// ฟังก์ชันค้นหาข้อมูล itemID
+		{
+			// ค้นหาในกรณีที่ เจอเลย
+			$this->db->select('itemid');
+			$this->db->from('item');
+			$this->db->where('itemid',$itemid);
+			$query = $this->db->get();		
+			return $query->result();
+
+				
+		}
 		
 		
 	}
