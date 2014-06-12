@@ -189,7 +189,7 @@
 		<br style='clear:both;'/>	
 
 		<input type="hidden" name="status" id="actionupdate" value="add">
-		<input type="hidden" name="olditemid" id="actionupdate" value="<? if(isset($itemid)){echo $itemid;}?>">
+		<input type="hidden" name="olditemid" id="oldid" value="<? if(isset($itemid)){echo $itemid;}?>">
 		<div align='right'>
 			<button style='width:20%;' class="btn btn-lg btn-primary" type="submit"  OnClick="JavaScript:fncAlert();">Save</button>
 		</div>
@@ -348,7 +348,7 @@
 		}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////  เช็คค่า itemid ว่าซ้ำหรือไม่ 
 			$(document).ready(function(){
-			
+				if($('#itemid').val()==""){
 				$("#itemid").focusout(function(){
 					$("#sitemid").empty();		
 						$.ajax({ 
@@ -367,6 +367,7 @@
 							}
 						});
 				});
+				}
 			});
 
 	</script>

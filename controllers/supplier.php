@@ -27,24 +27,33 @@
 					extract($post);
 					// ตัดช่องว่างหน้าหลัง string
 					$supid=trim($supid);
+					$oldsupid=trim($oldsupid);
 					$supname=trim($supname);
 					$tell=trim($tell);
 					$address1=trim($address1);
 					$sellman=trim($sellman);
 					$account=trim($account);
-					// เรียกใช้งาน function validate เพื่อตรวจสอบ string
-					$error = $this->validatesupplier($supid,$supname,$tell,$address1,$sellman,$account);
-					if (is_int($error)){
-						$this->supplier->pubAddSupplier($supid,$supname,$tell,$address1,$sellman,$account);		
-						$this->index();
+					if(strcmp($status,'add')==0){
+						// เรียกใช้งาน function validate เพื่อตรวจสอบ string
+						$error = $this->validatesupplier($supid,$oldsupid,$supname,$tell,$address1,$sellman,$account,$status);
+						if (is_int($error)){
+							$this->supplier->pubAddSupplier($supid,$supname,$tell,$address1,$sellman,$account);		
+							$this->index();
+						}
 					}
-				}			
-
+					if(strcmp($status,'update')==0){	
+						$error = $this->validatesupplier($supid,$oldsupid,$supname,$tell,$address1,$sellman,$account,$status);
+						if (is_int($error)){
+							$this->supplier->pubSetSupplier($supid,$oldsupid,$supname,$tell,$address1,$sellman,$account);		
+							$this->index();
+						}	
+					}
+				}
 			}
 			
 			
 			
-			private function validatesupplier($supid,$supname,$tell,$address1,$sellman,$account)
+			private function validatesupplier($supid,$oldsupid,$supname,$tell,$address1,$sellman,$account,$status)
 			{	
 				// ฟังก์ชันการตรวจสอบความถูกต้องของการกรอก form โดยจะแจ้ง error กลับไปยัง form
 				$erroract=0;
@@ -59,15 +68,26 @@
 				if(strlen($sellman)>=80){ $erroract = 1;$error['sellman_error'] = "Sellman Name Length More";}
 				if(strlen($sellman)==0){$erroract = 1;$error['sellman_notnull'] =  "Sellman Name Require";}
 				if(strlen($account)>=20){ $erroract = 1;$error['account_error'] = "Bank Accout Length More";}
-				if(strlen($account)==0){$erroract = 1;$error['account_notnull'] =  "Bank Accout Require";}				
-				$suprec= $this->supplier->pubSearchSupid($supid);
-				if($suprec==1){ 
-					$erroract = 1;
-					$error['supid_aready'] = "Supplier ID Aready";
+				if(strlen($account)==0){$erroract = 1;$error['account_notnull'] =  "Bank Accout Require";}	
+				if(strcmp($status,'add')==0){
+					$suprec= $this->supplier->pubSearchSupid($supid);
+					if($suprec==1){ 
+						$erroract = 1;
+						$error['supid_aready'] = "Supplier ID Aready";
+					}
 				}
+				if(strcmp($status,'update')==0){
+					if(strcmp($oldsupid,$supid)!=0){
+						$suprec= $this->supplier->pubSearchSupid($supid);
+						if($suprec==1){ 
+							$erroract = 1;
+							$error['supid_aready'] = "Supplier ID Aready";
+						}
+					}
+				}	
 				if($erroract==1){
 					$error['act']=$erroract;
-					$error['supid'] = $supid;
+					$error['supid'] = $oldsupid;
 					$error['supname'] = $supname;
 					$error['tell'] = $tell;
 					$error['address1'] = $address1;

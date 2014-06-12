@@ -49,7 +49,14 @@
 			
 		}
 		
-		public function pubCheckId($cusid)		// ฟังก์ชันค้นหาข้อมูล customer
+		public function pubSetCustomer($cusid,$oldcusid,$name,$suname,$tel1,$address1,$province,$post1,$cutid,$email)		// ฟังก์ชัน update ข้อมูลลูกค้า
+		{
+			$cause = array('cusid'=>$cusid,'name'=>$name,'suname'=>$suname,'tel1'=>$tel1,'address1'=>$address1,'province'=>$province,'post'=>$post1,'cutid'=>$cutid,'email'=>$email);	
+			$this->db->update('customer',$cause,array('cusid'=>$oldcusid));	
+			return;						
+		}
+		
+		public function pubCheckId($cusid)		// ฟังก์ชันค้นหาข้อมูล customerID
 		{
 			// ค้นหาในกรณีที่ เจอเลย
 			$this->db->select('cusid');
@@ -59,6 +66,24 @@
 			return $query->result();
 
 				
+		}
+		
+		public function pubSearchType($addtype)		// ฟังก์ชันค้นหาข้อมูล customer type
+		{
+			// ค้นหาในกรณีที่ เจอเลย
+			$this->db->select('customer_type_name');
+			$this->db->from('customertype');
+			$this->db->where('customer_type_name',$addtype);
+			$query = $this->db->get();		
+			return $query->row();					
+		}
+		
+		public function pubAddType($addtype)		// ฟังก์ชันเพิ่มข้อมูล customer type
+		{
+			
+			$cause = array('cutid'=>$addtype);	
+			$this->db->insert('customertype',$cause);	
+			return;			
 		}
 		
 		

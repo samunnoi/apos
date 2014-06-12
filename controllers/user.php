@@ -52,7 +52,11 @@
 					$post1=trim($post1);
 					$email=trim($email);
 					$password=trim($password);
-					$this->validateuser($userid,$name,$suname,$personal,$tel,$address1,$province,$post1,$email,$password);	
+					$error=$this->validateuser($userid,$name,$suname,$personal,$tel,$address1,$province,$post1,$email,$password);
+					if (is_int($error)){
+						$this->user->pubSetUser($userid,$name,$suname,$personal,$tel,$address1,$province,$post1,$email,$password);		
+						$this->index();
+					}
 				}
 				return 1;
 			}

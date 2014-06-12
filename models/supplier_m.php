@@ -61,10 +61,14 @@
 			$this->db->from('supplier');
 			$this->db->where('supid',$supid);
 			$query = $this->db->get();		
-			return $query->result();
-
-				
+			return $query->result();		
 		}
 		
+		public function pubSetSupplier($supid,$oldsupid,$supname,$tell,$address1,$sellman,$account)		// ฟังก์ชัน update ข้อมูลผู้ส่งสินค้า
+		{
+			$cause = array('supid'=>$supid,'sup_name'=>$supname,'tell'=>$tell,'address1'=>$address1,'sellman'=>$sellman,'account_bank'=>$account);	
+			$this->db->update('supplier',$cause,array('supid'=>$oldsupid));	
+			return;						
+		}
 		
 	}

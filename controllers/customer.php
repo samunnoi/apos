@@ -27,25 +27,48 @@
 					extract($post);
 					// ตัดช่องว่างหน้าหลัง string
 					$cusid=trim($cusid);
+					$oldcusid=trim($oldcusid);
 					$name=trim($name);
 					$suname=trim($suname);
 					$tel1=trim($tel1);
 					$address1=trim($address1);
 					$province=trim($province);
 					$post1=trim($post1);
-					$cutid=trim($cutid);
 					$email=trim($email);
-					// เรียกใช้งาน function validate เพื่อตรวจสอบ string
-					$error = $this->validatecustomer($cusid,$name,$suname,$tel1,$address1,$province,$post1,$cutid,$email);
-					// เช็คว่าค่า error ใช่ตัวเลขเปล่า
-					if (is_int($error)){
-						$this->customer->pubAddCustomer($cusid,$name,$suname,$tel1,$address1,$province,$post1,$cutid,$email);		
-						$this->index();
+					if($addtype){
+						$type = $this->customer->pubSearchType($addtype);
+						if($type){
+							$cutid=$addtype;
+						}else{
+							$cutid=$addtype;
+							$this->customer->pubAddType($addtype);
+						}
+					
+					}
+					$cutid=trim($cutid);
+					if(strcmp($status,'add')==0){
+						echo "aaaaaa";
+						// เรียกใช้งาน function validate เพื่อตรวจสอบ string
+						$error = $this->validatecustomer($cusid,$oldcusid,$name,$suname,$tel1,$address1,$province,$post1,$cutid,$email,$status);
+						// เช็คว่าค่า error ใช่ตัวเลขเปล่า
+						if (is_int($error)){
+							$this->customer->pubAddCustomer($cusid,$name,$suname,$tel1,$address1,$province,$post1,$cutid,$email);		
+							$this->index();
+						}
+					}if(strcmp($status,'update')==0){
+						echo "bbbbb";
+						// เรียกใช้งาน function validate เพื่อตรวจสอบ string
+						$error = $this->validatecustomer($cusid,$oldcusid,$name,$suname,$tel1,$address1,$province,$post1,$cutid,$email,$status);
+						// เช็คว่าค่า error ใช่ตัวเลขเปล่า
+						if (is_int($error)){
+							$this->customer->pubSetCustomer($cusid,$oldcusid,$name,$suname,$tel1,$address1,$province,$post1,$cutid,$email);		
+							$this->index();
+						}
 					}
 				}			
 			}
 			
-			private function validatecustomer($cusid,$name,$suname,$tel1,$address1,$province,$post1,$cutid,$email)
+			private function validatecustomer($cusid,$oldcusid,$name,$suname,$tel1,$address1,$province,$post1,$cutid,$email,$status)
 			{	
 				// ฟังก์ชันการตรวจสอบความถูกต้องของการกรอก form โดยจะแจ้ง error กลับไปยัง form
 				$erroract=0;
@@ -67,14 +90,28 @@
 				if(strlen($cutid)==0){$erroract = 1;$error['cutid_notnull'] =  "Customer Type Require";}
 				if(strlen($email)>=30){ $erroract = 1;$error['email_error'] = "E-mail Length More";}
 				if(strlen($email)==0){$erroract = 1;$error['email_notnull'] =  "E-mail Require";}
-				$cusrec= $this->customer->pubSearchCusid($cusid);
-				if($cusrec==1){ 
-					$erroract = 1;
-					$error['cusid_aready'] = "Customer ID Aready";	
+				if(strcmp($status,'add')==0){
+					$cusrec= $this->customer->pubSearchCusid($cusid);
+					if($cusrec==1){ 
+						$erroract = 1;
+						$error['cusid_aready'] = "Customer ID Aready";	
+					}
+				}if(strcmp($status,'update')==0){
+					if(strcmp($oldcusid,$cusid)!=0){
+						$cusrec= $this->customer->pubSearchCusid($cusid);
+						if($cusrec==1){ 
+							$erroract = 1;
+							$error['cusid_aready'] = "Customer ID Aready";	
+						}
+					}
+				
 				}
 				if($erroract==1){
+					foreach($error as $row){ // เอาไว้เช็ค Error
+						echo $row;
+					}
 					$error['act']=$erroract;
-					$error['cusid'] = $cusid;
+					$error['cusid'] = $oldcusid;
 					$error['name'] = $name;
 					$error['suname'] = $suname;
 					$error['tel1'] = $tel1;

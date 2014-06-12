@@ -114,10 +114,12 @@
 		</div> 
 		<br style='clear:both;'/>
 		
-		<div align='center'>
-			<!-- <a href='submit.html' style='width:20%;' class="btn btn-primary">Cancel</a> -->
-			<button style='width:20%;' class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
-			<button style='width:20%;' class="btn btn-lg btn-primary btn-block" type="submit">Cancel</button>
+		
+		<input type="hidden" name="status" id="actionupdate" value="add">
+		<input type="hidden" name="oldsupid" id="oldid" value="<? if(isset($supid)){echo $supid;}?>">
+		<div align='center'>	
+			<button style='width:20%;' class="btn btn-lg btn-primary" type="submit" >Cancel</button>
+			<button style='width:20%;' class="btn btn-lg btn-primary" type="submit" OnClick="JavaScript:fncAlert();">Save</button>
 		</div>
 	</form>
 
@@ -158,30 +160,53 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////  เช็คค่า supid ว่าซ้ำหรือไม่ 
 			$(document).ready(function(){
-				// เมื่อ หลุด focus จะทำการส่งค่า
-				$("#supid").focusout(function(){
-					// ส่งข้อมูลไปยัง controller
-					$("#ssupid").empty();		
-						$.ajax({ 
-						url: "<?php echo base_url()."index.php/supplier/validatesupid";?>",
-						type: "POST",
-						data: 'ssupid=' +$("#supid").val()
-						})
-						// เมื่อสำเร็จจะทำการเปิดไฟล์ json และเปรียบเทียบค่า
-						.success(function(result) { 
-						var obj = jQuery.parseJSON(result);
-						if(obj != ''){
-							$.each(obj, function(key, inval) {
-							if($("#supid").val() == inval["supid"]){
-							   $("#ssupid").html(" <font color='red'>Supplier is already.</font>");
+				if($('#supid').val()==""){
+					// เมื่อ หลุด focus จะทำการส่งค่า
+					$("#supid").focusout(function(){
+						// ส่งข้อมูลไปยัง controller
+						$("#ssupid").empty();		
+							$.ajax({ 
+							url: "<?php echo base_url()."index.php/supplier/validatesupid";?>",
+							type: "POST",
+							data: 'ssupid=' +$("#supid").val()
+							})
+							// เมื่อสำเร็จจะทำการเปิดไฟล์ json และเปรียบเทียบค่า
+							.success(function(result) { 
+							var obj = jQuery.parseJSON(result);
+							if(obj != ''){
+								$.each(obj, function(key, inval) {
+								if($("#supid").val() == inval["supid"]){
+								   $("#ssupid").html(" <font color='red'>Supplier is already.</font>");
+								}
+								});					
 							}
-							});					
-						}
-						});
-				});
+							});
+					});
+				}
 			});
 
-
+/*---------------------------------------------   ----------------------------------------------------  */		
+		var isDirty = false;
+		
+		if($('#supid').val()!=""){
+		$("input[type='text']").change(function(){
+			isDirty = true;
+		});
+		
+			function fncAlert()
+			{
+				if (isDirty == true) {
+				var sSave;	
+				sSave = window.confirm("You have some changes that have not been saved. Click OK to save now or CANCEL to continue without saving.");
+				if (sSave == true) {
+					document.getElementById('actionupdate').value = 'update'; 
+					
+					} else {
+					return true;
+					}
+				}
+			}
+		}
 
 
 

@@ -7,7 +7,6 @@
 				parent::__construct();
 				//	 โหลด model Item	
 				//	โหลดไลบารี session และ form_validation
-				$this->load->library('adodb_loader');
 				$this->load->model('Item_m','item');					
 				$this->load->library(array( 'session', 'form_validation')); 
 				$this->load->helper(array('url', 'html', 'form'));
@@ -168,12 +167,12 @@
 				
 				}
 				if($erroract==1){
-					//foreach($error as $row){
-					//echo $row;
-					//}
+					foreach($error as $row){
+					echo $row;
+					}
 					// เก็บตัวแปลเพื่อส่งไปแสดงผลยังหน้า view
 					$error['act']=$erroract;
-					$error['itemid'] = $itemid;
+					$error['itemid'] = $olditemid;
 					$error['barcode'] = $barcode;
 					$error['name'] = $name;
 					$error['detail'] = $detail;

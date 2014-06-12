@@ -1,37 +1,3 @@
-<script language="javascript">
-
-
-	
-	var _isDirty = false;
-	$("input[type='text']").change(function(){
-		var sSave;
-		sSave = window.confirm("You have some changes that have not been saved. Click OK to save now or CANCEL to continue without saving.");
-		_isDirty = true;
-	});
-
-OnUnLoad="JavaScript:fncAlert();"
-
-  /*  var isDirty;
-    isDirty = 0;
-
-    function setDirty() {
-        isDirty = 1;
-    }
-
-    function checkSave() {
-        var sSave;
-        if (isDirty == 1) {
-            sSave = window.confirm("You have some changes that have not been saved. Click OK to save now or CANCEL to continue without saving.");
-            if (sSave == true) {
-                document.getElementById('__EVENTTARGET').value = 'btnSubmit';
-                document.getElementById('__EVENTARGUMENT').value = 'Click';  
-                window.document.formName.submit();
-            } else {
-                 return true;
-            }
-        }
-    } */
-</script>
 
 	<form  method="post" action="<? echo site_url("user/setuser"); ?>"  class="StandardBody" onunload="checkSave()">
 		<br style='clear:both;'/>	
@@ -143,8 +109,8 @@ OnUnLoad="JavaScript:fncAlert();"
 		
 		<input type="hidden" name="status" id="actionupdate" value="add">	
 		<div align='center'>
-			<button style='width:20%;' class="btn btn-lg btn-primary btn-block" type="submit"   OnClick="JavaScript:fncAlert();">Save</button>
-			<button style='width:20%;' class="btn btn-lg btn-primary btn-block" type="submit">Cancel</button>
+			<button style='width:20%;' class="btn btn-lg btn-primary" type="submit">Cancel</button>
+			<button style='width:20%;' class="btn btn-lg btn-primary" type="submit"   OnClick="JavaScript:fncAlert();">Save</button>
 		</div>
 		
 	</form>
@@ -195,12 +161,7 @@ OnUnLoad="JavaScript:fncAlert();"
 				if (isDirty == true) {
 				var sSave;	
 				sSave = window.confirm("You have some changes that have not been saved. Click OK to save now or CANCEL to continue without saving.");
-				if (sSave == true) {
-					document.getElementById('actionupdate').value = 'update'; 
-					
-					} else {
-					return true;
-					}
+				
 				}
 			}
 			

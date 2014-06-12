@@ -131,10 +131,21 @@
 					}
 
 				}
-				// บันทึกไฟล์ Excel 2007
+				/// บันทึกไฟล์ Excel 2007
+				header('Content-Type: application/vnd.ms-excel');
+				header('Content-Disposition: attachment;filename="01simple.xls"');
+				header('Cache-Control: max-age=0');
+				// If you're serving to IE 9, then the following may be needed
+				header('Cache-Control: max-age=1');
+
+				// If you're serving to IE over SSL, then the following may be needed
+				header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+				header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+				header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+				header ('Pragma: public'); // HTTP/1.0
+
 				$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-				$objWriter->save( 'item.xls'); //ชื่อไฟล์ เมื่อมีการเรียกไฟล์นี้ทำงานก็จะทำการสร้าง ไฟล์ไว้ใน ตำแหน่งของที่กำหนดชื่อไฟล์
-				echo  redirect(base_url()."item.xls");
+				$objWriter->save('php://output');
 
 			}
 			
@@ -157,7 +168,7 @@
 				}			
 				$data['catalog_name']=$catalog;
 				$data['rowtable']=$index;
-				$this->load->view('itempdf_v',$data);
+				$this->load->view('pdf/item_v',$data);
 			}
 			
 	}

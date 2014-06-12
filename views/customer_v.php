@@ -128,7 +128,7 @@
 		<br style='clear:both;'/>
 		
 		
-		<? if(isset($cutid_error)){echo "<font color=red>".$cutid_error."</font>";} ?>
+		<!-- <? if(isset($cutid_error)){echo "<font color=red>".$cutid_error."</font>";} ?>
 		<? if(isset($cutid_notnull)){echo "<font color=red>".$cutid_notnull."</font>";} ?><br>
 		<div class="input-group input-group-lg" style=''>
 			<div class="input-group-btn">
@@ -136,27 +136,45 @@
 			</div>
 			<input name="cutid" style='padding: 10px 8px;' placeholder="Customer Type" type="text" class="form-control" value="<? if(isset($cutid)){echo $cutid;}?>" maxlength="10" required>
 		</div> 
-		<br style='clear:both;'/>
+		<br style='clear:both;'/> -->
 		
 		
+		<? if(isset($cutid_error)){echo "<font color=red>".$cutid_error."</font>";} ?>
+		<? if(isset($cutid_notnull)){echo "<font color=red>".$cutid_notnull."</font>";} ?><br>
 		<br style='clear:both;'/>
 		<div class="input-group input-group-lg" style=''>
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;'>Customer Type</span></button>
 			</div>
-			<input type="hidden" id="hideinputtype" name="custype" class="form-control" style="width:30%; height:46px;" />
-			<select id="inputtype" name="custype" class="form-control" style="width:30%; height:46px;">
-				<option value="Pen" >Cash</option>
-				<option value="Pencil">Member</option>
-				<option value="Paper">Vip</option>
+			<input type="hidden" id="hideinputtype" name="addtype" class="form-control" style="width:30%; height:46px;" />
+			<select id="inputtype" name="cutid" class="form-control" style="width:30%; height:46px;">
+				<span id="showselect">
+				<option value="cash" >Cash</option>
+				</span>
+				<option value="member">Member</option>
+				<option value="vip">Vip</option>
 			</select>
-			<button type="button" id="btnadd" class="btn btn-default btn-sm" style=" height:46px;">
-				<span class="glyphicon glyphicon-plus" > ADD  </span> 
+			<button type="button" id="btndetail" class="btn btn-default btn-sm" style=" height:46px;">
+				<span class="glyphicon glyphicon-plus" > Detail  </span> 
 			</button>
+			<span id="showbtn">
+				<button type="button" id="btnadd" class="btn btn-default btn-sm" style=" height:46px;">
+					<span class="glyphicon glyphicon-plus" > ADD  </span> 
+				</button>
+			</span>
 		</div> 
-		<br style='clear:both;'/>	
-			
+		<br style='clear:both;'/>
 
+		
+		<div class="input-group input-group-lg" style=''>
+			<div class="input-group-btn">
+				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;'>Customer Type Name</span></button>
+			</div>
+			<input name="typedetail1" id="typedetail" style='padding: 10px 8px;' placeholder="" type="text" class="form-control" value="" maxlength="50">
+		</div> 
+		<br style='clear:both;'/>
+		<textarea name="typedetail2"  rows="5" id="typedetail2" class="form-control" placeholder="Detail" ></textarea>	
+		<br style='clear:both;'/>
 		
 		
 		<? if(isset($email_error)){echo "<font color=red>".$email_error."</font>";} ?>
@@ -169,10 +187,11 @@
 		</div> 
 		<br style='clear:both;'/>
 	
-	
+		<input type="hidden" name="status" id="actionupdate" value="add">
+		<input type="hidden" name="oldcusid" id="oldid" value="<? if(isset($cusid)){echo $cusid;}?>">
 		<div align='center'>
 			<button style='width:20%;' class="btn btn-lg btn-primary " type="submit">Cancel</button>
-			<button style='width:20%;' class="btn btn-lg btn-primary " type="submit">Save</button>
+			<button style='width:20%;' class="btn btn-lg btn-primary " type="submit" OnClick="JavaScript:fncAlert();">Save</button>
 		</div>
 	</form>
 
@@ -216,36 +235,75 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////  เช็คค่า cusid ว่าซ้ำหรือไม่ 
 			$(document).ready(function(){
-				// เมื่อ หลุด focus จะทำการส่งค่า
-				$("#cusid").focusout(function(){
-					// ส่งข้อมูลไปยัง controller
-					$("#scusid").empty();		
-						$.ajax({ 
-						url: "<?php echo base_url()."index.php/customer/validatecusid";?>",
-						type: "POST",
-						data: 'scusid=' +$("#cusid").val()
-						})
-						// เมื่อสำเร็จจะทำการเปิดไฟล์ json และเปรียบเทียบค่า
-						.success(function(result) { 
-							var obj = jQuery.parseJSON(result);
-							if(obj != ''){
-								$.each(obj, function(key, inval) {
-								if($("#cusid").val() == inval["cusid"]){
-								   $("#scusid").html(" <font color='red'>CustomerID is already.</font>");
+				if($('#cusid').val()==""){
+					// เมื่อ หลุด focus จะทำการส่งค่า
+					$("#cusid").focusout(function(){
+						// ส่งข้อมูลไปยัง controller
+						$("#scusid").empty();		
+							$.ajax({ 
+							url: "<?php echo base_url()."index.php/customer/validatecusid";?>",
+							type: "POST",
+							data: 'scusid=' +$("#cusid").val()
+							})
+							// เมื่อสำเร็จจะทำการเปิดไฟล์ json และเปรียบเทียบค่า
+							.success(function(result) { 
+								var obj = jQuery.parseJSON(result);
+								if(obj != ''){
+									$.each(obj, function(key, inval) {
+									if($("#cusid").val() == inval["cusid"]){
+									   $("#scusid").html(" <font color='red'>CustomerID is already.</font>");
+									}
+									});					
 								}
-								});					
-							}
-						});
-				});
+							});
+					});
+				}
 			});
 			
 ///////////////////////////////////////////////////////////////////////////////////////////////////////// จัดการ customer type
 			
+			
 			$(document).on('click', '#btnadd', function(){ 
 				$('#inputtype').hide();
-				$('#hideinputtype').get(0).type = 'text'; // เปลี่ยน type ของ input	
+				$('#hideinputtype').show();
+					document.getElementById('inputtype').value = ''; 
+				$('#btnadd').hide();
+				$('#hideinputtype').get(0).type = 'text'; // เปลี่ยน type ของ input
+				$("#showbtn").html(" <button type='button' id='btncan' class='btn btn-default btn-sm' style=' height:46px;'><span class='glyphicon glyphicon-remove' >   </span> </button>");
 			});
+			
+			$(document).on('click', '#btncan', function(){ 
+				$('#hideinputtype').hide();
+				$('#btncan').hide();
+				$('#inputtype').show();
+				$("#showbtn").html(" <button type='button' id='btnadd' class='btn btn-default btn-sm' style=' height:46px;'><span class='glyphicon glyphicon-plus' > ADD  </span> </button>");
+			
+			});
+			
 
-
-
+/*---------------------------------------------   ----------------------------------------------------  */		
+		var isDirty = false;
+		
+		if($('#cusid').val()!=""){
+		$("input, select").change(function(){
+			isDirty = true;
+		});
+		
+		function fncAlert()
+		{
+			if (isDirty == true) {
+			var sSave;	
+			sSave = window.confirm("You have some changes that have not been saved. Click OK to save now or CANCEL to continue without saving.");
+			if (sSave == true) {
+				document.getElementById('actionupdate').value = 'update'; 
+				
+				} else {
+				return true;
+				}
+			}
+		}
+		}
+///////////////////////////////////////////////////////////
+		
+		
 	</script>
