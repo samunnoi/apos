@@ -1,73 +1,51 @@
 <html lang="en">
-<head>
-    <meta charset="TIS-620">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-
-    <title>Project</title>
-
-    <!-- Bootstrap core CSS -->
-    
-     <link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">
-   		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/slidePushMenus/default.css" />
+	<head>
+		<meta charset="TIS-620">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>Project</title>
+		<!-- Bootstrap core CSS -->
+		<link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/slidePushMenus/default.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/slidePushMenus/component.css" />
 		<script src="<?php echo base_url(); ?>js/slidePushMenus/modernizr.custom.js"></script>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/nav.css" />	
-		
-	
-    <!-- Custom styles for this template -->
-   
-
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-	<script type='text/javascript'>
-	var now_line =0; // ไว้ check ว่า ตอนนี้ lineไหน ใน group เปิดไว้อยู่
-	var now_group_id =0; // ไว้ check ว่า ตอนนี้ lineไหน ใน group เปิดไว้อยู่
-		function customer_dettail(){
-		
-		 $('#customer_detail').slideToggle('slow', function() {
-				if ($(this).is(':visible')) {
-						  $('#dettail_button').html("&nbsp;Hide&nbsp;");
-				} else {
-					$('#dettail_button').html("Detail");
-				}        
-			});       
-		}
-		function product_search(){
-		
-		 $('#product_search').slideToggle('slow');       
-		}
-		function show_list(line,group_id){
-			//alert(now_line+','+line);
-			if(now_line !=line){ 	//หากกดแล้วเป็น ไม่ใช่line เดิม ให้ปิด แล้วเปิดใหม่
-				$('.list-group').slideUp('fast');
-				now_line =line;	
-			}
-			
-			//alert(now_group_id+','+group_id);	
-						
-			if(now_group_id==group_id){	//เปิดได้ตัวมันเอง ให้ปิด			
-			$('#line'+line).slideToggle('fast');			
-			}else{
-			
-			$('#line'+line).slideDown('fast');
-			}
-			now_group_id=group_id; 	
-		}
-	function select_product(){
-	$('.list-group').slideUp('fast');
-	}
-	</script>
-  </head>
+		<script type='text/javascript'>
+			var now_line =0; // ไว้ check ว่า ตอนนี้ lineไหน ใน group เปิดไว้อยู่
+			var now_group_id =0; // ไว้ check ว่า ตอนนี้ lineไหน ใน group เปิดไว้อยู่
+				function customer_dettail(){
+					$('#customer_detail').slideToggle('slow', function() {
+						if ($(this).is(':visible')) {
+							$('#dettail_button').html("&nbsp;Hide&nbsp;");
+						} else {
+							$('#dettail_button').html("Detail");
+						}        
+					});       
+				}
+				function product_search(){
+					$('#product_search').slideToggle('slow');       
+				}
+				function show_list(line,group_id){
+					//alert(now_line+','+line);
+					if(now_line !=line){ 	//หากกดแล้วเป็น ไม่ใช่line เดิม ให้ปิด แล้วเปิดใหม่
+						$('.list-group').slideUp('fast');
+						now_line =line;	
+					}
+					//alert(now_group_id+','+group_id);				
+					if(now_group_id==group_id){	//เปิดได้ตัวมันเอง ให้ปิด			
+						$('#line'+line).slideToggle('fast');			
+					}else{
+						$('#line'+line).slideDown('fast');
+					}
+					now_group_id=group_id; 	
+				}
+				function select_product(){
+					$('.list-group').slideUp('fast');
+				}
+		</script>
+	</head>
 <style>
 .glyphicon-trash{
 margin-left:-3px;
@@ -164,4 +142,4 @@ padding:4px;
 	</div>
 	<div class="main col-sm-9 col-md-9 col-lg-10">	
 		<div class='set_center'>
-	<div class="control-group">
+	
