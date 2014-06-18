@@ -13,12 +13,29 @@
 			}
 			
 			public function index()
-			{
+			{	
+				
+				$data= $this->searchtype();
 				// ฟังก์ชัน index ทำการโหลด view
 				$this->load->view('head_v');
-				$this->load->view('customer_v');
+				$this->load->view('customer_v',$data);
 				$this->load->view('foot_v');
+				
 			}
+			public function searchtype()
+			{
+				$index=0;
+				$searchtype=1;	
+				$rec = $this->customer->pubSearchType($searchtype);
+				foreach($rec as $row){
+					$type['type'][$index]=$row->cutid;
+					$index++;	
+				}
+				$data['type']=$type;
+				$data['rowtable1']=$index;	
+				return $data;
+			}
+			
 			
 			public function addcustomer()
 			{
@@ -35,19 +52,27 @@
 					$province=trim($province);
 					$post1=trim($post1);
 					$email=trim($email);
+					$typedetail1=trim($typedetail1);
+					$typedetail2=trim($typedetail2);
+					if(isset($cutid)){
+						$this->customer->pubSetType($cutid,$typedetail1,$typedetail2);
+					}
 					if($addtype){
 						$type = $this->customer->pubSearchType($addtype);
-						if($type){
+						foreach($type as $row){
+							$custype=$row->cutid;
+						}
+						if(isset($custype)==$addtype){
 							$cutid=$addtype;
+							$this->customer->pubSetType($addtype,$typedetail1,$typedetail2);
 						}else{
 							$cutid=$addtype;
-							$this->customer->pubAddType($addtype);
+							$this->customer->pubAddType($addtype,$typedetail1,$typedetail2);
 						}
 					
 					}
 					$cutid=trim($cutid);
 					if(strcmp($status,'add')==0){
-						echo "aaaaaa";
 						// เรียกใช้งาน function validate เพื่อตรวจสอบ string
 						$error = $this->validatecustomer($cusid,$oldcusid,$name,$suname,$tel1,$address1,$province,$post1,$cutid,$email,$status);
 						// เช็คว่าค่า error ใช่ตัวเลขเปล่า
@@ -56,7 +81,6 @@
 							$this->index();
 						}
 					}if(strcmp($status,'update')==0){
-						echo "bbbbb";
 						// เรียกใช้งาน function validate เพื่อตรวจสอบ string
 						$error = $this->validatecustomer($cusid,$oldcusid,$name,$suname,$tel1,$address1,$province,$post1,$cutid,$email,$status);
 						// เช็คว่าค่า error ใช่ตัวเลขเปล่า
@@ -141,17 +165,33 @@
 				$rec = $this->customer->pubSearchCustomer($name);
 				// หากมีลูกค้า 1 คน
 				if(count($rec)==1){
+					$index=0;
 					foreach($rec as $row){
-						$data["cusid"] = $row->cusid;
-						$data["name"] = $row->name;
-						$data["suname"]= $row->suname;
-						$data["tel1"]= $row->tel1;
-						$data["address1"]= $row->address1;
-						$data["province"]= $row->province;
-						$data["post1"]= $row->post;	
-						$data["cutid"]= $row->cutid;	
-						$data["email"]= $row->email;
-					}			
+						//$data["cusid"] = $row->cusid;
+						//$data["name"] = $row->name;
+						//$data["suname"]= $row->suname;
+						//$data["tel1"]= $row->tel1;
+						//$data["address1"]= $row->address1;
+						//$data["province"]= $row->province;
+						//$data["post1"]= $row->post;	
+						//$data["cutid"]= $row->cutid;	
+						//$data["email"]= $row->email;
+						$searchtable['cusid'][$index]=$row->cusid;
+						$searchtable['name'][$index]=$row->name;
+						$searchtable['suname'][$index]=$row->suname;
+						$searchtable['tel1'][$index]= $row->tel1;
+						$searchtable['address1'][$index]= $row->address1;
+						$searchtable['province'][$index]= $row->province;
+						$searchtable['post1'][$index]= $row->post;
+						$searchtable['cutid'][$index]= $row->cutid;
+						$searchtable['email'][$index]= $row->email;
+						$index++;	
+					}
+					$data= $this->searchtype();
+					$data['searchtable']=$searchtable;
+					$data['rowtable']=$index;
+					
+						
 				}
 				// หากมีลูกค้ามากกว่า 1 คน
 				if(count($rec)>1){
@@ -167,7 +207,8 @@
 				} 
 				if(count($rec) == 0){
 					$data['cuserror']="Customer Not Found";
-				}	
+				}
+				
 				$this->load->view('head_v');
 				$this->load->view('customer_v',$data);
 				$this->load->view('foot_v');
@@ -191,6 +232,14 @@
 				//$_POST['scusid']
 				$check = $this->customer->pubCheckId($_POST['scusid']); 
 				echo json_encode($check);
+			}
+			
+			public function detailjquery()
+			{		
+				// เช็คค่าซ้ำจากฐานข้อมูลโดยใช้ ajax + json
+				//$_POST['scusid']
+				$detail = $this->customer->pubSearchType($_POST['scutid']); 
+				echo json_encode($detail);
 			}
 			
 	}

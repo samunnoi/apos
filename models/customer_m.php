@@ -70,19 +70,32 @@
 		
 		public function pubSearchType($addtype)		// ฟังก์ชันค้นหาข้อมูล customer type
 		{
-			// ค้นหาในกรณีที่ เจอเลย
-			$this->db->select('customer_type_name');
-			$this->db->from('customertype');
-			$this->db->where('customer_type_name',$addtype);
+			if($addtype==1){
+				$this->db->select('cutid');
+				$this->db->from('customertype');
+			}else{
+				// ค้นหาในกรณีที่ เจอเลย
+				$this->db->select('*');
+				$this->db->from('customertype');
+				$this->db->where('cutid',$addtype);
+			}
 			$query = $this->db->get();		
-			return $query->row();					
+			return $query->result();					
 		}
 		
-		public function pubAddType($addtype)		// ฟังก์ชันเพิ่มข้อมูล customer type
+		public function pubAddType($addtype,$typedetail1,$typedetail2)		// ฟังก์ชันเพิ่มข้อมูล customer type
 		{
 			
-			$cause = array('cutid'=>$addtype);	
+			$cause = array('cutid'=>$addtype,'customer_type_name'=>$typedetail1,'other_comment'=>$typedetail2);	
 			$this->db->insert('customertype',$cause);	
+			return;			
+		}
+		
+		public function pubSetType($addtype,$typedetail1,$typedetail2)		// ฟังก์ชันเพิ่มข้อมูล customer type
+		{
+			
+			$cause = array('customer_type_name'=>$typedetail1,'other_comment'=>$typedetail2);	
+			$this->db->update('customertype',$cause,array('cutid'=>$addtype));
 			return;			
 		}
 		

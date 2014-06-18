@@ -92,7 +92,8 @@ padding:4px;
 		<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
 			<h4>Setting</h4>
 			<a href="<? echo site_url("welcome/logout"); ?>">log out</a>
-				<a href="<? echo site_url("user"); ?>">User</a>
+			<a href="<? echo site_url("user"); ?>">User</a>
+			<a href="<? echo site_url("import"); ?>">Import Data</a>
 			<a href="#">menu1</a>
 			<a onclick='$("#r_sub").slideToggle("fast");' href="#">sub menu1 <span class='glyphicon glyphicon-chevron-down'></span></a>			
 			<ul id='r_sub' style='display:none;'>
