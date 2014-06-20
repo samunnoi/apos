@@ -5,7 +5,7 @@
 		<? if(isset($cuserror)){echo "<font color=red>".$cuserror."</font>";} ?><br>
 		<div class="control-group">
 			<div class="input-group input-group-lg" style=''>
-				<input name="name" style='padding: 10px 8px;' placeholder="Search Customer ID" type="text" class="form-control">
+				<input name="name" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('search');?>" type="text" class="form-control">
 				<div class="input-group-btn">
 					<button type="submit" style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-search"></span></button>
 				</div>
@@ -17,9 +17,9 @@
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>			
-				<th class='col-xs-3'>Customer ID</th>
-				<th class='col-xs-5'>Name</th>
-				<th class='col-xs-5'>Surname</th>
+				<th class='col-xs-3'><?=$this->lang->line('customerid');?></th>
+				<th class='col-xs-5'><?=$this->lang->line('name');?></th>
+				<th class='col-xs-5'><?=$this->lang->line('suname');?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -45,9 +45,9 @@
 	<form  method="post" action="<? echo site_url("customer/addcustomer"); ?>"> 
 		<br style='clear:both;'/>
 		<div class="control-group">
-			<button id="btn1" style='padding: 10px 10px;' type="reset" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-plus"> ADD</span></button>
-			<a href="<? if(isset($cusid)){echo site_url("customer/delcustomer/".$cusid); } ?>"> <button id="btn2" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-trash">DELETE</span></button></a>
-			<a href="<?echo site_url("customerreport");?>"> <button id="btn3" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> REPORT </span></button></a>
+			<button id="btn1" style='padding: 10px 10px;' type="reset" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-plus"> <?=$this->lang->line('add');?></span></button>
+			<a href="<? if(isset($cusid)){echo site_url("customer/delcustomer/".$cusid); } ?>"> <button id="btn2" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-trash"> <?=$this->lang->line('delete');?></span></button></a>
+			<a href="<?echo site_url("customerreport");?>"> <button id="btn3" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> <?=$this->lang->line('report');?> </span></button></a>
 		</div> 
 		<br style='clear:both;'/>
 		
@@ -59,7 +59,7 @@
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-pencil"></span></button>
 			</div>
-			<input name="cusid" style='padding: 10px 8px;' id="cusid" placeholder="Customer ID" type="text" class="form-control" value="<? if(isset($searchtable['cusid'][0])){echo $searchtable['cusid'][0];}?>" maxlength="15" required>
+			<input name="cusid" style='padding: 10px 8px;' id="cusid" placeholder="<?=$this->lang->line('customerid');?>" type="text" class="form-control" value="<? if(isset($searchtable['cusid'][0])){echo $searchtable['cusid'][0];}?>" maxlength="15" required>
 		</div> 
 		<br style='clear:both;'/>	
 			
@@ -70,7 +70,7 @@
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-user"></span></button>
 			</div>
-			<input name="name" style='padding: 10px 8px;' placeholder="Name" type="text" class="form-control" value="<? if(isset($searchtable['name'][0])){echo $searchtable['name'][0];}?>" maxlength="30" required>
+			<input name="name" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('name');?>" type="text" class="form-control" value="<? if(isset($searchtable['name'][0])){echo $searchtable['name'][0];}?>" maxlength="30" required>
 		</div> 
 		<br style='clear:both;'/>
 		
@@ -81,7 +81,7 @@
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-user"></span></button>
 			</div>
-			<input name="suname" style='padding: 10px 8px;' placeholder="Surname" type="text" class="form-control" value="<? if(isset($searchtable['suname'][0])){echo $searchtable['suname'][0];}?>" maxlength="30" required>
+			<input name="suname" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('suname');?>" type="text" class="form-control" value="<? if(isset($searchtable['suname'][0])){echo $searchtable['suname'][0];}?>" maxlength="30" required>
 		</div> 
 		<br style='clear:both;'/>
 		
@@ -92,7 +92,7 @@
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-phone"></span></button>
 			</div>
-			<input name="tel1" style='padding: 10px 8px;' placeholder="Telephone" type="text" class="form-control" value="<? if(isset($searchtable['tel1'][0])){echo $searchtable['tel1'][0];}?>" maxlength="15" required>
+			<input name="tel1" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('tel');?>" type="text" class="form-control" value="<? if(isset($searchtable['tel1'][0])){echo $searchtable['tel1'][0];}?>" maxlength="15" required>
 		</div> 
 		<br style='clear:both;'/>
 		
@@ -103,7 +103,7 @@
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-home"></span></button>
 			</div>
-			<input name="address1" style='padding: 10px 8px;' placeholder="Address" type="text" class="form-control" value="<? if(isset($searchtable['address1'][0])){echo $searchtable['address1'][0];}?>" maxlength="50" required>
+			<input name="address1" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('address');?>" type="text" class="form-control" value="<? if(isset($searchtable['address1'][0])){echo $searchtable['address1'][0];}?>" maxlength="50" required>
 		</div> 
 		<br style='clear:both;'/>
 		
@@ -114,7 +114,7 @@
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-globe"></span></button>
 			</div>
-			<input name="province" style='padding: 10px 8px;' placeholder="Province" type="text" class="form-control" value="<? if(isset($searchtable['province'][0])){echo $searchtable['province'][0];}?>" maxlength="30" required>
+			<input name="province" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('province');?>" type="text" class="form-control" value="<? if(isset($searchtable['province'][0])){echo $searchtable['province'][0];}?>" maxlength="30" required>
 		</div> 
 		<br style='clear:both;'/>
 		
@@ -125,7 +125,7 @@
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-send"></span></button>
 			</div>
-			<input name="post1" style='padding: 10px 8px;' placeholder="Post Number" type="text" class="form-control" value="<? if(isset($searchtable['post1'][0])){echo $searchtable['post1'][0];}?>" maxlength="10" required>
+			<input name="post1" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('postid');?>" type="text" class="form-control" value="<? if(isset($searchtable['post1'][0])){echo $searchtable['post1'][0];}?>" maxlength="10" required>
 		</div> 
 		<br style='clear:both;'/>
 		
@@ -146,7 +146,7 @@
 		<br style='clear:both;'/>
 		<div class="input-group input-group-lg" style=''>
 			<div class="input-group-btn">
-				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;'>Customer Type</span></button>
+				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;'><?=$this->lang->line('customertype');?></span></button>
 			</div>
 			<input type="hidden" id="hideinputtype" name="addtype" class="form-control" style="width:30%; height:46px;" />
 			<select id="cutid" name="cutid" class="form-control" style="width:30%; height:46px;" >
@@ -165,12 +165,12 @@
 			</select>
 			<span id="showbtndetail">
 			<button type="button" id="btndetail" class="btn btn-default btn-sm" style=" height:46px;" OnClick="JavaScript:btnshowDetail();">
-				<span class="" > Detail  </span> 
+				<span class="" > <?=$this->lang->line('detail');?>  </span> 
 			</button>
 			</span>
 			<span id="showbtn">
 				<button type="button" id="btnadd" class="btn btn-default btn-sm" style=" height:46px;">
-					<span class="glyphicon glyphicon-plus" > ADD  </span> 
+					<span class="glyphicon glyphicon-plus" > <?=$this->lang->line('add');?>  </span> 
 				</button>
 			</span>
 		</div> 
@@ -181,12 +181,12 @@
 		<span id="spandetail">
 		<div class="input-group input-group-lg" style=''>
 			<div class="input-group-btn">
-				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;'>Customer Type Name</span></button>
+				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;'><?=$this->lang->line('customertypename');?></span></button>
 			</div>
 			<input name="typedetail1" id="typedetail1" style='padding: 10px 8px;' placeholder="" type="text" class="form-control" value="" maxlength="50">
 		</div> 
 		<br style='clear:both;'/>
-		<textarea name="typedetail2"  rows="5" id="typedetail2" class="form-control" placeholder="Detail" value=""></textarea>	
+		<textarea name="typedetail2"  rows="5" id="typedetail2" class="form-control" placeholder="<?=$this->lang->line('detail');?>" value=""></textarea>	
 		<br style='clear:both;'/>
 		</span>
 		
@@ -197,15 +197,15 @@
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-envelope"></span></button>
 			</div>
-			<input type="email" name="email" style='padding: 10px 8px;' placeholder="E-mail" type="text" class="form-control" value="<? if(isset($searchtable['email'][0])){echo $searchtable['email'][0];}?>" maxlength="30" required>
+			<input type="email" name="email" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('email');?>" type="text" class="form-control" value="<? if(isset($searchtable['email'][0])){echo $searchtable['email'][0];}?>" maxlength="30" required>
 		</div> 
 		<br style='clear:both;'/>
 	
 		<input type="hidden" name="status" id="actionupdate" value="add">
 		<input type="hidden" name="oldcusid" id="oldid" value="<? if(isset($searchtable['cusid'][0])){echo $searchtable['cusid'][0];}?>">
 		<div align='center'>
-			<button style='width:20%;' class="btn btn-lg btn-primary " type="submit">Cancel</button>
-			<button style='width:20%;' class="btn btn-lg btn-primary " type="submit" OnClick="JavaScript:fncAlert();">Save</button>
+			<button style='width:20%;' class="btn btn-lg btn-primary " type="submit"><?=$this->lang->line('cancel');?></button>
+			<button style='width:20%;' class="btn btn-lg btn-primary " type="submit" OnClick="JavaScript:fncAlert();"><?=$this->lang->line('save');?></button>
 		</div>
 	</form>
 
@@ -301,7 +301,7 @@
 				$('#hideinputtype').hide();
 				$('#btncan').hide();
 				$('#cutid').show();
-				$("#showbtn").html(" <button type='button' id='btnadd' class='btn btn-default btn-sm' style=' height:46px;'><span class='glyphicon glyphicon-plus' > ADD  </span> </button>");
+				$("#showbtn").html(" <button type='button' id='btnadd' class='btn btn-default btn-sm' style=' height:46px;'><span class='glyphicon glyphicon-plus' > <?=$this->lang->line('add');?>  </span> </button>");
 			
 			});
 			
@@ -333,7 +333,7 @@
 		{	
 			$('#spandetail').show();
 			$('#btndetail').hide();
-			$("#showbtndetail").html(" <button type='button' id='btnhide' class='btn btn-default btn-sm' style=' height:46px;' OnClick='JavaScript:btnhideDetail();'><span class='' > Hide  </span> </button>");
+			$("#showbtndetail").html(" <button type='button' id='btnhide' class='btn btn-default btn-sm' style=' height:46px;' OnClick='JavaScript:btnhideDetail();'><span class='' > <?=$this->lang->line('hide');?>  </span> </button>");
 
 		}
 		
@@ -341,7 +341,7 @@
 		{	
 			$('#btnhide').hide();
 			$('#spandetail').hide();
-			$("#showbtndetail").html(" <button type='button' id='btndetail' class='btn btn-default btn-sm' style=' height:46px;' OnClick='JavaScript:btnshowDetail();'><span class='' > Detail  </span> </button>");
+			$("#showbtndetail").html(" <button type='button' id='btndetail' class='btn btn-default btn-sm' style=' height:46px;' OnClick='JavaScript:btnshowDetail();'><span class='' > <?=$this->lang->line('detail');?>  </span> </button>");
 			
 		}
 		

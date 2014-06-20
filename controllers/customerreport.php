@@ -19,6 +19,7 @@
 			{
 				// ฟังก์ชันโหลด view
 				$data1=$this->head();
+				$this->lang->load($this->session->userdata('language'));
 				$this->load->view('head_v');
 				$this->load->view('customerreporthead_v',$data1);
 				$this->load->view('foot_v');
@@ -48,7 +49,8 @@
 					}			
 					$data['customer']=$customer;
 					$data['rowtable']=$index;
-					$data1['cutid_select']=$select;	
+					$data1['cutid_select']=$select;
+				$this->lang->load($this->session->userdata('language'));					
 				$this->load->view('head_v');
 				$this->load->view('customerreporthead_v',$data1);
 				$this->load->view('customerreport_v',$data);

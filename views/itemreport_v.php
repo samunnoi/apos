@@ -27,15 +27,15 @@
 					<thead>
 						<tr>
 							<th class=''colspan="3"><?php echo  $catalog_name['catalog_name'][$count]; ?></th>
-							<th class='' colspan="3">ราคาสินค้า</th>
+							<th class='' colspan="3"><?=$this->lang->line('price');?></th>
 						</tr>	
 						<tr>
-							<th class=''>รหัสสินค้า</th>
-							<th class=''>สินค้า</th>
-							<th class=''>บาร์โค๊ด</th>
-							<th class=''>เงินสด</th>
-							<th class=''>member</th>
-							<th class=''>VIP</th>
+							<th class=''><?=$this->lang->line('itemid');?></th>
+							<th class=''><?=$this->lang->line('item');?></th>
+							<th class=''><?=$this->lang->line('barcode');?></th>
+							<th class=''><?=$this->lang->line('cash');?></th>
+							<th class=''><?=$this->lang->line('member');?></th>
+							<th class=''><?=$this->lang->line('vip1');?></th>
 						</tr>
 					</thead>
 			<? 		
@@ -63,7 +63,7 @@
 						</tr>
 						<tr>
 							<td align='' colspan="3">
-								<span>รายละเอียด : </span><span><?php echo  $catalog_name['detail'][$count]; ?></span>
+								<span><?=$this->lang->line('detail');?> : </span><span><?php echo  $catalog_name['detail'][$count]; ?></span>
 							</td>
 						</tr>
 		<?	
@@ -91,7 +91,7 @@
 						</tr>
 						<tr>
 							<td align='' colspan="3">
-								<span>รายละเอียด : </span><span><?php echo  $catalog_name['detail'][$count]; ?></span>
+								<span><?=$this->lang->line('detail');?> : </span><span><?php echo  $catalog_name['detail'][$count]; ?></span>
 							</td>
 						</tr>
 				

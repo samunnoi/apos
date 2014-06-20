@@ -6,7 +6,7 @@
 		<div class="control-group">
 		<!--<label class="control-label" for="input01">Barcode</label>-->
 			<div class="input-group input-group-lg" style=''>
-				<input name="name" style='padding: 10px 8px;' placeholder="Search Item" type="text" class="form-control">
+				<input name="name" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('search');?>" type="text" class="form-control">
 				<div class="input-group-btn">
 						<!--  onclick='product_search();'   -->
 					<button type="submit" style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-search"></span></button>
@@ -18,8 +18,8 @@
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
-					<th class='col-xs-3'>Item ID</th>
-					<th class='col-xs-9'>สินค้า</th>
+					<th class='col-xs-3'><?=$this->lang->line('itemid');?></th>
+					<th class='col-xs-9'><?=$this->lang->line('product');?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -45,9 +45,9 @@
 		 
 	<form  method="post" action="<? echo site_url("item/additem");?>" enctype="multipart/form-data" > 
 		<div class="control-group">
-			<button id="btn1" style='padding: 10px 10px;' type="reset" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-plus"> ADD </span></button>
-			<a href="<? if(isset($itemid)){echo site_url("item/delitem/".$itemid); } ?>"><button id="btn2" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-trash"> DELETE </span></button></a>
-			<a href="<?echo site_url("itemreport");?>"> <button id="btn3" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> REPORT </span></button></a>				
+			<button id="btn1" style='padding: 10px 10px;' type="reset" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-plus"> <?=$this->lang->line('add');?> </span></button>
+			<a href="<? if(isset($itemid)){echo site_url("item/delitem/".$itemid); } ?>"><button id="btn2" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-trash"> <?=$this->lang->line('delete');?> </span></button></a>
+			<a href="<?echo site_url("itemreport");?>"> <button id="btn3" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> <?=$this->lang->line('report');?> </span></button></a>				
 		</div>  
 		<br style='clear:both;'/>
 		
@@ -58,7 +58,7 @@
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-pencil"></span></button>
 			</div>
-			<input name="itemid" style='padding: 10px 8px;'id="itemid" placeholder="Item ID" type="text" class="form-control" value="<? if(isset($itemid)){echo $itemid;}?>" maxlength="15" required>
+			<input name="itemid" style='padding: 10px 8px;'id="itemid" placeholder="<?=$this->lang->line('itemid');?>" type="text" class="form-control" value="<? if(isset($itemid)){echo $itemid;}?>" maxlength="15" required>
 		</div> 
 		<br style='clear:both;'/>	
 		
@@ -69,7 +69,7 @@
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-barcode"></span></button>
 			</div>
-			<input name="barcode" style='padding: 10px 8px;'id="barcode" placeholder="Barcode" type="text" class="form-control" value="<? if(isset($barcode)){echo $barcode;}?>" maxlength="20" required>
+			<input name="barcode" style='padding: 10px 8px;'id="barcode" placeholder="<?=$this->lang->line('barcode');?>" type="text" class="form-control" value="<? if(isset($barcode)){echo $barcode;}?>" maxlength="20" required>
 		</div> 
 		<br style='clear:both;'/>
 		
@@ -80,7 +80,7 @@
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-pencil"></span></button>
 			</div>
-			<input name="name" style='padding: 10px 8px;' placeholder="Name" type="text" class="form-control" value="<? if(isset($name)){echo $name;} ?>" maxlength="50" required>
+			<input name="name" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('name');?>" type="text" class="form-control" value="<? if(isset($name)){echo $name;} ?>" maxlength="50" required>
 		</div> 
 		<br style='clear:both;'/>
 	
@@ -91,7 +91,7 @@
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-list-alt"></span></button>
 			</div>
-			<input name="detail" style='padding: 10px 8px;' placeholder="Detail" type="text" class="form-control" value="<? if(isset($detail)){echo $detail;} ?>"  maxlength="255" required>
+			<input name="detail" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('detail');?>" type="text" class="form-control" value="<? if(isset($detail)){echo $detail;} ?>"  maxlength="255" required>
 		</div>
 		<br style='clear:both;'/>	
 				
@@ -100,33 +100,33 @@
 			<table class="table table-bordered table-hover ">
 				<thead>
 					<tr>
-						<th class='col-xs-3'>ประเภท</th>
-						<th class='col-xs-3'>ราคา</th>
-						<th class='col-xs-3'>Discount</th>
-						<th class='col-xs-3'>Percent</th>
+						<th class='col-xs-3'><?=$this->lang->line('type');?></th>
+						<th class='col-xs-3'><?=$this->lang->line('price');?></th>
+						<th class='col-xs-3'><?=$this->lang->line('discount');?></th>
+						<th class='col-xs-3'><?=$this->lang->line('percent');?></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>        
 						<td align='center'>
-							<span>เงินสด</span>
+							<span><?=$this->lang->line('cash');?></span>
 							<span style='float:right'></span>
 						</td>
 						<td  align='center'>
 							<? if(isset($price_notnull)){echo "<font color=red>".$price_notnull."</font>";} ?>
 							<? if(isset($price_nav)){echo "<font color=red>".$price_nav."</font>";} ?>
 							<? if(isset($price_notnum)){echo "<font color=red>".$price_notnum."</font>";} ?><br>
-							<input name="price" style='padding: 10px 8px;' placeholder="Price " type="text" class="form-control" value="<? if(isset($price)){echo $price;} ?>" >
+							<input name="price" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('price');?> " type="text" class="form-control" value="<? if(isset($price)){echo $price;} ?>" >
 						</td>
 						<td align='center'>
 							<? if(isset($discount_notnum)){echo "<font color=red>".$discount_notnum."</font>";} ?>
 							<? if(isset($discount_nav)){echo "<font color=red>".$discount_nav."</font>";} ?><br>
-							<input name="discount" style='padding: 10px 8px;' placeholder="Discount " type="text" class="form-control" value="<? if(isset($discount)){echo $discount;} ?>" >
+							<input name="discount" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('discount');?> " type="text" class="form-control" value="<? if(isset($discount)){echo $discount;} ?>" >
 						</td>
 						<td align='center'>
 							<? if(isset($percent_notnum)){echo "<font color=red>".$percent_notnum."</font>";} ?>
 							<? if(isset($percent_nav)){echo "<font color=red>".$percent_nav."</font>";} ?><br>
-							<input name="percent" style='padding: 10px 8px;' placeholder="Percent " type="text" class="form-control" value="<? if(isset($percent)){echo $percent;} ?>" >
+							<input name="percent" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('percent');?> " type="text" class="form-control" value="<? if(isset($percent)){echo $percent;} ?>" >
 						</td>
 				  </tr> 
 				</tbody>
@@ -141,9 +141,9 @@
 			  <tr>
 				
 				
-				<th class='col-xs-3'>ประเภทสินค้า</th>
+				<th class='col-xs-3'><?=$this->lang->line('type');?></th>
 			
-				<th class='col-xs-3'>ประเภทหลัก</th>
+				<th class='col-xs-3'><?=$this->lang->line('master');?></th>
 				
 			  </tr>
 			</thead>
@@ -191,7 +191,7 @@
 		<input type="hidden" name="status" id="actionupdate" value="add">
 		<input type="hidden" name="olditemid" id="oldid" value="<? if(isset($itemid)){echo $itemid;}?>">
 		<div align='right'>
-			<button style='width:20%;' class="btn btn-lg btn-primary" type="submit"  OnClick="JavaScript:fncAlert();">Save</button>
+			<button style='width:20%;' class="btn btn-lg btn-primary" type="submit"  OnClick="JavaScript:fncAlert();"><?=$this->lang->line('save');?></button>
 		</div>
 	</form>
   

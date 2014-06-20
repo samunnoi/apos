@@ -11,6 +11,7 @@
 				$this->load->library(array( 'session', 'form_validation','table')); 
 				$this->load->helper(array('url', 'html', 'form'));
 				$this->load->library('phpexcel');
+				$this->lang->load($this->session->userdata('language'));
 			
 			}
 			

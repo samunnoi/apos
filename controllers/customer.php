@@ -10,6 +10,7 @@
 				$this->load->model('Customer_m','customer');
 				$this->load->library(array( 'session', 'form_validation')); 
 				$this->load->helper(array('url', 'html', 'form'));
+				$this->lang->load($this->session->userdata('language'));
 			}
 			
 			public function index()
@@ -143,7 +144,7 @@
 					$error['province'] = $province;
 					$error['post1'] = $post1;
 					$error['cutid'] = $cutid;
-					$error['email'] = $email;	 				
+					$error['email'] = $email;
 					$this->load->view('head_v');
 					$this->load->view('customer_v',$error);
 					$this->load->view('foot_v');
@@ -208,7 +209,6 @@
 				if(count($rec) == 0){
 					$data['cuserror']="Customer Not Found";
 				}
-				
 				$this->load->view('head_v');
 				$this->load->view('customer_v',$data);
 				$this->load->view('foot_v');

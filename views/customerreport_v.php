@@ -31,11 +31,11 @@
 						<th class=''colspan="3"><?php echo  $customer['cutid'][$count]; ?></th>
 					</tr>
 					<tr>
-						<th class=''>รหัสลูกค้า</th>
-						<th class=''>ชื่อ</th>
-						<th class=''>นามสกุล</th>
-						<th class=''>เบอร์โทร</th>
-						<th class=''>E-mail</th>
+						<th class=''><?=$this->lang->line('customerid');?></th>
+						<th class=''><?=$this->lang->line('name');?></th>
+						<th class=''><?=$this->lang->line('suname');?></th>
+						<th class=''><?=$this->lang->line('tel');?></th>
+						<th class=''><?=$this->lang->line('email');?></th>
 					</tr>
 					</thead>
 		<? 		
@@ -60,7 +60,7 @@
 					</tr>
 					<tr>
 						<td align='' colspan="5">
-						<span>ที่อยู่ : </span><span><?php echo  $customer['address1'][$count]; ?> <?php echo  $customer['province'][$count]; ?> <?php echo  $customer['post1'][$count]; ?></span>
+						<span><?=$this->lang->line('address');?> : </span><span><?php echo  $customer['address1'][$count]; ?> <?php echo  $customer['province'][$count]; ?> <?php echo  $customer['post1'][$count]; ?></span>
 						</td>
 					</tr>
 		<?	
@@ -86,7 +86,7 @@
 					</tr>
 					<tr>
 					<td align='' colspan="5">
-						<span>ที่อยู่ : </span><span><?php echo  $customer['address1'][$count]; ?> <?php echo  $customer['province'][$count]; ?> <?php echo  $customer['post1'][$count]; ?></span>
+						<span><?=$this->lang->line('address');?> : </span><span><?php echo  $customer['address1'][$count]; ?> <?php echo  $customer['province'][$count]; ?> <?php echo  $customer['post1'][$count]; ?></span>
 					</td>
 					</tr>
 			

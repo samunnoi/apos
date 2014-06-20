@@ -1,4 +1,3 @@
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 	class Import extends CI_Controller {
@@ -14,9 +13,14 @@
 				$this->load->library('phpexcel');
 				
 			}
-			
-			
 			public function index()
+			{
+				$this->load->view('head_v');
+				$this->load->view('import_v');
+				$this->load->view('foot_v');
+			}
+			
+			public function importexcel()
 			{	
 				require_once(APPPATH.'libraries/PHPExcel/IOFactory.php');
 				$inputFileName = "excel/item.xls";  

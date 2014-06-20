@@ -19,6 +19,7 @@
 			{
 				// ดึงข้อมูลประเภทสินค้า แหละโลหด view
 				$data1=$this->head();
+				$this->lang->load($this->session->userdata('language'));
 				$this->load->view('head_v');
 				$this->load->view('itemreporthead_v',$data1);
 				$this->load->view('foot_v');
@@ -44,7 +45,8 @@
 				}			
 				$data['catalog_name']=$catalog;
 				$data['rowtable']=$index;
-				$data1['catalog_select']=$select;	
+				$data1['catalog_select']=$select;
+				$this->lang->load($this->session->userdata('language'));				
 				$this->load->view('head_v');
 				$this->load->view('itemreporthead_v',$data1);
 				$this->load->view('itemreport_v',$data);

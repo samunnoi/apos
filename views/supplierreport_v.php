@@ -25,11 +25,11 @@
 		<table class="table table-bordered table-hover ">
 				<thead>
 					<tr>
-						<th class=''>รหัสผู้ส่งสินค้า</th>
-						<th class=''>ชื่อผู้ส่งสินค้า</th>
-						<th class=''>เบอร์โทร</th>
-						<th class=''>พนักงานขาย</th>
-						<th class=''>Bank Account</th>		
+						<th class=''><?=$this->lang->line('supplierid');?></th>
+						<th class=''><?=$this->lang->line('name');?></th>
+						<th class=''><?=$this->lang->line('tel');?></th>
+						<th class=''><?=$this->lang->line('sellman');?></th>
+						<th class=''><?=$this->lang->line('bankaccount');?></th>		
 					</tr>
 				</thead>   
 			<?php for( $count=0; $count<$rowtable; $count++ ){ ?>
@@ -52,7 +52,7 @@
 					</tr>
 					<tr>					
 						<td align='' colspan="5">
-							<span>ที่อยู่ : </span><span><?php echo  $supplier['address1'][$count]; ?> </span>
+							<span><?=$this->lang->line('address');?> : </span><span><?php echo  $supplier['address1'][$count]; ?> </span>
 						</td>
 					</tr>
 			<?	

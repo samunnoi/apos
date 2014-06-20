@@ -1,8 +1,8 @@
 
 	<div class="input-group input-group-lg">
-		<input style='padding: 10px 8px;' placeholder="Customer" type="text" class="form-control">
+		<input style='padding: 10px 8px;' placeholder="<?=$this->lang->line('customer');?>" type="text" class="form-control">
 		<span class="input-group-btn">
-			<button id='dettail_button' onclick='customer_dettail();' style='padding: 10px 8px;' class="btn btn-default" type="button">Detail</button>
+			<button id='dettail_button' onclick='customer_dettail();' style='padding: 10px 8px;' class="btn btn-default" type="button"><?=$this->lang->line('detail');?></button>
 		</span>
 	</div>			
 				
@@ -12,7 +12,7 @@
 			<div class="controls">
 				<div class="input-group">
 					<span class="input-group-addon"><span class='glyphicon glyphicon-user'></span></span>
-					<input type="text" class="form-control" placeholder="name"/>
+					<input type="text" class="form-control" placeholder="<?=$this->lang->line('name');?>"/>
 				</div>
 			</div>
 			<label class="control-label" for="input01"></label>
@@ -21,12 +21,12 @@
 					<span class="input-group-addon">
 						<span class="glyphicon glyphicon-phone-alt"></span>
 					</span>
-				<input type="text" class="form-control" placeholder="Tel"/>
+				<input type="text" class="form-control" placeholder="<?=$this->lang->line('tel');?>"/>
 				</div>
 			</div>						
 			<div class="controls" style=''>										
 				<label class="control-label" for="input01"></label> 
-				<textarea class="form-control" placeholder="Adress" rows="3"></textarea>
+				<textarea class="form-control" placeholder="<?=$this->lang->line('address');?>" rows="3"></textarea>
 			</div>
 		  </div>
 		  
@@ -36,9 +36,9 @@
 	
     <div class="control-group">
 		<div class="input-group input-group-lg" style=''>
-			<input style='padding: 10px 8px;' placeholder="Barcode" type="text" class="form-control">
+			<input style='padding: 10px 8px;' placeholder="<?=$this->lang->line('barcode');?>" type="text" class="form-control">
 			<div class="input-group-btn">
-				<button style='padding: 10px 8px;' type="button" class="btn btn-default">Add</button>            
+				<button style='padding: 10px 8px;' type="button" class="btn btn-default"><?=$this->lang->line('add');?></button>            
 				<button onclick='product_search();' style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-search"></span></button>
 			</div>
 				</div>				
@@ -518,7 +518,7 @@
 	 </table>
   
 	<div align='center'>
-	<a href='submit.html' style='width:80%;' class="btn btn-primary">Save</a>
+	<a href='submit.html' style='width:80%;' class="btn btn-primary"><?=$this->lang->line('save');?></a>
 	</div>
 	
    <!-- Bootstrap core JavaScript================================================== -->

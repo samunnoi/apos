@@ -10,6 +10,7 @@
 				$this->load->model('Login_m','login');					
 				$this->load->library(array( 'session', 'form_validation')); 
 				$this->load->helper(array('url', 'html', 'form'));
+				
 			}
 			private function validate($user,$pass)
 			{	// ฟังก์ชันตรวจสอบความถูกต้องในการกรอก user,password
@@ -20,7 +21,24 @@
 			
 			public function index()
 			{
-				$this->load->view('login_v');	
+				if($this->session->userdata('language')==""){
+					$this->session->set_userdata('language','english' );
+				}
+				$this->lang->load($this->session->userdata('language'));
+				$this->load->view('login_v');			
+			}
+			
+			public function lang()
+			{	
+				if($this->uri->segment(3)){
+					$lang=$this->uri->segment(3);
+					$this->session->set_userdata('language',$lang );
+					$this->lang->load($this->session->userdata('language'));
+					$this->load->view('login_v');
+				}else{
+					$this->lang->load($this->session->userdata('language'));
+					$this->load->view('login_v');	
+				}
 			}
 	
 			public function login()
@@ -36,12 +54,14 @@
 						$userid= $this->login->pubSelectUser($user,$pass);	
 						if($userid){																	
 							$this->session->set_userdata('id',$userid->userid); 	
-							// 	ใช้งาน load view				
+							// 	ใช้งาน load view	
+							$this->lang->load($this->session->userdata('language'));
 							$this->load->view('head_v');
 							$this->load->view('body_v');
 							$this->load->view('foot_v');
 						}else{
 							echo "Login Fail";
+							$this->lang->load($this->session->userdata('language'));
 							$this->load->view('login_v');
 						}
 					}
@@ -73,6 +93,7 @@
 					$error['password'] = $password;
 					$error['name'] = $name;
 					$error['email'] = $email;
+					$this->lang->load($this->session->userdata('language'));
 					$this->load->view('login_v',$error);
 					return $error;
 				}else{
@@ -99,7 +120,8 @@
 					$data['error']=$error;
 					if ($error == 0){
 						// 	เรียกใช้ฟังก์ชัน pubaddUser จาก model User โดยสร้างตัวแปร $userid ในการรับค่า
-						$this->login->pubAddUser($userid,$password,$name,$email);	
+						$this->login->pubAddUser($userid,$password,$name,$email);
+						$this->lang->load($this->session->userdata('language'));
 						$this->load->view('login_v');
 						return 0;
 					}

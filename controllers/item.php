@@ -10,6 +10,7 @@
 				$this->load->model('Item_m','item');					
 				$this->load->library(array( 'session', 'form_validation')); 
 				$this->load->helper(array('url', 'html', 'form'));
+				$this->lang->load($this->session->userdata('language'));
 			}
 			
 			
@@ -179,7 +180,7 @@
 					$error['price'] = $price;
 					$error['discount'] = $discount;
 					$error['percent'] = $percent;
-					$error['catalog'] = $catalog; 				
+					$error['catalog'] = $catalog; 
 					$this->load->view('head_v');
 					$this->load->view('item_v',$error);
 					$this->load->view('foot_v');

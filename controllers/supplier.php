@@ -10,11 +10,13 @@
 				$this->load->model('Supplier_m','supplier');					
 				$this->load->library(array( 'session', 'form_validation')); 
 				$this->load->helper(array('url', 'html', 'form'));
+				$this->lang->load($this->session->userdata('language'));
 			}
 			
 			
 			public function index()
 			{
+				
 				$this->load->view('head_v');
 				$this->load->view('supplier_v');
 				$this->load->view('foot_v');

@@ -16,6 +16,10 @@
 		<br style='clear:both;'/>
 		
 		
+		
+	<?
+	if(isset($rowtable)){
+	?>
 		<table  class="table table-bordered ">
 		  <tr>
 			<td>ItemID</td>
@@ -30,19 +34,18 @@
 			<td>Member</td>
 		  </tr>
 	<?
+		
 		for( $count=0; $count<$rowtable; $count++ ){ 
 			
-			//if(array_key_exists( $count,$error['itemid_aready'])==true){echo $error['itemid_aready'][$count];}
-			//if(array_key_exists( $count,$error['name_error'])==true){echo $error['name_error'][$count];}
 	?>		
 			
 			
-	<?					
+	<?	if(isset($error)){	 		
 			if(array_key_exists($count,$error)==true){
 			
-			?>	
-			<tr <? if(array_key_exists( $count,$error)==true||isset($primary_already[$count])){?> style="background-color:#ff7373;"   <?}?> class="tip-left" data-toggle="tooltip" data-placement="left" title="
-			<?	
+	?>	
+				<tr <? if(array_key_exists( $count,$error)==true||isset($primary_already[$count])){?> style="background-color:#ff7373;"   <?}?> class="tip-left" data-toggle="tooltip" data-placement="left" title="
+	<?	
 				foreach($error[$count] as $row){
 					
 					if(isset($primary_already[$count])){echo $primary_already[$count];}
@@ -69,7 +72,7 @@
 					if(isset($row['member_notnum'])){echo $row['member_notnum'];}
 				
 					}
-			?>
+		?>
 				"> 
 				
 				<td <? if(isset($primary_already[$count])||isset($row['itemid_aready'])){?> style="background-color:#ff0d00;"   <?}?>><?=$item['itemid'][$count];?></td>
@@ -83,27 +86,45 @@
 				<td <? if(isset($row['vip3_nav'])||isset($row['vip3_notnum'])){?> style="background-color:#ff0d00;"   <?}?>><?=$item['vip3'][$count];?></td>
 				<td <? if(isset($row['member_nav'])||isset($row['member_notnum'])){?> style="background-color:#ff0d00;"   <?}?>><?=$item['member'][$count];?></td>
 			  </tr>
-				<?
-			}else{
-				?>
-				<tr <? if(isset($primary_already[$count])){?> style="background-color:#ff7373;"   <?}?>>
-				
-				<td ><?=$item['itemid'][$count];?></td>
-				<td ><?=$item['item'][$count];?></td>
-				<td ><?=$item['barcode'][$count];?></td>
-				<td ><?=$item['type'][$count];?></td>
-				<td ><?=$item['detail'][$count];?></td>
-				<td ><?=$item['cash'][$count];?></td>
-				<td ><?=$item['vip1'][$count];?></td>
-				<td ><?=$item['vip2'][$count];?></td>
-				<td ><?=$item['vip3'][$count];?></td>
-				<td ><?=$item['member'][$count];?></td>
-			
-				</tr>
+	<?
+				}else{
+	?>
+					<tr <? if(isset($primary_already[$count])){?> style="background-color:#ff7373;"   <?}?>>
+					
+					<td ><?=$item['itemid'][$count];?></td>
+					<td ><?=$item['item'][$count];?></td>
+					<td ><?=$item['barcode'][$count];?></td>
+					<td ><?=$item['type'][$count];?></td>
+					<td ><?=$item['detail'][$count];?></td>
+					<td ><?=$item['cash'][$count];?></td>
+					<td ><?=$item['vip1'][$count];?></td>
+					<td ><?=$item['vip2'][$count];?></td>
+					<td ><?=$item['vip3'][$count];?></td>
+					<td ><?=$item['member'][$count];?></td>
+					</tr>
 	<?			
+				}
+				
+			}else{
+	?>
+				<tr <? if(isset($primary_already[$count])){?> style="background-color:#ff7373;"   <?}?>>	
+					<td ><?=$item['itemid'][$count];?></td>
+					<td ><?=$item['item'][$count];?></td>
+					<td ><?=$item['barcode'][$count];?></td>
+					<td ><?=$item['type'][$count];?></td>
+					<td ><?=$item['detail'][$count];?></td>
+					<td ><?=$item['cash'][$count];?></td>
+					<td ><?=$item['vip1'][$count];?></td>
+					<td ><?=$item['vip2'][$count];?></td>
+					<td ><?=$item['vip3'][$count];?></td>
+					<td ><?=$item['member'][$count];?></td>
+				</tr>		
 	
+	
+	
+	
+	<?
 			}
-		
 		}
 	?>
 		</table>
@@ -121,6 +142,7 @@
 		</div>
 	<?	
 		}
+	}
 	?>	
 	
 

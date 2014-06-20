@@ -1,7 +1,6 @@
 <html lang="en">
 	<head>
-		<meta charset="TIS-620">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<meta name="description" content="">
 		<meta name="author" content="">
@@ -73,13 +72,13 @@ padding:4px;
 
   <body class="cbp-spmenu-push">  
 		<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
-			<h4 class='menu-left'><img style='width:45px; height:45px;' src="<?php echo base_url(); ?>image/user.jpg"  class="img-rounded"> Username</h4>
-				<a href="<? echo site_url("item"); ?>">Item</a>
-			<a href="<? echo site_url("customer"); ?>">Customer</a>
-			<a href="<? echo site_url("supplier"); ?>">Supplier</a>
+			<h4 class='menu-left'><img style='width:45px; height:45px;' src="<?php echo base_url(); ?>image/user.jpg"  class="img-rounded"> <?=$this->lang->line('username');?></h4>
+				<a href="<? echo site_url("item"); ?>"><?=$this->lang->line('item');?></a>
+			<a href="<? echo site_url("customer"); ?>"><?=$this->lang->line('customer');?></a>
+			<a href="<? echo site_url("supplier"); ?>"><?=$this->lang->line('supplier');?></a>
 		
 			
-			<a href="<? echo site_url("");?>">Receipt</a>
+			<a href="<? echo site_url("");?>"><?=$this->lang->line('receipt');?></a>
 			<a onclick='$("#l_sub").slideToggle("fast");' href="#">sub menu1 <span class='glyphicon glyphicon-chevron-down'></span></a>			
 			<ul id='l_sub' style='display:none;'>
 				<li><a href="#">sub menu1</a></li>								
@@ -91,9 +90,9 @@ padding:4px;
 		</nav>
 		<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
 			<h4>Setting</h4>
-			<a href="<? echo site_url("welcome/logout"); ?>">log out</a>
-			<a href="<? echo site_url("user"); ?>">User</a>
-			<a href="<? echo site_url("import"); ?>">Import Data</a>
+			<a href="<? echo site_url("welcome/logout"); ?>"><?=$this->lang->line('logout');?></a>
+			<a href="<? echo site_url("user"); ?>"><?=$this->lang->line('user');?></a>
+			<a href="<? echo site_url("import"); ?>"><?=$this->lang->line('import');?></a>
 			<a href="#">menu1</a>
 			<a onclick='$("#r_sub").slideToggle("fast");' href="#">sub menu1 <span class='glyphicon glyphicon-chevron-down'></span></a>			
 			<ul id='r_sub' style='display:none;'>
@@ -110,7 +109,7 @@ padding:4px;
 		  <div class="container">
 				
 				
-				 <a class="navbar-brand" href="#">ใบเสร็จ</a>
+				 <a class="navbar-brand" href="#"><?=$this->lang->line('receipt');?></a>
 				 <button id="showLeftPush"  type="button" style=''  class="navbar-toggle pull-left" > 
 					<span class="sr-only">Toggle navigation</span>
 						<img style="width:20px; height:14px;" src="<?php echo base_url(); ?>image/icon-bar.png" />
@@ -125,13 +124,13 @@ padding:4px;
 	<div class='row'>
 	<div class='hidden-xs col-sm-3 col-md-3 col-lg-2' style='float:left;height:100%;'>	
 		<nav class="cbp-spmenu cbp-vertical">
-			<h4 class='menu-left'><img style='width:45px; height:45px;' src="<?php echo base_url(); ?>image/user.jpg"  class="img-rounded"> Username</h4>
-			<a href="<? echo site_url("item"); ?>">Item</a>
-			<a href="<? echo site_url("customer"); ?>">Customer</a>
-			<a href="<? echo site_url("supplier"); ?>">Supplier</a>
+			<h4 class='menu-left'><img style='width:45px; height:45px;' src="<?php echo base_url(); ?>image/user.jpg"  class="img-rounded"> <?=$this->lang->line('username');?></h4>
+			<a href="<? echo site_url("item"); ?>"><?=$this->lang->line('item');?></a>
+			<a href="<? echo site_url("customer"); ?>"><?=$this->lang->line('customer');?></a>
+			<a href="<? echo site_url("supplier"); ?>"><?=$this->lang->line('supplier');?></a>
 			
 			
-			<a href="<? echo site_url("");?>">Receipt</a>
+			<a href="<? echo site_url("");?>"><?=$this->lang->line('receipt');?></a>
 			<a onclick='$("#fix_sub").slideToggle("fast");' href="#">sub menu1 <span class='glyphicon glyphicon-chevron-down'></span></a>			
 			<ul id='fix_sub' style='display:none;'>
 				<li><a href="#">sub menu1</a></li>								

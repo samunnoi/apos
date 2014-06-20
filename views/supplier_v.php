@@ -4,7 +4,7 @@
 		<? if(isset($superror)){echo "<font color=red>".$superror."</font>";} ?><br>
 			<div class="control-group">
 				<div class="input-group input-group-lg" style=''>
-					<input name="name" style='padding: 10px 8px;' placeholder="Search Supplier ID" type="text" class="form-control">
+					<input name="name" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('search');?>" type="text" class="form-control">
 					<div class="input-group-btn">
 						<button type="submit" style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-search"></span></button>
 					</div>
@@ -15,8 +15,8 @@
 			<table class="table table-bordered table-hover">
 				<thead>
 					 <tr>
-						<th class='col-xs-3'>Supplier ID</th>
-						<th class='col-xs-9'>Name</th>
+						<th class='col-xs-3'><?=$this->lang->line('supplierid');?></th>
+						<th class='col-xs-9'><?=$this->lang->line('name');?></th>
 						
 						
 					 </tr>
@@ -42,9 +42,9 @@
 	<form  method="post" action="<? echo site_url("supplier/addsupplier"); ?>"> 	
 		<br style='clear:both;'/>
 		<div class="control-group">
-			<button id="btn1" style='padding: 10px 10px;' type="reset" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-plus"> ADD</span></button>
-			<a href="<? if(isset($supid)){echo site_url("supplier/delsupplier/".$supid); } ?>"><button id="btn2" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-trash"> DELETE</span></button></a>
-			<a href="<?echo site_url("supplierreport");?>"> <button id="btn3" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> REPORT </span></button></a>
+			<button id="btn1" style='padding: 10px 10px;' type="reset" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-plus"> <?=$this->lang->line('add');?></span></button>
+			<a href="<? if(isset($supid)){echo site_url("supplier/delsupplier/".$supid); } ?>"><button id="btn2" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-trash"> <?=$this->lang->line('delete');?></span></button></a>
+			<a href="<?echo site_url("supplierreport");?>"> <button id="btn3" style='padding: 10px 10px;' type="button" class="btn btn-default"><span style='padding-top: 1px;padding-bottom: 1px;' class="glyphicon glyphicon-list-alt"> <?=$this->lang->line('report');?> </span></button></a>
 		</div>  
 		<br>
 		
@@ -56,7 +56,7 @@
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-pencil"></span></button>
 			</div>
-			<input name="supid" style='padding: 10px 8px;' placeholder="Supplier ID" id="supid" type="text" class="form-control" value="<? if(isset($supid)){echo $supid;}?>" maxlength="15" required>
+			<input name="supid" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('supplierid');?>" id="supid" type="text" class="form-control" value="<? if(isset($supid)){echo $supid;}?>" maxlength="15" required>
 		</div> 
 		<br style='clear:both;'/>	
 			
@@ -67,7 +67,7 @@
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-user"></span></button>
 			</div>
-			<input name="supname" style='padding: 10px 8px;' placeholder="Supplier Name" type="text" class="form-control" value="<? if(isset($supname)){echo $supname;}?>" maxlength="50" required>
+			<input name="supname" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('name');?>" type="text" class="form-control" value="<? if(isset($supname)){echo $supname;}?>" maxlength="50" required>
 		</div> 
 		<br style='clear:both;'/>
 		
@@ -77,7 +77,7 @@
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-phone"></span></button>
 			</div>
-			<input name="tell" style='padding: 10px 8px;' placeholder="Telephone" type="text" class="form-control" value="<? if(isset($tell)){echo $tell;}?>" maxlength="15" required>
+			<input name="tell" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('tel');?>" type="text" class="form-control" value="<? if(isset($tell)){echo $tell;}?>" maxlength="15" required>
 		</div> 
 		<br style='clear:both;'/>
 		
@@ -88,7 +88,7 @@
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-home"></span></button>
 			</div>
-			<input name="address1" style='padding: 10px 8px;' placeholder="Address" type="text" class="form-control" value="<? if(isset($address1)){echo $address1;}?>" maxlength="50" required>
+			<input name="address1" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('address');?>" type="text" class="form-control" value="<? if(isset($address1)){echo $address1;}?>" maxlength="50" required>
 		</div> 
 		<br style='clear:both;'/>
 		
@@ -99,7 +99,7 @@
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-user"></span></button>
 			</div>
-			<input name="sellman" style='padding: 10px 8px;' placeholder="Sellman" type="text" class="form-control" value="<? if(isset($sellman)){echo $sellman;}?>" maxlength="80" required>
+			<input name="sellman" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('sellman');?>" type="text" class="form-control" value="<? if(isset($sellman)){echo $sellman;}?>" maxlength="80" required>
 		</div> 
 		<br style='clear:both;'/>
 		
@@ -110,7 +110,7 @@
 			<div class="input-group-btn">
 				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;' class="glyphicon glyphicon-euro"></span></button>
 			</div>
-			<input name="account" style='padding: 10px 8px;' placeholder="Bank Account" type="text" class="form-control" value="<? if(isset($account)){echo $account;}?>" maxlength="20" required>
+			<input name="account" style='padding: 10px 8px;' placeholder="<?=$this->lang->line('bankaccount');?>" type="text" class="form-control" value="<? if(isset($account)){echo $account;}?>" maxlength="20" required>
 		</div> 
 		<br style='clear:both;'/>
 		
@@ -118,8 +118,8 @@
 		<input type="hidden" name="status" id="actionupdate" value="add">
 		<input type="hidden" name="oldsupid" id="oldid" value="<? if(isset($supid)){echo $supid;}?>">
 		<div align='center'>	
-			<button style='width:20%;' class="btn btn-lg btn-primary" type="submit" >Cancel</button>
-			<button style='width:20%;' class="btn btn-lg btn-primary" type="submit" OnClick="JavaScript:fncAlert();">Save</button>
+			<button style='width:20%;' class="btn btn-lg btn-primary" type="submit" ><?=$this->lang->line('cancel');?></button>
+			<button style='width:20%;' class="btn btn-lg btn-primary" type="submit" OnClick="JavaScript:fncAlert();"><?=$this->lang->line('save');?></button>
 		</div>
 	</form>
 
