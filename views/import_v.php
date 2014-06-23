@@ -1,18 +1,14 @@
-		<div class="input-group input-group-lg" style=''>
-			<div class="input-group-btn">
-				<button  style='padding: 10px 14px;' type="button" class="btn btn-default"><span style='padding-top: 3px;padding-bottom: 3px;'>Select File</span></button>
-			</div>
-			<input type="text" id="hideinputtype" name="addtype" class="form-control" style="width:30%; height:46px;" />
-	
+		
+			<form action="<? echo site_url("import/upload"); ?>" method="post"enctype="multipart/form-data">
+				<label>File Import</label>
+				<input type="file" name="myfile" id="file"><br>
+				<div align='left'>
+					<button style='width:20%;' class="btn btn-lg btn-primary" type="submit" ><?=$this->lang->line('import');?></button>
+					<a href="<?echo site_url("import/download");?>"><button style='width:20%;' class="btn btn-lg btn-primary" type="button" >Download Template</button></a>
+				</div>
 				
-				
-			</select>
-			<span id="showbtndetail">
-			<button type="button" id="btndetail" class="btn btn-default btn-sm" style=" height:46px;" >
-				<span class="" > Import  </span> 
-			</button>
-			</span>
-		</div> 
+			</form>
+		
 		<br style='clear:both;'/>
 		
 		
@@ -129,16 +125,18 @@
 	?>
 		</table>
 	<?
-		if(isset($primary_already)||isset($row['itemid_aready'])){
+		if(isset($primary_already)||isset($error)){
 	?>
 		<div align='right'>
-			<button style='width:20%;' class="btn btn-lg btn-primary"   OnClick="JavaScript:importAlert();">Import</button>
+			<a href="<? echo site_url("import"); ?>"> <button style='width:20%;' class="btn btn-lg btn-primary"  ><?=$this->lang->line('cancel');?></button></a>
+			<button style='width:20%;' class="btn btn-lg btn-primary"   OnClick="JavaScript:importAlert();"><?=$this->lang->line('import');?></button>
 		</div>
 	<?	
 		}else{
 	?>
 		<div align='right'>
-			<a href="<? echo site_url("import/additem"); ?>"> <button style='width:20%;' class="btn btn-lg btn-primary"   OnClick="JavaScript:importOkAlert();">Import</button></a>
+			<a href="<? echo site_url("import"); ?>"> <button style='width:20%;' class="btn btn-lg btn-primary"  ><?=$this->lang->line('cancel');?></button></a>
+			<a href="<? echo site_url("import/additem"); ?>"> <button style='width:20%;' class="btn btn-lg btn-primary"   OnClick="JavaScript:importOkAlert();"><?=$this->lang->line('import');?></button></a>
 		</div>
 	<?	
 		}
@@ -197,3 +195,30 @@
 		}
 
 	</script>
+	<style>	
+			.container{
+				margin-top:20px;
+			}
+			.image-preview-input {
+				position: relative;
+				overflow: hidden;
+				margin: 0px;    
+				color: #333;
+				background-color: #fff;
+				border-color: #ccc;    
+			}
+			.image-preview-input input[type=file] {
+				position: absolute;
+				top: 0;
+				right: 0;
+				margin: 0;
+				padding: 0;
+				font-size: 20px;
+				cursor: pointer;
+				opacity: 0;
+				filter: alpha(opacity=0);
+			}
+			.image-preview-input-title {
+				margin-left:2px;
+			}
+	</style>

@@ -431,15 +431,15 @@
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
-				<th>รายการ</th>
+				<th><?=$this->lang->line('list');?></th>
 				<th class='col-xs-1'>Qty</th>
-				<th class='col-xs-1'>Price</th>
+				<th class='col-xs-1'><?=$this->lang->line('price');?></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>        
 				<td>
-				<span>ขนม</span>
+				<span>Snack</span>
 				<span style='float:right'>
 					<button type="button" class="btn btn-default btn-sm">
 						<span class="glyphicon glyphicon-trash"></span> 
@@ -465,7 +465,7 @@
 			 <tr>
 				
 				<td>
-				<span>น้ำส้ม</span>
+				<span>Orange Juice</span>
 				<span style='float:right'>
 					<button type="button" class="btn btn-default btn-sm">
 						<span class="glyphicon glyphicon-trash"></span> 
@@ -488,7 +488,7 @@
 			 </tr>
 			 <tr>
 				<td>
-				<span>น้ำอัดลม</span>
+				<span>Drink</span>
 				<span style='float:right'>
 					<button type="button" class="btn btn-default btn-sm">
 						<span class="glyphicon glyphicon-trash"></span> 
@@ -511,7 +511,7 @@
 				<td align='center'>300</td>
 			 </tr>
 			 <tr>
-				<td colspan="2" align='right' ><b>รวม</b></td>
+				<td colspan="2" align='right' ><b><?=$this->lang->line('total');?></b></td>
 				<td align='center'>1,600</td>
 			 </tr>
 		</tbody>

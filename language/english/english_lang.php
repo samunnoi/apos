@@ -50,3 +50,5 @@ $lang['supplierid'] = 'SupplierID';
 $lang['sellman'] = 'Sellman';
 $lang['bankaccount'] = 'Bank Account';
 $lang['personal'] = 'PersonalID';
+$lang['list'] = 'List';
+$lang['total'] = 'Total';

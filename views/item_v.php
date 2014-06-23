@@ -150,16 +150,16 @@
 			<tbody>
 				<tr>        
 					<td  align='center'>
-						<input type="text" name="catalog" list="productName"/>
-						<datalist id="productName" name="catalog" value="<? if(isset($catalog_name)){echo $catalog_name;} ?>" >
+						<input type="text" name="catalog" value="<? if(isset($catalog_name)){echo $catalog_name;} ?>"  list="productName"/>
+						<datalist id="productName" name="catalog" >
 							<option value="Pen">Pen</option>
 							<option value="Pencil">Pencil</option>
 							<option value="Paper">Paper</option>
 						</datalist>
 					</td>
 					<td align='center'>		
-						<input type="text" name="master" list="productName"/>
-						<datalist id="productName" name="master" value="<? if(isset($master_catalog)){echo $master_catalog;} ?>">
+						<input type="text" name="master" value="<? if(isset($master_catalog)){echo $master_catalog;} ?>" list="productName"/>
+						<datalist id="productName" name="master" >
 							<option value="Pen">Pen</option>
 							<option value="Pencil">Pencil</option>
 							<option value="Paper">Paper</option>

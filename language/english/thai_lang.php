@@ -50,3 +50,5 @@ $lang['supplierid'] = 'รหัสผู้ส่งสินค้า';
 $lang['sellman'] = 'พนักงานขาย';
 $lang['bankaccount'] = 'เลขบัญชีธนาคาร';
 $lang['personal'] = 'เลขประจำตัวประชาชน';
+$lang['list'] = 'รายการ';
+$lang['total'] = 'รวม';

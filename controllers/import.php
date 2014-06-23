@@ -11,6 +11,7 @@
 				$this->load->library(array( 'session', 'form_validation')); 
 				$this->load->helper(array('url', 'html', 'form'));
 				$this->load->library('phpexcel');
+				$this->lang->load($this->session->userdata('language'));
 				
 			}
 			public function index()
@@ -41,6 +42,7 @@
 						++$r;
 						foreach($headingsArray as $columnKey => $columnHeading) {
 							$namedDataArray[$r][$columnHeading] = $dataRow[$row][$columnKey];
+							
 						}
 					}
 				}
@@ -49,16 +51,16 @@
 				$new="";
 				foreach ($namedDataArray as $result) {
 					
-					$item['itemid'][$index]=$result["ItemID"];
-					$item['item'][$index]=$result["Item"];
-					$item['barcode'][$index]=$result["Barcode"];
-					$item['type'][$index]=$result["Type"];
-					$item['detail'][$index]=$result["Detail"];
-					$item['cash'][$index]=$result["Cash"];
-					$item['vip1'][$index]=$result["VIP1"];
-					$item['vip2'][$index]=$result["VIP2"];
-					$item['vip3'][$index]=$result["VIP3"];
-					$item['member'][$index]=$result["Member"];
+					$item['itemid'][$index]=  iconv("tis-620", "utf-8",$result["ItemID"]);
+					$item['item'][$index]=iconv("utf-8", "utf-8",$result["Item"]);
+					$item['barcode'][$index]=iconv("tis-620", "utf-8",$result["Barcode"]);
+					$item['type'][$index]=iconv("utf-8", "utf-8",$result["Type"]);
+					$item['detail'][$index]=iconv("utf-8", "utf-8",$result["Detail"]);
+					$item['cash'][$index]=iconv("tis-620", "utf-8",$result["Cash"]);
+					$item['vip1'][$index]=iconv("tis-620", "utf-8",$result["VIP1"]);
+					$item['vip2'][$index]=iconv("tis-620", "utf-8",$result["VIP2"]);
+					$item['vip3'][$index]=iconv("tis-620", "utf-8",$result["VIP3"]);
+					$item['member'][$index]=iconv("tis-620", "utf-8",$result["Member"]);
 					$errors=$this->validateitem($result["ItemID"],$result["Item"],$result["Barcode"],$result["Type"],$result["Detail"],$result["Cash"],$result["VIP1"],$result["VIP2"],$result["VIP3"],$result["Member"],$index);					
 					// เช็ค primary ซ้ำใน excel
 					if($result["ItemID"]){ 
@@ -144,16 +146,45 @@
 				$percent=0;
 				$image="";
 				$master="";
-				foreach ($namedDataArray as $result) {
-					$this->item->pubAddItem($result["ItemID"],$result["Barcode"],$result["Item"],$result["Detail"],$image);
-					$this->item->pubAddPrice($result["ItemID"],$result["Cash"],$discount,$percent);
-					$this->item->pubAddCatalog($result["ItemID"],$result["Type"],$master);
-				}
-			
-			
-			
+				$index=0;
+					foreach ($namedDataArray as $result) {
+						$errors=$this->validateitem($result["ItemID"],$result["Item"],$result["Barcode"],$result["Type"],$result["Detail"],$result["Cash"],$result["VIP1"],$result["VIP2"],$result["VIP3"],$result["Member"],$index);
+						if($errors){
+							echo "error";
+						}else{
+							$this->item->pubAddItem(iconv("tis-620", "utf-8",$result["ItemID"]),iconv("tis-620", "utf-8",$result["Barcode"]),iconv("utf-8", "utf-8",$result["Item"]),iconv("utf-8", "utf-8",$result["Detail"]),$image);
+							$this->item->pubAddPrice(iconv("tis-620", "utf-8",$result["ItemID"]),iconv("tis-620", "utf-8",$result["Cash"]),$discount,$percent);
+							$this->item->pubAddCatalog(iconv("tis-620", "utf-8",$result["ItemID"]),iconv("utf-8", "utf-8",$result["Type"]),$master);
+						}
+					}
+				
+				$this->index();
 			}
 			
+			
+		public function upload()
+			{
+				$file = $_FILES['myfile']['name'];
+				$typefile = $_FILES['myfile']['type'];	
+				$sizefile = $_FILES['myfile']['size'];			
+				$tempfile = $_FILES['myfile']['tmp_name'];
+				$destination_path ='excel/';
+					$msgsuccess = 0;			
+					$target_path = $destination_path . $file;   
+					if(@move_uploaded_file($tempfile, $target_path)) {
+						$this->importexcel();
+					}	
+			}
+		public function download()
+		{
+
+			$file_url = 'excel/template.xls';
+			header('Content-Type: application/octet-stream');
+			header("Content-Transfer-Encoding: Binary"); 
+			header("Content-disposition: attachment; filename=\"" . basename($file_url) . "\""); 
+			readfile($file_url); 
+		
+		}
 	}
 		
 		
